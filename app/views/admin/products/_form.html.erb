@@ -1,0 +1,17 @@
+<%= form_for :product do |f| %>
+	<%= render 'shared/error_messages', :target => @product %>
+		<%= f.label :name %>
+		<%= f.text_field :name %>
+		
+		<%= f.label :description %>
+	  <%= f.text_area :description %>
+
+	  <%= f.label :image %>
+	  <%= f.file_field :image %>
+	  
+	  <%= f.label :price %>
+	  <%= f.text_field :price %>
+
+	  <%= f.submit %>
+
+<% end %>

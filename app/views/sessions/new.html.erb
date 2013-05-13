@@ -1,0 +1,9 @@
+<h1> Login </h1>
+<%- if current_user %>
+	<%= "You silly lemon your already logged in!" %>
+<%- else %>
+	<%= render 'form' %>
+	<%= link_to "Register", login_path %>
+<% end %>
+
+
