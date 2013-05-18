@@ -6,4 +6,5 @@ class Product < ActiveRecord::Base
 	validates_presence_of :description
 
 	belongs_to :category 
+	belongs_to :department
 end

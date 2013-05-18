@@ -3,5 +3,5 @@
 #
 # Examples:
 #
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+department= Department.create([{ department_name: 'Mens' }, { department_name: 'Womens' }, { department_name: 'Kids'}])
 #   Mayor.create(name: 'Emanuel', city: cities.first)

@@ -14,7 +14,7 @@ group :assets do
 
 group :test do
   gem 'rspec-rails', '2.11.0'
-  gem 'factory_girl_rails', '3.5.0'
+  gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'
   gem 'guard-rspec'
