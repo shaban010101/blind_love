@@ -6,6 +6,7 @@ gem 'pg'
 gem "bcrypt-ruby"
 gem "paperclip"
 gem "will_paginate"
+gem "friendly_id"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

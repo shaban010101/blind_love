@@ -1,5 +1,8 @@
 <% @products.each do |p| %>
-	<%= p.product.name %>
-	<%= p.product.price %>
-	<%= p.product.image %>
+	<%= p.name %>
+	<%= p.price %>
+	<%= p.image_file_name %>
+	<%= link_to 'Show', admin_product_path(p) %>
+	<%= link_to 'Edit', edit_admin_product_path(p) %>
+	<%= link_to 'Remove', @product, :confirm => 'Are you sure?', :method => :delete %>
 <% end %>

@@ -4,4 +4,5 @@
 # Examples:
 #
 department= Department.create([{ department_name: 'Mens' }, { department_name: 'Womens' }, { department_name: 'Kids'}])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+category= Category.create([{ category_name: 'Trousers'}, {category_name: 'Shorts'}, {category_name: 'Underwear'}])
+product= Product.create([{:name => 'Foo', :price => 'Bar', :description => 'FooBar' }])

@@ -1,6 +1,10 @@
-class Admin::Categories < ApplicationController
+class Admin::CategoriesController < ApplicationController
 	def new
-		@category = Category.new
+		@categories = Category.new
+	end
+
+	def index
+		@categories = Category.all
 	end
 
 	def create
@@ -11,5 +15,10 @@ class Admin::Categories < ApplicationController
 			flash.now[:error] = "Could not save the category"
 			render "new"
 		end
+	end
+
+	def edit 
+		@category = Category.find(params[:id])
+		@products = Product.all
 	end
 end
