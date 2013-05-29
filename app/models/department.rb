@@ -1,5 +1,8 @@
 class Department < ActiveRecord::Base
-  attr_accessible :department_name
+	extend FriendlyId 
+	friendly_id :department_name, use: :slugged
+
+  attr_accessible :department_name, :slug
   has_many :categories
   has_many :products
   accepts_nested_attributes_for :categories, :products

@@ -1,6 +1,6 @@
 class Product < ActiveRecord::Base
-	include FriendlyId 
-	friendly_id :name
+	extend FriendlyId 
+	friendly_id :name, use: :slugged
 
 	attr_accessible :name, :price, :description, :category_id, :slug
 

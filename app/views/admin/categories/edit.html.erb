@@ -1,7 +1,8 @@
 <h1> Edit Category </h1>
 <%= form_for [:admin, @category] do |f| %>
-	<%= f.fields_for :products do |p| %>
-		<%= p.label :prodcts, "Prducts" %>
-		<%= p.select(:products, options_from_collection_for_select(@products,:id, :name) )%>
+	<%= f.fields_for :products do |product_form| %>
+		<%= product_form.label :products, "Products" %>
+		<%= product_form.select_tag :products, options_for_select(:id) %>
 	<% end %>
+	<%= f.submit %>
 <% end %>

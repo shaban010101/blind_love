@@ -19,6 +19,6 @@ class Admin::CategoriesController < ApplicationController
 
 	def edit 
 		@category = Category.find(params[:id])
-		@products = Product.all
+		@products = @category.products.build
 	end
 end
