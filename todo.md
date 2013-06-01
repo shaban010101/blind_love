@@ -12,7 +12,7 @@ backend
 -google analytics
 -redis instance
 -email
--api for iphone/adroid use
+-api for iphone/android use
 
 hosting
 -setup a remote server with postgres,rails,ruby,redis using capitstrano to deploy

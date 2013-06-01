@@ -3,18 +3,9 @@ require 'factory_girl'
 FactoryGirl.define do
   factory :category do
     category_name "Trousers"
+    slug "trousers"
     department
-    department_id 1
-
-    factory :category_with_products do
-      ignore do
-        products_count 100
-      end
-
-      after(:create) do |category, evaluator|
-       FactoryGirl.create_list(:product, evaluator.products_count, category: category )
-      end
-    end
+    products_attributes { [ FactoryGirl.attributes_for(:product) ]}
   end
 
   factory :user do
@@ -26,12 +17,15 @@ FactoryGirl.define do
   	name "Foo"
   	price 9999
   	description "I am a foobar"
+    slug "foo"
   	category
     department
   end
 
   factory :department do
     department_name "Mens"
+    slug "mens"
+    products_attributes { [ FactoryGirl.attributes_for(:product) ]}
   end
 
 end

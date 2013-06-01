@@ -1,0 +1,9 @@
+	<%= form_for :category do  |f| %>
+		<%= f.label :category_name %>
+		<%= f.text_field :category_name %>
+		<%= f.fields_for :products do |product_form| %>
+			<%= product_form.label :products, "Products" %>
+			<%= product_form.select :products, options_from_collection_for_select(Product.all, :id, :name) %>
+		<% end %>
+		<%= f.submit %>
+	<% end %>

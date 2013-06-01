@@ -10,6 +10,7 @@ BlindLove::Application.routes.draw do
   namespace :admin do
     resources :products
     resources :categories
+    resources :departments
   end
   
   root :to => 'sessions#new'

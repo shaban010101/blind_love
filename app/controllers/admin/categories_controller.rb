@@ -1,6 +1,7 @@
 class Admin::CategoriesController < ApplicationController
 	def new
-		@categories = Category.new
+		@category = Category.new
+		@products = @category.products.build
 	end
 
 	def index

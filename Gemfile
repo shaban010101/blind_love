@@ -14,7 +14,7 @@ group :assets do
   gem 'bootstrap-sass'
 
 group :test do
-  gem 'rspec-rails', '2.11.0'
+  gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'
@@ -28,7 +28,7 @@ end
 
 group :test, :development do
   gem 'database_cleaner'
-  gem 'rspec-rails', '2.11.0'
+  gem 'rspec-rails'
   gem 'guard-rspec'
   gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'fuubar'
