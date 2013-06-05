@@ -1,8 +1,22 @@
-<% @products.each do |p| %>
-	<%= p.name %>
-	<%= p.price %>
-	<%= p.image_file_name %>
-	<%= link_to 'Show', admin_product_path(p) %>
-	<%= link_to 'Edit', edit_admin_product_path(p) %>
-	<%= link_to 'Remove', @product, :confirm => 'Are you sure?', :method => :delete %>
-<% end %>
+<div class="alert alert-success">
+	<p><%= flash[:notice] %></p>
+</div>
+
+<table class="table table-hover">
+		<tr>
+			<th>Name</th>
+			<th>Price</th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
+		<tr>
+		<% @products.each do |p| %>
+			<td><p><%= p.name %><p></td>
+			<td><p><%= p.price %><p></td>
+			<td><%= link_to 'Show', admin_product_path(p) %></td>
+			<td><%= link_to 'Edit', edit_admin_product_path(p) %></td>
+			<td><%= link_to 'Remove', @product, :confirm => 'Are you sure?', :method => :delete %></td>
+		</tr>
+	<% end %>
+</table>

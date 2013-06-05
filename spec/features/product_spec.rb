@@ -8,8 +8,9 @@ feature 'Product' do
 		fill_in "Name", :with => product.name 
 		fill_in "Description", :with => product.description 
 		fill_in "Price", :with => product.price
-		attach_file("Image", '/Users/shabankarumba/Pictures/IMG_0001.PNG')
-		page.content.should_be("")
+		attach_file "Image", Rails.root.join('spec', 'fixtures', 'images', 'boom.jpg')
+		click_button "Save Product"
+		page.should have_content "Product succefully created"
   end
 
   scenario 'editing' do

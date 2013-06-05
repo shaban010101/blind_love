@@ -1,5 +1,5 @@
-<%= form_for :product do |f| %>
-	<%= render 'shared/error_messages', :target => @products %>
+<%= form_for :product, :url => { :action => "create" } do |f| %>
+	<%= render 'shared/error_messages', :target => @product %>
 		<%= f.label :name %>
 		<%= f.text_field :name %>
 		

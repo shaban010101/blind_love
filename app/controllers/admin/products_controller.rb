@@ -15,6 +15,7 @@ class Admin::ProductsController < ApplicationController
 	def create
 		@product = Product.new(params[:product])
 		if @product.save
+			flash[:notice] = "Product succesfully created"
 			redirect_to admin_products_path
 		else
 			flash.now[:error] = "Could not save the product"
