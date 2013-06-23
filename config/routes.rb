@@ -1,11 +1,11 @@
 BlindLove::Application.routes.draw do
 
-	get "login" => "sessions#new", :as => "login"
-  get "logout" => "sessions#destroy", :as => "logout"
+	match "new_session" => "sessions#new", :as => "login"
+  match "session" => "sessions#destroy", :as => "logout"
 
   resources :admin, :only => [:index]
-
-  resources :sessions, :only => [:create,:destroy]
+  resources :sessions, :only => [:new,:create,:destroy]
+  resources :users, :only => [:edit,:create,:update,:new,:show,:destroy]
 
   namespace :admin do
     resources :products

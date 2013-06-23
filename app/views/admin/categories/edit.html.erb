@@ -1,2 +1,30 @@
 <h1> Edit Category </h1>
-	<%= render :partial => "form_category" %>
+	<%= form_for :category, :url => { :action => "update" }, :method => :put do  |f| %>
+	<div class="category-form-update">
+		<form class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label">
+					<%= f.label :category_name %>
+				</label>
+				<div clas="controls">
+					<%= f.text_field :category_name %>
+				</div>
+			</div>
+			<div class="control-group">
+				<%= f.fields_for :products do |product_form| %>
+				<label class="control-label">
+					<%= product_form.label :products, "Products" %>
+				</div>
+				<select>
+					<%= product_form.select :products, options_from_collection_for_select(Product.all, :id, :name) %>
+				</select>
+			<% end %>
+			<div class="control-group">
+				<div class="controls">
+					<button class="btn">
+						<%= f.submit %>
+					</button>
+				</div>
+			</div>
+		</div>
+	<% end %>

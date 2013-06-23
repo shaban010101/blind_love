@@ -11,10 +11,15 @@
 	  <div class="navbar-inner">
 	  	<a class="brand" href="#">Blind Love</a>
 	  	 <ul class="nav">
-	      <li class="active"><a href="#">Home</a></li>
-	      <li><%= link_to 'Products',admin_products_path %></li>
-	      <li><a href="#">Orders</a></li>
-	      <li><a href="#">Customers</a></li>
+	  	 	<% if :current_user %>
+		      <li><%= link_to 'Home', admin_index_path %></li>
+		      <li><%= link_to 'Products',admin_products_path %></li>
+		      <li><a href="#">Orders</a></li>
+		      <li><a href="#">Customers</a></li>
+		      <li><%= link_to 'Log Out',logout_path(@user) %></li>
+		     <% else %>
+		     	<li><%= link_to 'Login',login_path %></li>
+		     <% end %>
 	    </ul>
 	  </div>
 	</div>

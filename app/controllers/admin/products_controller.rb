@@ -1,11 +1,12 @@
 class Admin::ProductsController < ApplicationController
-	
+	before_filter :authorize
+
 	def index
-		@products = Product.all
+		@products = Product.paginate(:page => params[:page], :per_page => 15 )
 	end
 
 	def new
-		@products = Product.new
+		@product = Product.new
 	end
 
 	def show
@@ -28,7 +29,7 @@ class Admin::ProductsController < ApplicationController
 	end
 
 	def update
-		@product = Product.update_attributes(params[id])
+		@product = Product.update_attributes(params[:id])
 		if @product.update
 			flash[:notice] = "Product Succesfully updated"
 		else

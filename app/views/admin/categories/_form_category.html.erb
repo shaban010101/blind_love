@@ -1,9 +1,31 @@
-	<%= form_for :category do  |f| %>
-		<%= f.label :category_name %>
-		<%= f.text_field :category_name %>
-		<%= f.fields_for :products do |product_form| %>
-			<%= product_form.label :products, "Products" %>
-			<%= product_form.select :products, options_from_collection_for_select(Product.all, :id, :name) %>
-		<% end %>
-		<%= f.submit %>
-	<% end %>
+<%= form_for :category do  |f| %>
+	<div class="category-form-new">
+		<form class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label">
+					<%= f.label :category_name %>
+				</label>
+				<div class="controls">
+					<%= f.text_field :category_name %>
+				</div>
+			</div>
+			<div class="control-group">
+				<%= f.fields_for :products do |product_form| %>
+				<label class="control-label">
+					<%= product_form.label :products, "Products" %>
+				</label>
+				<div class="controls">
+					<select>
+						<%= product_form.select :products, options_from_collection_for_select(Product.all, :id, :name) %>
+					</select>
+			<% end %>
+			</div>
+			<div class"control-group">
+				<div class="controls">
+					<button class="btn">
+						<%= f.submit %>
+					</button>
+				</div>
+			</div>
+	</div>
+<% end %>

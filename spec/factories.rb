@@ -1,5 +1,4 @@
 require 'factory_girl'
-require 'spec_helper'
 
 FactoryGirl.define do
   factory :category do
@@ -18,7 +17,6 @@ FactoryGirl.define do
   	name "Foo"
   	price 9999
   	description "I am a foobar"
-    # image fixture_file_upload('/images/boom.jpg', 'image/jpg')
     slug "foo"
   	category
     department

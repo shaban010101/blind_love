@@ -22,4 +22,14 @@ class Admin::CategoriesController < ApplicationController
 		@category = Category.find(params[:id])
 		@products = @category.products.build
 	end
+
+	def update
+		@category = Category.find(params[:id])
+		if @category.update_attributes(params[:category])
+			redirect_to admin_category_path
+		else
+			flash.now[:error] = "Could not  update this category"
+			render "edit"
+		end
+	end
 end

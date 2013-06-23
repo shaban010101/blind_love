@@ -1,16 +1,18 @@
 <%= form_tag sessions_path do  %>
-<form class="form-horizontal">
-	<div class="control-group">
-		<label class="control-label"><%= label_tag :username %></label>
-		<div class="controls">
-			<%= text_field_tag :username %>
+<div class ="span5 offset6">
+	<form class="form-horizontal">
+		<div class="control-group">
+			<label class="control-label"><%= label_tag :username %></label>
+			<div class="controls">
+				<%= text_field_tag :username %>
+			</div>
 		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label"><%= label_tag :password %></label>
-		<div class "controls">
-			<%= password_field_tag :password %>
+		<div class="control-group">
+			<label class="control-label"><%= label_tag :password %></label>
+			<div class "controls">
+				<%= password_field_tag :password %>
+			</div>
 		</div>
-	</div>
-			<%= submit_tag "Login" %>
-<% end %>
+				<%= submit_tag "Login" %>
+	<% end %>
+</div>

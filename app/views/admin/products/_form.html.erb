@@ -1,17 +1,45 @@
 <%= form_for :product, :url => { :action => "create" } do |f| %>
 	<%= render 'shared/error_messages', :target => @product %>
-		<%= f.label :name %>
-		<%= f.text_field :name %>
-		
-		<%= f.label :description %>
-	  <%= f.text_area :description %>
-
-	  <%= f.label :image %>
-	  <%= f.file_field :image %>
-	  
-	  <%= f.label :price %>
-	  <%= f.text_field :price %>
-
-	  <%= f.submit %>
-
+	<div class="product-form">
+		<form class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label">
+					<%= f.label :name %>
+				</label>
+				<div class="controls">
+					<%= f.text_field :name %>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">
+					<%= f.label :description %>
+				</label>
+				<textarea rows="6">
+			  	<%= f.text_area :description %>
+			  </textarea>
+			</div>
+			<div class="control-group">
+			 	<label class="control-label">
+			  	<%= f.label :image %>
+			  </label>
+			  <div class="controls">
+			  	<%= f.file_field :image %>
+			  </div>
+			</div>
+		  <div class="control-group">
+		  	<label class="control-label">
+		  		<%= f.label :price %>
+		  	</label>
+		  	<div class="controls">
+		  		<%= f.text_field :price %>
+		  	</div>
+		  </div>
+		  <div class="control-group">
+		  	<div class="controls">
+			  	<button class="btn">
+			  		<%= f.submit %>
+			  	</button>
+			  </div>
+			</div>
+		</div>
 <% end %>
