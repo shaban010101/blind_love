@@ -14,11 +14,12 @@
 				<%= f.fields_for :products do |product_form| %>
 				<label class="control-label">
 					<%= product_form.label :products, "Products" %>
-				</div>
-				<select>
+				</label>
+				<div class="controls">
 					<%= product_form.select :products, options_from_collection_for_select(Product.all, :id, :name) %>
-				</select>
-			<% end %>
+				<% end %>
+				</div>
+			</div>
 			<div class="control-group">
 				<div class="controls">
 					<button class="btn">

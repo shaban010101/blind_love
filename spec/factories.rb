@@ -27,6 +27,5 @@ FactoryGirl.define do
     slug "mens"
     products_attributes { [ FactoryGirl.attributes_for(:product) ]}
   end
-
 end
 

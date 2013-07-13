@@ -1,9 +1,10 @@
 BlindLove::Application.routes.draw do
 
-	match "new_session" => "sessions#new", :as => "login"
+	match "sessions/new" => "sessions#new", :as => "login"
   match "session" => "sessions#destroy", :as => "logout"
 
   resources :admin, :only => [:index]
+  resources :departments, :only => [:index, :show]
   resources :sessions, :only => [:new,:create,:destroy]
   resources :users, :only => [:edit,:create,:update,:new,:show,:destroy]
 

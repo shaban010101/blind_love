@@ -9,8 +9,4 @@ class Category < ActiveRecord::Base
   validates_presence_of :category_name
   accepts_nested_attributes_for :products
 
-  # def category_assigned
-  	
-  # end
-
 end

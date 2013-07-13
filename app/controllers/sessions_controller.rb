@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
 			session[:user_id] = user.id
 			redirect_to admin_index_path, :notice => "Logged In!"
 		else
-			flash.now.alert = "Invalid email or Password supplied"
+			flash[:notice] = "Invalid email or Password supplied"
 			render login_path
 		end
 	end

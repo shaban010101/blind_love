@@ -21,10 +21,10 @@ feature "Session" do
 		fill_in "Password", :with => ""
 		click_button "Login"
 		page.driver.post '/sessions', :username => "", :password => ""		
-		visit '/sessions/new'
-		page.should have_content("Your email or password is invalid")
+		visit login_path
+		page.should have_content("Invalid email or Password supplied")
 	end
-	
+
 	context "Logged into site"
 		scenario "can logout of the website" do		
 			visit '/sessions/new'	
@@ -35,7 +35,6 @@ feature "Session" do
 			visit("/users/#{@user.id}")
 			click_link("Log Out")
 			visit '/sessions/new'
-			# page.should have_content("Logged out yay!")
 		end
 
 		scenario "gets a message when the user is already logged in" do 

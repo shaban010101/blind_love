@@ -15,9 +15,8 @@
 					<%= product_form.label :products, "Products" %>
 				</label>
 				<div class="controls">
-					<select>
-						<%= product_form.select :products, options_from_collection_for_select(Product.all, :id, :name) %>
-					</select>
+					<%= product_form.select :products, options_from_collection_for_select(Product.all, :id, :name) %>
+				</div>
 			<% end %>
 			</div>
 			<div class"control-group">
