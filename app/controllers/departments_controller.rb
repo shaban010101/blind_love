@@ -4,5 +4,10 @@ class DepartmentsController < ApplicationController
 	def show
 		@department = Department.find(params[:id])
 		@dep_cat = @department.categories.find(:all)
+		begin 
+			@department = Department.find(params[:id])
+		rescue ActiveRecord::RecordNotFound
+			render 'public/404', status: 404
+		end
 	end
 end

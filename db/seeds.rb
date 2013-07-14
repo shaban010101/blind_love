@@ -4,5 +4,5 @@
 # Examples:
 #
 department= Department.create([{ department_name: 'Mens' }, { department_name: 'Womens' }, { department_name: 'Kids'}])
-category= Category.create([{ category_name: 'Trousers'}, {category_name: 'Shorts'}, {category_name: 'Underwear'}])
-product= Product.create([{:name => 'Foo', :price => 'Bar', :description => 'FooBar' }])
+category= Category.create([{ category_name: 'Trousers', :department_id => 1}, {category_name: 'Shorts'}, {category_name: 'Underwear'}])
+product= Product.create([{:name => 'Foo', :price => 'Bar', :description => 'FooBar', :category_id => 1 }])

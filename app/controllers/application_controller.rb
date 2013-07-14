@@ -11,5 +11,4 @@ class ApplicationController < ActionController::Base
   def authorize
 		redirect_to root_url, :notice => "Please log in" if current_user.nil?
 	end
-
 end

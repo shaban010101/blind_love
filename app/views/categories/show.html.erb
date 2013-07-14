@@ -1,0 +1,4 @@
+<% @cp.each do |p| %>
+	<%= p.name %>
+	<%= link_to p.name, product_path(@p.slug) %>
+<% end %>
