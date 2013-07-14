@@ -1,0 +1,30 @@
+<h1>Edit Department</h1>
+
+	<% @products_department.inspect do |p| %>
+		<%= p.name %>
+	<% end %>
+
+	<%= form_for :department, :url => { :action => "update" }, :method => :put do  |f| %>
+	<div class="category-form-update">
+		<form class="form-horizontal">
+			<div class="control-group">
+				<%= f.fields_for :products do |product_form| %>
+				<label class="control-label">
+					<%= product_form.label :product, "Products" %>
+				</label>
+				<div class="controls">
+					<%= product_form.select :product, options_from_collection_for_select(Product.all, :id, :name) %>
+				<% end %>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<button class="btn">
+						<%= f.submit %>
+					</button>
+				</div>
+			</div>
+		</div>
+	<% end %>
+
+	

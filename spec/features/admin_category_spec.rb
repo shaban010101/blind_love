@@ -2,14 +2,6 @@ require 'spec_helper'
 
 feature 'Category' do
 	context "when logged in" do
-		# let
-		# let (:attr_cat) do 
-		# 	{
-		# 		:category_name => "Trousers",
-  #   		:slug  => "trousers",
-  #   		:products_attributes => {:product_id => 1}
-		# 	}
-		# end
 
 	  let(:user) { FactoryGirl.create(:user)}
 		

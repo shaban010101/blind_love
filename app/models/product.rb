@@ -11,6 +11,5 @@ class Product < ActiveRecord::Base
 
 	belongs_to :category
 	belongs_to :department
-	# accepts_nested_attributes_for :departments
 
 end

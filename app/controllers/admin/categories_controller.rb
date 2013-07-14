@@ -1,5 +1,5 @@
 class Admin::CategoriesController < ApplicationController
-	before_filter :authorize
+
 	def new
 		@category = Category.new
 		@products = @category.products.build(params[:products_attributes])

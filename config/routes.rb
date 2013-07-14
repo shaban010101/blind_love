@@ -13,6 +13,13 @@ BlindLove::Application.routes.draw do
     resources :categories
     resources :departments
   end
+
+  resources :departments, :only => [:index, :show] do
+    resources :categories, :only => [:index, :show], :shallow => true do
+      resources :products, :only => [:index, :show], :shallow => true
+    end
+  end
+
   
   root :to => 'sessions#new'
   

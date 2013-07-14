@@ -1,11 +1,8 @@
 class DepartmentsController < ApplicationController
-
-	def index
-		@department = Department.all
-	end
+	skip_before_filter :authorize, :only => [:show]
 
 	def show
-		@department.products.collect { |p| p.product }
+		@department = Department.find(params[:id])
+		@dep_cat = @department.categories.find(:all)
 	end
-
 end

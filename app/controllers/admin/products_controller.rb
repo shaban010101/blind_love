@@ -1,5 +1,4 @@
 class Admin::ProductsController < ApplicationController
-	before_filter :authorize
 
 	def index
 		@products = Product.paginate(:page => params[:page], :per_page => 15 )
@@ -7,7 +6,7 @@ class Admin::ProductsController < ApplicationController
 
 	def new
 		@product = Product.new
-	end
+ 	end
 
 	def show
 		@product = Product.find(params[:id])
