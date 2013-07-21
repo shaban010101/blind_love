@@ -7,6 +7,7 @@ gem "bcrypt-ruby", '~> 3.0.1'
 gem "paperclip", '~> 3.4.2'
 gem "will_paginate", '~> 3.0.4'
 gem "friendly_id", '~> 4.0.9'
+gem "tire", '~> 0.6.0'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

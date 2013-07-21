@@ -32,6 +32,13 @@ feature 'Product' do
 			attach_file "Image", Rails.root.join('spec', 'fixtures', 'images', 'boom.jpg')
 			page.has_xpath?("//div[2]/p")
 	  end
+
+	  scenario 'deleting' do
+	  	visit '/admin/products'
+	  	find(:xpath, "//tr[2]/td[5]/a").click
+	  	visit '/admin/products'
+	  	page.should have_content("The products has gone")
+	  end
 	 end
 
 	context "when not logged in" do

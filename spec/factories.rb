@@ -25,8 +25,8 @@ FactoryGirl.define do
   factory :department do
     department_name "Mens"
     slug "mens"
-    categories_attributes { [ FactoryGirl.attributes_for(:category)]}
-    # products_attributes { [ FactoryGirl.attributes_for(:product) ]}
+    # categories_attributes { [ FactoryGirl.attributes_for(:category)]}
+    products_attributes { [ FactoryGirl.attributes_for(:product) ]}
   end
 end
 

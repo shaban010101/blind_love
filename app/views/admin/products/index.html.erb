@@ -16,7 +16,7 @@
 				<td><p><%= p.price %><p></td>
 				<td><%= link_to 'Show', admin_product_path(p) %></td>
 				<td><%= link_to 'Edit', edit_admin_product_path(p) %></td>
-				<td><%= link_to 'Remove', @product, :confirm => 'Are you sure?', :method => :delete %></td>
+				<td><%= link_to 'Remove', admin_product_path(p), method: :delete, data: { :confirm => 'Are you sure?' } %></td>
 			</tr>
 		<% end %>
 		</table>

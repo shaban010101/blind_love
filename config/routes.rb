@@ -14,7 +14,7 @@ BlindLove::Application.routes.draw do
     resources :departments
   end
 
-  resources :departments, :only => [:index, :show] do
+  resources :departments, :only => [:index, :show], :shallow => true do
     resources :categories, :only => [:index, :show], :shallow => true do
       resources :products, :only => [:index, :show], :shallow => true
     end

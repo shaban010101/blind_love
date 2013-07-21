@@ -28,9 +28,10 @@ class Admin::ProductsController < ApplicationController
 	end
 
 	def update
-		@product = Product.update_attributes(params[:id])
-		if @product.update
+		@product = Product.find(params[:id])
+		if @product.update_attributes(params[:product])
 			flash[:notice] = "Product Succesfully updated"
+			redirect_to admin_products_path(@product.slug)
 		else
 			flash.now[:error] = "Product could not be edited"
 			render "edit"
@@ -39,5 +40,8 @@ class Admin::ProductsController < ApplicationController
 
 	def destroy
 		@product = Product.find(params[:id])
+		@product.destroy
+		redirect_to admin_product_path
+		flash[:notice] = "The products has gone"
 	end
 end
