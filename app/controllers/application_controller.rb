@@ -9,6 +9,17 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def authorize
-		redirect_to root_url, :notice => "Please log in" if current_user.nil?
+		redirect_to login_path, :notice => "Please log in" if current_user.nil?
 	end
+
+  private 
+
+    def current_basket
+      if session[:basket_id]
+        basket.find(session[:basket_id])
+      else 
+        basket = Basket.create
+        session[:basket_id] = basket.id
+      end
+    end
 end

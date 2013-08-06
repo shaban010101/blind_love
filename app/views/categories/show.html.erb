@@ -1,4 +1,21 @@
-<% @cp.each do |p| %>
-	<%= p.name %>
-	<%= link_to p.name, product_path(@p.slug) %>
-<% end %>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+      <p> departments </p>
+    </div>
+    <div class="span10">
+      <% @cp.each.each do |p| %>
+        <div class="product-i">
+          <ul class="thumbnails">
+            <li class="span3">
+              <%= image_tag p.image %> 
+            </li>
+         </ul>
+         <p><%= p.price %></p>
+         <p><%= link_to p.name, product_path(p.slug) %></p>
+        </div>
+      <% end %>
+        </div>
+    </div>
+  </div>
+</div>

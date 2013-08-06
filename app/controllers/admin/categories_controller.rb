@@ -38,4 +38,13 @@ class Admin::CategoriesController < ApplicationController
 			render "edit"
 		end
 	end
+
+	def destroy
+    @category = Category.find_by_slug(params[:id])
+    if @category.present?
+    	@category.destroy
+    end
+    flash[:notice] = "The category has been deleted"
+    redirect_to admin_categories_path
+  end
 end

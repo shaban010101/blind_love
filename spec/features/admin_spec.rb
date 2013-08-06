@@ -13,9 +13,11 @@ feature 'Admin' do
 		#  page.should have_content("Logged In")
 	end
 
-	scenario "No entry unless logged in" do
-		visit '/admin'
-		page.should have_content("Please log in")
-		visit '/sessions/new'
+	context "not logged in" do
+		scenario "no entry unless logged in" do
+			visit '/admin'
+			page.should have_content("Please log in")
+			visit '/sessions/new'
+		end
 	end
 end

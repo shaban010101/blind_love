@@ -1,5 +1,6 @@
 <% @categories.each do |c| %>
 	<p><%= c.category_name %>
 	<%= link_to 'Show', admin_category_path(c) %>
-	<%= link_to 'Edit', edit_admin_category_path(c) %></p>
+	<%= link_to 'Edit', edit_admin_category_path(c) %>
+	<%= link_to 'Delete', admin_category_path(c), :method => 'delete', :confirm => 'Are you sure?' %></p>
 <% end %>

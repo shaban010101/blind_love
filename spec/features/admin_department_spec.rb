@@ -19,7 +19,4 @@ feature Department do
 		# find(:xpath, '/option[3]').click
 		click_button("Save")   
 	end
-
-	scenario "denied entry when not logged in" do
-	end
 end

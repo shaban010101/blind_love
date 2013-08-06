@@ -10,6 +10,7 @@ feature 'Category', %q{
 		
 		before(:each) do
 			@user = FactoryGirl.create(:user)
+			@category = FactoryGirl.create(:category)
 			visit '/sessions/new'
 			fill_in "Username", :with => @user.username
 			fill_in "Password", :with => @user.password
@@ -18,7 +19,6 @@ feature 'Category', %q{
 		end
 
 		scenario "creating a category" do
-			@category = FactoryGirl.create(:category)
 			visit new_admin_category_path
 			fill_in "category_category_name", :with => "trousers"
 			find(:xpath, "//option[1]").click
@@ -35,18 +35,15 @@ feature 'Category', %q{
 	  end
 
 	  scenario "viewing a category" do
-	  	@category = FactoryGirl.create(:category)
 	  	visit admin_categories_path
 	  	find(:xpath, "//p[1]/a[1]").click
 	  	visit admin_category_path(@category.slug)
 	  end
-	end
 
-	context "when not logged in" do
-		scenario "denied entry when not logged in" do
-			visit admin_categories_path
-			page.should  have_content("Please log in")
-			visit new_session_path
-		end
+	  scenario "deleting a category" do
+	  	visit admin_categories_path
+	  	find(:xpath, "//p/a[3]").click
+	  	page.has_xpath?("//div[2]/p")
+	  end
 	end
 end

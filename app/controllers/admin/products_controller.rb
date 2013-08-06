@@ -39,9 +39,11 @@ class Admin::ProductsController < ApplicationController
 	end
 
 	def destroy
-		@product = Product.find(params[:id])
-		@product.destroy
-		redirect_to admin_product_path
-		flash[:notice] = "The products has gone"
+		@product = Product.find_by_slug(params[:id])
+		if @product.present?
+			@product.destroy
+		end
+		flash[:notice] = "The product has gone"
+		redirect_to admin_products_path
 	end
 end

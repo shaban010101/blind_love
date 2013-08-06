@@ -1,1 +1,11 @@
-<%= @product.name %>
+<ul class="thumbnails">
+	<li class="span4">
+		<div class="thumbnail">
+			<%= image_tag(@product.image) %>
+		</div>
+	</li>
+</ul>
+<div class="product-detail">
+	<p><%= @product.name %></p>
+	<p><%= @product.price %></p>
+</div>

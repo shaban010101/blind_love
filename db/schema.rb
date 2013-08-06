@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130702210654) do
+ActiveRecord::Schema.define(:version => 20130806205703) do
+
+  create_table "basket_items", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "basket_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "baskets", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "categories", :force => true do |t|
     t.string   "category_name"
@@ -49,6 +61,20 @@ ActiveRecord::Schema.define(:version => 20130702210654) do
   end
 
   add_index "products", ["slug"], :name => "index_products_on_slug", :unique => true
+
+  create_table "sizes", :force => true do |t|
+    t.string   "size"
+    t.integer  "quantity"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "sizings", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "size_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "username"
