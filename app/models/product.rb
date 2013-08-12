@@ -1,5 +1,8 @@
 class Product < ActiveRecord::Base
-	extend FriendlyId 
+	extend FriendlyId
+	include Tire::Model::Search
+	include Tire::Model::Callbacks
+
 	friendly_id :name, use: :slugged
 	has_attached_file :image
 
@@ -18,4 +21,9 @@ class Product < ActiveRecord::Base
 	has_many :sizes, :through => :sizings
 	has_many :line_items
 
+  def self.search(params)
+  	tire.search(load: true) do
+  		query { string params[:query] } if params[:query].present?
+  	end
+  end
 end

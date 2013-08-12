@@ -10,7 +10,7 @@ describe Product do
 	it { should belong_to(:department) }
 	it { should belong_to(:category) }
 	it { should have_many(:sizes).through(:sizings)}
-	it { should have_many(:basket_item) }
+	it { should have_many(:basket_items) }
 	it { should have_attached_file(:image) }
 	it { should validate_attachment_presence(:image) }
 

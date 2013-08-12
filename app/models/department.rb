@@ -8,18 +8,4 @@ class Department < ActiveRecord::Base
   accepts_nested_attributes_for :categories, :products
 
   validates_presence_of :department_name
-
-  # Elastic Search Integration
-  # def self.search(params)
-  # 	tire.search(load: true) do
-  # 		query { string params[:query] } if params[:query].present?
-  # 	end
-  # end
-
-  # def to_indexed_json
-  #   # to_json(methods: [:products])
-  #   {
-  #     :products => products.map { |p| {:_id => p.id} } 
-  #   }
-  # end
 end

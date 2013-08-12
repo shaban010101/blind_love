@@ -15,11 +15,10 @@ class ApplicationController < ActionController::Base
   private 
 
     def current_basket
-      if session[:basket_id]
-        basket.find(session[:basket_id])
-      else 
-        basket = Basket.create
-        session[:basket_id] = basket.id
-      end
+      Basket.find(session[:basket_id])
+    rescue ActiveRecord::RecordNotFound 
+      basket = Basket.create
+      session[:basket_id] = basket.id
+      basket
     end
 end

@@ -3,7 +3,7 @@ class DepartmentsController < ApplicationController
 	
   def index
     @departments = Department.all
-    @products = Product.all
+    @products = Product.search(params)
   end
 	
   def show
