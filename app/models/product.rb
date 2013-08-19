@@ -1,7 +1,5 @@
 class Product < ActiveRecord::Base
 	extend FriendlyId
-	include Tire::Model::Search
-	include Tire::Model::Callbacks
 
 	friendly_id :name, use: :slugged
 	has_attached_file :image
@@ -19,11 +17,8 @@ class Product < ActiveRecord::Base
 	belongs_to :department
 	has_many :sizings
 	has_many :sizes, :through => :sizings
-	has_many :line_items
+	has_many :basket_items
 
-  def self.search(params)
-  	tire.search(load: true) do
-  		query { string params[:query] } if params[:query].present?
-  	end
-  end
+  scope :search, lambda { |params| where("name LIKE ?", "%#{params[:query]}%" ) }
+
 end

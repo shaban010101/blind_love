@@ -2,7 +2,7 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-# require 'rspec/autorun'
+require 'rspec/autorun'
 require 'capybara/rspec'
 require 'database_cleaner'
 require 'rack/test'
@@ -31,7 +31,6 @@ RSpec.configure do |config|
   end
 
   config.include Capybara::DSL
-  
 end
 
 def login_post

@@ -43,7 +43,6 @@ FactoryGirl.define do
 
   
   factory :basket do
-    basket_id 1
   end
 
   factory :basket_item do
