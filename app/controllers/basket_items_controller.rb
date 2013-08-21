@@ -14,12 +14,14 @@ class BasketItemsController < ApplicationController
   end
 
   def destroy
-    @basket_item = @basket.basket_items(@product_id)
+    @basket_item = BasketItem.find(params[:id])
     @basket_item.destroy
     if @basket_item.destroy
       flash[:notice] = "Product has been removed from your shopping basket"
+      redirect_to current_basket
     else
       flash[:notice] = "Product couldn't be removed from the shopping basket"
+      redirect_to basket_path
     end
   end
 end

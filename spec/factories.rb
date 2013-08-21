@@ -46,8 +46,8 @@ FactoryGirl.define do
   end
 
   factory :basket_item do
-    product_id 1
-    basket_id 1
+    product
+    basket
   end
 end
 
