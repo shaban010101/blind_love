@@ -43,11 +43,25 @@ FactoryGirl.define do
 
   
   factory :basket do
+    payment
   end
 
   factory :basket_item do
     product
     basket
+    payment
+  end
+
+  factory :payment do
+    title "Mr"
+    first_name "Foo"
+    last_name "Bar"
+    address_1 "105 Arcadian Gardens"
+    address_2 "London"
+    card_no 3939393
+    csv 234
+    start_date "2013/08"
+    exp_date "2014/12"
   end
 end
 

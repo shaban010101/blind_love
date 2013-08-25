@@ -9,6 +9,7 @@ BlindLove::Application.routes.draw do
   resources :users, :only => [:edit,:create,:update,:new,:show,:destroy]
   resources :basket_items, :only =>[ :create, :destroy ]
   resources :baskets, :only => [ :show ]
+  resources :payments, :only => [ :new, :create]
 
   namespace :admin do
     resources :products

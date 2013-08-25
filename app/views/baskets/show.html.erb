@@ -1,6 +1,10 @@
 <p><%= notice %></p>
 
-<%= @basket.basket_items.each do |item| %>
+<%= @basket_items.each do |item| %>
   <%= item.product.name %>
   <%= button_to 'Remove', basket_item_path(item.id), :method => 'delete', :confirm => 'Are you sure?' %>
 <% end %>
+
+<p><%= @basket_items.product_totals %><p>
+
+<%= link_to "Order", new_payment_path %>
