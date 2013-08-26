@@ -16,6 +16,7 @@ RSpec.configure do |config|
   config.order = "random"
   config.use_transactional_fixtures = false
   config.include Paperclip::Shoulda::Matchers
+  config.filter_run_excluding :skipping => true
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

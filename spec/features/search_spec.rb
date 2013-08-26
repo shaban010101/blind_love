@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-feature Department do 
+feature Product do 
   before do
     @product = FactoryGirl.create(:product)
   end
 
-  scenario "search for products" do
+  scenario "search for products", :skipping => true do
     visit "/departments/"
     fill_in 'query', :with => @product.name
     click_button 'Search'

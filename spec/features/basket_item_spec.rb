@@ -32,4 +32,10 @@ feature "BasketItem" do
     visit basket_path(@basket.id)
     page.has_xpath?("//p[2]")
   end
+
+  scenario "attempting to go to a cart which does not belong to the user" do
+    @basket = FactoryGirl.create(:basket)
+    @basket2 = Basket.
+    visit basket_path(@basket2.id)
+  end
 end

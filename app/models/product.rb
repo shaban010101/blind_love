@@ -4,7 +4,7 @@ class Product < ActiveRecord::Base
 	friendly_id :name, use: :slugged
 	has_attached_file :image
 
-	attr_accessible :name, :price, :description, :category_id, :slug, :image, :department_id, :image_file_name
+	attr_accessible :name, :price, :description, :category_id, :slug, :image, :image_file_name
 
 	validates_presence_of :price
 	validates :price, :numericality => true

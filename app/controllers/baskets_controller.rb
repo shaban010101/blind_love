@@ -1,5 +1,6 @@
 class BasketsController < ActionController::Base
   skip_before_filter :authorize, :only => [:show]
+  # before_filter :only_current_cart
   def show
     # begin
       @basket = Basket.find(params[:id])
