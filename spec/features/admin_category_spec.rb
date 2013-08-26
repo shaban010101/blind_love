@@ -42,7 +42,7 @@ feature 'Category', %q{
 
 	  scenario "deleting a category" do
 	  	visit admin_categories_path
-	  	find(:xpath, "//p/a[3]").click
+	  	find(:xpath, "//td[4]/a").click
 	  	page.has_xpath?("//div[2]/p")
 	  end
 	end

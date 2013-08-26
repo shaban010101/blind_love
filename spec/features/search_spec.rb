@@ -3,10 +3,11 @@ require 'spec_helper'
 feature Product do 
   before do
     @product = FactoryGirl.create(:product)
+    @category = FactoryGirl.create(:category)
   end
 
-  scenario "search for products", :skipping => true do
-    visit "/departments/"
+  scenario "search for products" do
+    visit categories_path(@category.slug)
     fill_in 'query', :with => @product.name
     click_button 'Search'
     page.should have_content(@product.name)

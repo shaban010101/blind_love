@@ -1,6 +1,34 @@
-<% @categories.each do |c| %>
-	<p><%= c.category_name %>
-	<%= link_to 'Show', admin_category_path(c) %>
-	<%= link_to 'Edit', edit_admin_category_path(c) %>
-	<%= link_to 'Delete', admin_category_path(c), :method => 'delete', :confirm => 'Are you sure?' %></p>
-<% end %>
+<div class="alert alert-success">
+  <p><%= flash[:notice] %></p>
+</div>
+<ul class="nav nav-pills">
+  <li><%= link_to "Product management", admin_products_path %></li>
+
+  <li><%= link_to "Category management", admin_categories_path %></li>
+</ul>
+
+<p> <%= link_to 'New Category', new_admin_category_path %> </p>
+
+<div class="container">
+  <table class="table table-hover">
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr>
+      <% @categories.each do |c| %>
+        <td><p><%= c.category_name %></p></td>
+        <td><%= link_to 'Show', admin_category_path(c) %></td>
+        <td><%= link_to 'Edit', edit_admin_category_path(c) %></td>
+        <td><%= link_to 'Delete', admin_category_path(c), :method => 'delete', :confirm => 'Are you sure?' %></td>
+     </tr> 
+      <% end %>
+    </table>
+    <div class="pagination">
+      <ul>
+        <li><%= will_paginate @categories %></li>
+      </ul>
+    </div>
+  </div>
