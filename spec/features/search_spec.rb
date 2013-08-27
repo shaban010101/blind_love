@@ -7,7 +7,7 @@ feature Product do
   end
 
   scenario "search for products" do
-    visit categories_path(@category.slug)
+    visit category_path(@category.slug)
     fill_in 'query', :with => @product.name
     click_button 'Search'
     page.should have_content(@product.name)
