@@ -19,6 +19,7 @@ FactoryGirl.define do
     slug "foo"
     image Rails.root.join("spec/fixtures/images/boom.jpg").open
   	category
+    department "mens"
   end
 
   factory :size do
@@ -35,25 +36,21 @@ FactoryGirl.define do
 
   
   factory :basket do
-    payment
+    order
   end
 
   factory :basket_item do
     product
     basket
-    payment
+    order
   end
 
-  factory :payment do
+  factory :order do
     title "Mr"
     first_name "Foo"
     last_name "Bar"
     address_1 "105 Arcadian Gardens"
     address_2 "London"
-    card_no 3939393
-    csv 234
-    start_date "2013/08"
-    exp_date "2014/12"
   end
 end
 

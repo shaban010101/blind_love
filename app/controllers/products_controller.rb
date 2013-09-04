@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-	skip_before_filter :authorize, :only => [:index, :show]
+	skip_before_filter :authorize, :only => [:index, :show, :mens]
 
   def index
     @products = Product.search(params)
@@ -8,4 +8,8 @@ class ProductsController < ApplicationController
 	def show
 		@product = Product.find(params[:id])
 	end
+
+  def mens
+    @product = Product.mens_clothing
+  end
 end

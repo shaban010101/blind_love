@@ -1,13 +1,13 @@
-class PaymentsController < ApplicationController
+class OrdersController < ApplicationController
   skip_before_filter :authorize, :only => [:new, :create]
 
   def new
-    @payment = current_basket.build_payment(params[:basket_id]) 
+    @order = current_basket.build_order(params[:basket_id]) 
   end
 
   def create
-    @payment = current_basket.create_payment(params[:payment]) 
-    if @payment.save
+    @order = current_basket.create_order(params[:payment]) 
+    if @order.charge_customer
       redirect_to root_path
       flash[:notice] = "Congrats you've made an order"
     else
@@ -15,4 +15,9 @@ class PaymentsController < ApplicationController
        render "new" 
     end
   end
+
+  def show
+    @order = Order.find(params[:id])
+  end
+
 end

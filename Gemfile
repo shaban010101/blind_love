@@ -7,11 +7,13 @@ gem "bcrypt-ruby", '~> 3.0.1'
 gem "paperclip", '~> 3.4.2'
 gem "will_paginate", '~> 3.0.4'
 gem "friendly_id", '~> 4.0.9'
+gem 'stripe'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-  gem 'bootstrap-sass', '~> 2.3.1.3'
+  gem 'bootstrap-sass', '~> 2.3.2'
+end
 
 group :test do
   gem 'rspec-rails', '2.13.2'
@@ -33,7 +35,6 @@ group :test, :development do
   gem 'guard-rspec', '~> 3.0.1'
   gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'fuubar', '~> 1.1.1'
-end
   gem 'uglifier', '>= 1.0.3'
 end
 

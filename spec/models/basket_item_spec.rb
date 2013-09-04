@@ -6,7 +6,7 @@ describe BasketItem do
   
   it { should belong_to(:basket) }
   it { should belong_to(:product) }
-  it { should belong_to(:payment)}
+  it { should belong_to(:order)}
 
   it "should sum the totals for products in the shopping basket" do
     FactoryGirl.create(:basket_item)

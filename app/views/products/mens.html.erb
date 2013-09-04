@@ -1,16 +1,18 @@
 <button type="button" class="close" data-dismiss="alert">&times;</button>
   <p><%= flash[:notice] %></p>
 
-<div class="search">
-    <%= form_tag(search_path, method: "get", :class => "form-search") do %>
-      <%= text_field_tag(:query, nil, :class => "input-medium search-query") %>
-      <%= submit_tag("Search", :class => "btn") %>
+<div class ="search">
+  <form class="form-search">
+    <%= form_tag(search_path, method: "get") do %>
+      <%= text_field_tag(:query) %>
+      <%= submit_tag("Search") %>
     <% end %>
+  </form> 
 </div>  
 
  <div class="container-fluid">
   <div class="row-fluid">
-    <% @cp.each do |p| %>
+    <% @product.each do |p| %>
       <div class="product"> 
         <div class="product-image">
           <%= image_tag p.image %>

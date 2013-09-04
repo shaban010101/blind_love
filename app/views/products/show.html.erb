@@ -1,3 +1,9 @@
+<ul class="breadcrumb">
+  <li><%= link_to "Home", root_path %></li>
+  <li class="active">Department </li>
+  <li class="active">Category products </li>
+</ul>
+
 <ul class="thumbnails">
 	<li class="span4">
 		<div class="thumbnail">
@@ -8,5 +14,5 @@
 <div class="product-detail">
 	<p><%= @product.name %></p>
 	<p><%= @product.price %></p>
-  <%= button_to "Add to Basket", basket_items_path(product_id: @product.id) %>
+  <%= button_to "Add to Basket", basket_items_path(product_id: @product.id), :class =>"btn" %>
 </div>

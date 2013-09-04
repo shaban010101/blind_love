@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130826183732) do
+ActiveRecord::Schema.define(:version => 20130903220214) do
 
   create_table "basket_items", :force => true do |t|
     t.integer  "product_id"
     t.integer  "basket_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "payment_id"
+    t.integer  "order_id"
   end
 
   create_table "baskets", :force => true do |t|
@@ -36,20 +36,17 @@ ActiveRecord::Schema.define(:version => 20130826183732) do
 
   add_index "categories", ["slug"], :name => "index_categories_on_slug", :unique => true
 
-  create_table "payments", :force => true do |t|
+  create_table "orders", :force => true do |t|
     t.string   "title"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "address_1"
     t.string   "address_2"
-    t.integer  "card_no"
-    t.integer  "csv"
-    t.date     "start_date"
-    t.date     "exp_date"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "basket_id"
     t.integer  "total"
+    t.string   "stripe_token"
   end
 
   create_table "products", :force => true do |t|
@@ -65,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20130826183732) do
     t.datetime "image_updated_at"
     t.string   "slug"
     t.string   "image"
+    t.string   "department"
   end
 
   add_index "products", ["slug"], :name => "index_products_on_slug", :unique => true
