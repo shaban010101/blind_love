@@ -4,10 +4,9 @@ class Product < ActiveRecord::Base
 	friendly_id :name, use: :slugged
 	has_attached_file :image
 
-	attr_accessible :name, :price, :description, :category_id, :slug, :image, :image_file_name, :department
+	attr_accessible :name, :price, :description, :category_id, :slug, :image, :image_file_name, :department, :size_ids, :quantity
 
 	validates_presence_of :price
-	validates_presence_of :department
 	validates :price, :numericality => true
 	validates_presence_of :name
 	validates_uniqueness_of :name
@@ -19,6 +18,9 @@ class Product < ActiveRecord::Base
 	has_many :sizes, :through => :sizings
 	has_many :basket_items
 
+  accepts_nested_attributes_for :sizes
+  accepts_nested_attributes_for :sizings
+
   scope :search, lambda { |params| where("name LIKE ?", "%#{params[:query]}%" ) }
 
   scope :mens_clothing, where(:department => "Mens")
@@ -26,7 +28,4 @@ class Product < ActiveRecord::Base
   # 	joins(:category).where("category.category_name =?", category_name) 
   # end
 
-  def to_param
-  	category
-  end
 end

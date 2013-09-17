@@ -34,13 +34,13 @@
 		  	</div>
 			</div>
 			<div class="control-group">
-        <% hidden_field_tag "product[size_ids][]", nil %>
+  			<% hidden_field_tag "product[size_ids][]", nil %>
         <% Size.all.each do |s| %>
           <%= check_box_tag "product[size_ids][]", s.id, @product.size_ids.include?(s.id), id: dom_id(s) %>
             <label clss="control-label">
-              <%= label_tag dom_id(s), s.size %><br>
+              <%= label_tag dom_id(s), s.size_name %><br>
             </label>
-				<% end %>
+         <% end %>
 			</div>
 		  <div class="control-group">
 		  	<div class="controls">

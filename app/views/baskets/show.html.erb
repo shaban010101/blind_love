@@ -1,22 +1,29 @@
 <p><%= notice %></p>
 
-<p><%= @basket_items.product_totals %><p>
-
-<%= button_to "Purchase products", new_payment_path, :class => "btn" %>
-
-<table class="table table-hover">
-  <tr>
-    <th>Picture</th>
-    <th>Name</th>
-    <th>Price</th>
-    <th></th>
-  </tr>
-  <tr>
-    <% @basket_items.each do |item| %>
-      <td><p>Nothingness</p></td>
-      <td><p><%= item.product.name %></p></td>
-      <td><p><%= item.product.price %></p></td>
-      <td><%= button_to 'Remove', basket_item_path(item.id), :method => 'delete', :confirm => 'Are you sure?', :class => "btn" %></td>
-      <% end %>
-  </tr>
-</table>
+<div class="container">
+<% if @basket_items.empty? %>
+  <p> Add some products this is empty.... </p>
+<% else %> 
+    <table class="table table-hover">
+      <tr>
+        <th>Picture</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th></th>
+      </tr>
+      <tr>
+        <% @basket_items.each do |item| %>
+          <td><p>Nothingness</p></td>
+          <td><p><%= item.product.name %></p></td>
+          <td><p><%= item.product.price %></p></td>
+          <td><%= button_to 'Remove', basket_item_path(item.id), :method => 'delete', :confirm => 'Are you sure?', :class => "btn" %></td>
+          <td><%= button_to "Update quantity", basket_items_path(item.id), :class => "btn" %></td>
+        </tr>
+        <% end %>
+         <tr>
+          <td><p class="text-info">Total  <%= @basket_items.product_totals %><p></td>
+          <td><%= button_to "Purchase products", shipping_order_path, :class => "btn" %></td>
+        </tr>
+    </table>
+  </div>
+<% end %>

@@ -12,14 +12,7 @@ class ApplicationController < ActionController::Base
 		redirect_to login_path, :notice => "Please log in" if current_user.nil?
 	end
 
-  def only_current_cart
-    unless !current_basket = basket.id
-      redirect_to current_basket
-    end
-  end
-
   private 
-
     def current_basket
       Basket.find(session[:basket_id])
     rescue ActiveRecord::RecordNotFound 

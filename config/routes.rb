@@ -4,6 +4,7 @@ BlindLove::Application.routes.draw do
   match "session" => "sessions#destroy", :as => "logout"
   get "search" => "categories#search"
   get "mens" => "products#mens"
+ 
 
   resources :admin, :only => [:index]
   resources :home_pages, :only => [:index]
@@ -11,10 +12,24 @@ BlindLove::Application.routes.draw do
   resources :users, :only => [:edit,:create,:update,:new,:show,:destroy]
   resources :basket_items, :only =>[ :create, :destroy ]
   resources :baskets, :only => [ :show ]
-  resources :orders, :only => [ :new, :create]
+
+  resources :orders ,:only => [ :new, :create, :show] do
+    member do
+      get "shipping"
+      get "review"
+      get "payment"
+      put "payment"
+      put "review"
+    end
+  end
 
   namespace :admin do
-    resources :products
+    resources :products do
+      member do
+        get "sizing"
+        put "sizing_update"
+      end
+    end
     resources :categories
   end
 

@@ -24,4 +24,14 @@ class BasketItemsController < ApplicationController
       redirect_to basket_path
     end
   end
+
+  def update
+    @basket_item = BasketItem.find(params[:id])
+    if @basket_item.update_attributes(params[:basket_item])
+      flash.now[:notice] = "Basket Updated"
+    else
+      flash.now[:error] = "Basket could not be updated"
+      render "edit"
+    end
+  end
 end
