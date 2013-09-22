@@ -9,6 +9,7 @@ gem "will_paginate", '~> 3.0.4'
 gem "friendly_id", '~> 4.0.9'
 gem 'stripe'
 gem "thin"
+gem "rb-fsevent"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

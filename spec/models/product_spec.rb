@@ -21,7 +21,6 @@ describe Product do
 	end
 
 	context "scopes" do
-
 		it "should return products for the departments categories" do
 			Product.mens_category("Trousers").should == [@product]
 		end
