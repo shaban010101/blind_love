@@ -14,28 +14,14 @@ class Order < ActiveRecord::Base
   validates_format_of :year, :with => /\d{2,4}/
   validates_format_of :month, :with => /\d{1,2}/
   validate :year_cannot_be_in_the_past
-  validate :invalid_month_and_year
   
   has_many :basket_items
   belongs_to :basket
 
   before_save :product_totals
-  # after_save :empty_the_basket
-
-  # def empty_the_basket
-  #   basket = self.basket_id
-  #   basket.destroy
-  # end
 
   def year_cannot_be_in_the_past
     if self.year < Time.now.year
-      errors.add(:year, "can't be in the past")
-    end
-  end
-
-  def invalid_month_and_year
-    if self.year < Time.now.year && self.month < Time.now.month
-      errors.add(:month, "can't be in the past")
       errors.add(:year, "can't be in the past")
     end
   end
