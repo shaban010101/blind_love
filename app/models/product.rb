@@ -24,8 +24,7 @@ class Product < ActiveRecord::Base
   scope :search, lambda { |params| where("name LIKE ?", "%#{params[:query]}%" ) }
 
   scope :mens_clothing, where(:department => "Mens")
-  # scope :mens_category, lambda do  |category_name| 
-  # 	joins(:category).where("category.category_name =?", category_name) 
-  # end
+
+  scope :mens_category, lambda {|category_name| joins(:category).where("category_name =?", category_name) } 
 
 end

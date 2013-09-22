@@ -42,5 +42,8 @@ group :test, :development do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'rails_12factor', group: :production
+
 gem 'jquery-rails', '~> 3.0.1'
 
+ruby '2.0.0'

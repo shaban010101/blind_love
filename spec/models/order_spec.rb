@@ -8,13 +8,6 @@ describe Order do
     basket = FactoryGirl.create(:basket)
   end
 
-  it "should set the total from the value of basket_item totals", :skipping => true do
-    BasketItem.product_totals
-    order.product_totals
-    order.save
-    order.total.should == 9999
-  end
-
   it "should give a validation error when year is not in the correct format" do
     order.year = 201
     order.should_not be_valid
