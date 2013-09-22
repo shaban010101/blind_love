@@ -1,13 +1,17 @@
 class OrdersController < ApplicationController
-  skip_before_filter :authorize, :only => [:new, :create, :shipping, :payment, :review]
+  skip_before_filter :authorize, :only => [:new, :create, :shipping, :payment, :review, :show]
+
+  def new 
+    @order = current_basket.build_order(params[:basket_id])
+  end
 
   def create
     @order = current_basket.create_order(params[:order])
-    if @order.save
-      redirect_to payment_order_path(@order)
+    if @order.charge_customer
+      redirect_to order_path(@order)
     else
       flash[:notice] = "Please try again"
-      redirect_to shipping_order_path
+      render "new"
     end
   end
 

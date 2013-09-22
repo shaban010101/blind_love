@@ -1,23 +1,6 @@
-<button type="button" class="close" data-dismiss="alert">&times;</button>
-  <p><%= flash[:notice] %></p>
+<head>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application", :media => "all" %>
+</head>
 
-<div class="search">
-    <%= form_tag(search_path, method: "get", :class => "form-search") do %>
-      <%= text_field_tag(:query, nil, :class => "input-medium search-query") %>
-      <%= submit_tag("Search", :class => "btn") %>
-    <% end %>
-</div>  
-
- <div class="container-fluid">
-  <div class="row-fluid">
-    <% @cp.each do |p| %>
-      <ul class="thumbnails"> 
-        <li class="span4">
-          <%= image_tag p.image %>
-        </li>
-        <p><%= p.price %></p>
-        <p><%= link_to p.name, product_path(p.slug) %></p>
-      </ul>
-    <% end %>
-  </div>
-</div>
+<%= render partial: 'categories' %>

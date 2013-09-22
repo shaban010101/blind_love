@@ -7,6 +7,6 @@ class CategoriesController < ActionController::Base
 	end
 
   def search
-    @products = Product.search(params)
+    @cp = Product.search(params)
   end
 end

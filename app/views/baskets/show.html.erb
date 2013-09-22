@@ -22,7 +22,7 @@
         <% end %>
          <tr>
           <td><p class="text-info">Total  <%= @basket_items.product_totals %><p></td>
-          <td><%= button_to "Purchase products", shipping_order_path, :class => "btn" %></td>
+          <td><%= link_to "Purchase products", new_order_path, :class => "btn" %></td>
         </tr>
     </table>
   </div>

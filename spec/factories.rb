@@ -51,6 +51,11 @@ FactoryGirl.define do
     last_name "Bar"
     address_1 "105 Arcadian Gardens"
     address_2 "London"
+    number  4242424242424242
+    cvc 234
+    basket_id 1
+    year 2020
+    month 12
   end
 end
 

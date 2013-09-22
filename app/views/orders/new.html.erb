@@ -11,9 +11,8 @@
       </ul>
     </div>
   <% end %>
-  
 
-  <div id="shipping-details">
+ <div id="shipping-details">
     <h2> Shipping Details </h2>
 
     <div class="control-group">
@@ -58,8 +57,7 @@
     </div>
   </div>
 
-  <div id="payment-details">
-    <h2> Payment Details </h2>
+  <h2> Payment Details </h2>
     <div class="control-group">
       <label class="control-label">
         <%= label_tag(:card_no, "Card Number") %>
@@ -79,23 +77,23 @@
     </div>
     <div class="control-group">
       <label class="control-label">
-        <%= label_tag(:exp_month) %>  
+        <%= label_tag(:expiry_month) %>  
       </label>
       <div class="controls">
-        <%= select_month( Date.today, :use_month_number => true, :field_name => "month")%>
+        <%= f.text_field(:month) %>
       </div>
     </div>
     <div class="control-group">
       <label class="control-label">
-        <%= label_tag(:exp_year) %>  
+        <%= label_tag(:expiry_year) %>  
       </label>
       <div class="controls">
-        <%= select_year( Date.today, start_year: 2000, end_year: Date.today.year + 10, :field_name => "year"  ) %>
+        <%= f.text_field(:year) %>
       </div>
 
-      <%= f.submit("submit", :class => "btn") %>
+      <%= f.submit("Order", :class => "btn") %>
     </div>
-  </div>
+  </div>>
 
   <div id="stripe_error">
     <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
