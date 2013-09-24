@@ -10,12 +10,19 @@
 <body >
 	<div class="navbar navbar-static-top">
 	  <div class="navbar-inner">
+    <div class="search">
+    <%= form_tag(search_path, method: "get", :class => "form-search") do %>
+      <%= text_field_tag(:query, nil, :class => "input-medium search-query") %>
+      <%= submit_tag("Search", :class => "btn") %>
+    <% end %>
+</div> 
 	  	<a class="brand" href="#">Blind Love</a>
 	  	 <ul class="nav">
 	  	 	<% if current_user %>
 			     	<li><%= link_to 'Home', admin_index_path %></li>
 			      <li><%= link_to 'Log Out',logout_path(@user) %></li>
 		     <% end %>
+          <li><%= link_to "Basket", current_basket %></li> 
 	    </ul>
 	  </div>
 	</div>

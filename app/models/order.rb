@@ -18,12 +18,12 @@ class Order < ActiveRecord::Base
   belongs_to :basket
 
   before_save :product_totals
-  # after_save :update_basket_status
+  after_save :update_basket_status
 
-  # def update_basket_status
-  #   basket.find(basket_id)
-  #   basket.update_attribute(:status, "Inactive")
-  # end
+  def update_basket_status
+    Basket.find(basket_id)
+    basket.update_attributes(:status => "Inactive", :order_id => order_id )
+  end
 
   def product_totals
     self.total = basket_items.product_totals

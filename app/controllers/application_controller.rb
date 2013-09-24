@@ -12,9 +12,10 @@ class ApplicationController < ActionController::Base
 		redirect_to login_path, :notice => "Please log in" if current_user.nil?
 	end
 
-  private 
+  private
+  helper_method :current_basket 
     def current_basket
-      Basket.find(session[:basket_id])
+      @current_basket ||= Basket.find(session[:basket_id]) if session[:basket_id]
     rescue ActiveRecord::RecordNotFound 
       basket = Basket.create
       session[:basket_id] = basket.id

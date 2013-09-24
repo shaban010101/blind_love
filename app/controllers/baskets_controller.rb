@@ -3,15 +3,17 @@ class BasketsController < ApplicationController
 
   def show
     begin
-      if status == "Active"
-        @basket = Basket.find(session[:basket_id])
-        @basket_items = @basket.basket_items
+      current_basket
+      if current_basket.status == "Inactive"
+        basket = Basket.create
+        session[:basket_id] = basket.id
+        basket
+        redirect_to current_basket
       else
-        render 'public/404', status: 404
+        @basket_items = current_basket.basket_items
       end
     rescue ActiveRecord::RecordNotFound
-      flash[:notice] = "Could not find basket with id of #{@basket.id}"
-      redirect_to current_basket
+      render 'public/404', status: 404
     end
   end
 
