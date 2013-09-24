@@ -13,18 +13,17 @@ class Order < ActiveRecord::Base
   validates  :month, :presence => true
   validates_format_of :year, :with => /\d{2,4}/
   validates_format_of :month, :with => /\d{1,2}/
-  validate :year_cannot_be_in_the_past
   
   has_many :basket_items
   belongs_to :basket
 
   before_save :product_totals
+  # after_save :update_basket_status
 
-  def year_cannot_be_in_the_past
-    if self.year < Time.now.year
-      errors.add(:year, "can't be in the past")
-    end
-  end
+  # def update_basket_status
+  #   basket.find(basket_id)
+  #   basket.update_attribute(:status, "Inactive")
+  # end
 
   def product_totals
     self.total = basket_items.product_totals
@@ -43,7 +42,7 @@ class Order < ActiveRecord::Base
     false
   rescue Stripe::CardError => e
     logger.error "Stripe error while trying to charge the customer: #{e.message}"
-    errors.add :base, "There was a problem with your credit/debit card. #{e.code}"
+    errors.add :base, "There was a problem with your credit/debit card."
     false
   end
 end

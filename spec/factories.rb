@@ -37,6 +37,7 @@ FactoryGirl.define do
   
   factory :basket do
     order
+    status "Active"
   end
 
   factory :basket_item do
@@ -53,7 +54,6 @@ FactoryGirl.define do
     address_2 "London"
     number  4242424242424242
     cvc 234
-    basket_id 1
     year 2020
     month 12
   end

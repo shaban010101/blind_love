@@ -31,7 +31,7 @@ feature "BasketItem" do
 
   scenario "attempting to go to a cart which does not belong to the user", :skipping => true do
     @basket = FactoryGirl.create(:basket)
-    @basket2 = Basket.
+    @basket2 = FactoryGirl.create(:basket)
     visit basket_path(@basket2.id)
   end
 end

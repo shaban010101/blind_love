@@ -1,5 +1,5 @@
-class CategoriesController < ActionController::Base
-	skip_before_filter :authorize, :only => [:index, :show]
+class CategoriesController < ApplicationController
+	skip_before_filter :authorize, :only => [:index, :show, :search]
 
 	def show
 		@category = Category.find(params[:id])
