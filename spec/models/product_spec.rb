@@ -1,9 +1,8 @@
 require 'spec_helper'
 
 describe Product do
-	before(:each) do
-		@product = FactoryGirl.create(:product)
-	end
+	let(:category)  { FactoryGirl.build(:category) }
+ 	let(:product) { FactoryGirl.build(:product) }
 
 	it { should validate_presence_of(:price) }
 	it { should validate_presence_of(:name) }
@@ -16,13 +15,21 @@ describe Product do
 	it { should validate_attachment_presence(:image) }
 
 	it "only numeric values should be valid" do
-		@product.price = "4hfhf"
-		@product.should_not be_valid
+		product.price = "4hfhf"
+		product.should_not be_valid
+	end
+
+	it "should downcase name" do
+		product.name = "HUGO"
+		product.save
+		product.name.should == "hugo"
 	end
 
 	context "scopes" do
 		it "should return products for the departments categories" do
-			Product.mens_category("Trousers").should == [@product]
+			category = FactoryGirl.create(:category)
+			product_one = FactoryGirl.create(:product, :category_id => category.id)
+			expect(Product.products_category(category)).to eq([product_one])
 		end
 	end
 end

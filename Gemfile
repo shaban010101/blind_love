@@ -26,7 +26,7 @@ group :test do
   gem 'launchy', '~> 2.3'
   gem 'guard-rspec', '~> 3.0.1'
   gem 'shoulda-matchers', '~> 2.1'
-  gem 'webmock'
+  gem 'puffing-billy'
 end
 
 group :development do

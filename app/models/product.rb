@@ -4,7 +4,8 @@ class Product < ActiveRecord::Base
 	friendly_id :name, use: :slugged
 	has_attached_file :image
 
-	attr_accessible :name, :price, :description, :category_id, :slug, :image, :image_file_name, :department, :size_ids, :quantity, :size
+	attr_accessible :ranges, :name, :price, :description, :category_id, :slug, :image, :image_file_name, :department_id, :sizing_attributes
+  attr_accessor :ranges
 
 	validates_presence_of :price
 	validates :price, :numericality => true
@@ -14,17 +15,33 @@ class Product < ActiveRecord::Base
 	validates_attachment_presence :image
 
 	belongs_to :category
+  belongs_to :department
 	has_many :sizings
 	has_many :sizes, :through => :sizings
 	has_many :basket_items
+  before_save :downcase_name
 
   accepts_nested_attributes_for :sizes
   accepts_nested_attributes_for :sizings
 
-  scope :search, lambda { |params| where("name LIKE ?", "%#{params[:query]}%" ) }
+  scope :search, lambda {|params| where("name LIKE ?", "%#{params[:query]}%" ) }
+  scope :products_category, lambda {|category| joins(:category).where(:category_id => category)}
+  scope :products_department, lambda {|department| joins(:department).where(:department_id => department)}
+  scope :lowest_or_highest, lambda {|ordering| order("price #{ordering}") if ordering.present? }
+  scope :pricing, lambda {|min,max| where(:price => (min)..(max)) if min.present? && max.present? }
 
-  scope :mens_clothing, where(:department => "Mens")
+  def downcase_name
+    name.downcase!
+  end
 
-  scope :mens_category, lambda {|category_name| joins(:category).where("category_name =?", category_name) } 
 
+  def self.workout_min_and_max(category)
+    min = self.products_category(category).minimum(:price)
+    max = self.products_category(category).maximum(:price)
+
+    min = (min / 100) * 100
+    max = max.round(-2)
+
+    ranges = (min..max).select {|m| m % 100 == 0  }
+  end
 end

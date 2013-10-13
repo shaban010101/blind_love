@@ -26,10 +26,11 @@ feature 'Category', %q{
 		end
 
 		scenario "editing a category" do
-			@category = FactoryGirl.create(:category, :products_attributes => [FactoryGirl.attributes_for(:product, :name => "Barz")])
+			@category = FactoryGirl.create(:category, :products_attributes => [ FactoryGirl.attributes_for(:product, :name => "Barz")])
 			visit edit_admin_category_path(@category.slug)
 			fill_in "category_category_name", :with => "Baz"
-			page.select('Barz', :from => "category_products_products")
+			find(:xpath, "//option[1]").click
+			find(:xpath, "").click
 			click_button("Save Category")
 			visit admin_category_path(@category)
 	  end

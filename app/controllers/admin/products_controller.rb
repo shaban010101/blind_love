@@ -24,13 +24,12 @@ class Admin::ProductsController < ApplicationController
 
   def sizing
     @product = Product.find(params[:id])
-    @sizings = @product.sizings.build(params[:sizings_attributes]) 
   end
 
   def sizing_update
     @product = Product.find(params[:id])
     if @product.update_attributes(params[:product])
-      flash[:notice] = "Product succesfully created"
+      flash[:notice] = "Product succesfully updated"
       redirect_to admin_products_path
     else
       redirect_to sizing_admin_product_path

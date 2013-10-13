@@ -4,7 +4,6 @@
   <title>BlindLove</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application", :media => "all" %>
-  <%= javascript_include_tag "https://js.stripe.com/v2/" %>
   <%= csrf_meta_tags %>
 </head>
 <body >
@@ -18,11 +17,13 @@
 </div> 
 	  	<a class="brand" href="#">Blind Love</a>
 	  	 <ul class="nav">
-	  	 	<% if current_user %>
-			     	<li><%= link_to 'Home', admin_index_path %></li>
-			      <li><%= link_to 'Log Out',logout_path(@user) %></li>
-		     <% end %>
-          <li><%= link_to "Basket", current_basket %></li> 
+          <li><%= link_to 'Home', admin_index_path %></li>
+          <li><%= link_to 'Mens', department_path(:mens) %></li>
+          <li><%= link_to "Womens", department_path(:womens) %></li>
+          <li><%= link_to "Basket", current_basket %></li>
+          <% if current_user %>
+            <li><%= link_to 'Log Out',logout_path(@user) %></li>
+          <% end %> 
 	    </ul>
 	  </div>
 	</div>

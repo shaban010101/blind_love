@@ -7,7 +7,9 @@ require 'capybara/rspec'
 require 'database_cleaner'
 require 'rack/test'
 require "paperclip/matchers"
-require 'webmock/rspec'
+require 'billy/rspec'
+
+Capybara.javascript_driver = :selenium_billy
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 

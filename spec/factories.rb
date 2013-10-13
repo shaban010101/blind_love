@@ -19,7 +19,17 @@ FactoryGirl.define do
     slug "foo"
     image Rails.root.join("spec/fixtures/images/boom.jpg").open
   	category
-    department "mens"
+    department
+  end
+
+  factory :department do
+    department_name "mens"
+    slug "mens"
+  end
+
+  factory :category_department do
+    category
+    department
   end
 
   factory :size do

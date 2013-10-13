@@ -1,19 +1,8 @@
-Ecomerce clothing website
+E-comerce clothing website for selling mens and womens clothing in diffrent sizes using stripe payments
 
-Able to do the following:-
+Built using:-
 
- * manage the site via the admin panel
- -- products can be added, edited and deleted
- -- categories can be added, edited and deleted
-
-* view the products 
---navagating to the department it belongs to
---navagating to the categories it belongs to
-
-To do
-* adding a shopping basket
-* store checkout
-* paypal integration
-* order management
-* user management
-* email
+Rails 3.2.1.4
+Ruby 2.0.0
+Postgres
+Heroku

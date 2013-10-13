@@ -2,21 +2,9 @@
   <p><%= flash[:notice] %></p>
 </div>
 
-<div class ="dep-search">
-  <%= form_tag("/products", method: "get") do %>
-  <%= label_tag(:search, "Search for:") %>
-  <%= text_field_tag(:query) %>
-  <%= submit_tag("Search") %>
-  <% end %>
-  </form> 
-</div>  
-
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span2">
-<!--       <% @departments.each do |d| %>
-        <p><%= link_to d.department_name, department_path(d) %></p>
-      <% end %> -->
     </div>
     <div class="span10">
       <% @products.each do |p| %>

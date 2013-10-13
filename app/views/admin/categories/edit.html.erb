@@ -20,6 +20,17 @@
 				<% end %>
 				</div>
 			</div>
+    	<div class="control-group">
+				<%= f.fields_for :departments do |department_form| %>
+				<label class="control-label">
+					<%= department_form.label :department, "Department" %>
+				</label>
+				<div class="controls">
+					<% department = Department.all.map {|d| [d.department_name.capitalize, d.id ] } %>
+    			<%= department_form.select(:departments, options_for_select(department)) %>
+				<% end %>
+				</div>
+			</div>
 			<div class="control-group">
 				<div class="controls">
 					<button class="btn">

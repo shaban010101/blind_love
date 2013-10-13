@@ -13,6 +13,6 @@
 </ul>
 <div class="product-detail">
 	<p><%= @product.name %></p>
-	<p><%= @product.price %></p>
+	<p> &#163 <%= @product.price %></p>
   <%= button_to "Add to Basket", basket_items_path(product_id: @product.id), :class =>"btn" %>
 </div>

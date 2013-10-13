@@ -11,6 +11,8 @@ product= Product.create([{:name => 'Foo', :price => 'Bar', :description => 'FooB
 	{:name => "Monza", :price => 633, :description => "Short", :category_id => 1, :image => File.open("#{Rails.root}/app/assets/images/image1xl4.jpg"), :department => "Womens"},
 	{:name => "Viva la vida", :price => 353, :description => "Short", :category_id => 2, :image => File.open("#{Rails.root}/app/assets/images/image1xl5.jpg") , :department => "Mens"}
 	])
-size = Size.create([{:size => 'Small'}, {:size => "Medium"}, {:size => "Large"}, {:size => "One Size"}])
+size = Size.create([{:size_name => 'Small'}, {:size_name => "Medium"}, {:size_name => "Large"}, {:size_name => "One Size"}])
 
 user = User.create([{:username => "shaban", :password => "boomting"}])
+
+department = Department.create([:department_name => "mens"], [:department_name => "womens"])

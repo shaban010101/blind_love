@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130923202824) do
+ActiveRecord::Schema.define(:version => 20131013115316) do
 
   create_table "basket_items", :force => true do |t|
     t.integer  "product_id"
@@ -38,6 +38,22 @@ ActiveRecord::Schema.define(:version => 20130923202824) do
 
   add_index "categories", ["slug"], :name => "index_categories_on_slug", :unique => true
 
+  create_table "category_departments", :force => true do |t|
+    t.integer  "category_id"
+    t.integer  "department_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "departments", :force => true do |t|
+    t.string   "department_name"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "slug"
+  end
+
+  add_index "departments", ["slug"], :name => "index_departments_on_slug", :unique => true
+
   create_table "orders", :force => true do |t|
     t.string   "title"
     t.string   "first_name"
@@ -55,8 +71,8 @@ ActiveRecord::Schema.define(:version => 20130923202824) do
     t.string   "name"
     t.integer  "price"
     t.text     "description"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.integer  "category_id"
     t.string   "image_file_name"
     t.string   "image_content_type"
@@ -64,7 +80,8 @@ ActiveRecord::Schema.define(:version => 20130923202824) do
     t.datetime "image_updated_at"
     t.string   "slug"
     t.string   "image"
-    t.string   "department"
+    t.integer  "department_id"
+    t.string   "currency",           :default => "gbp"
   end
 
   add_index "products", ["slug"], :name => "index_products_on_slug", :unique => true

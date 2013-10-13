@@ -1,30 +1,26 @@
-<!-- <div class ="dep-search">
-	<%= form_tag("/departments", method: "get") do %>
-	<%= label_tag(:search, "Search for:") %>
-	<%= text_field_tag(:search) %>
-	<%= submit_tag("Seach") %>
-	<% end %>
-	</form> 
-</div>  -->
+<h1><%= params[:id].capitalize %> </h1>
 
 <div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span2">
-
-		</div>
-		<div class="span10">
-			<% @dep_cat.each do |p| %>
-				<div class="product-i">
-					<ul class="thumbnails">
-    				<li class="span3">
-    					<%= image_tag p.image %> 
-    				</li>
-			   </ul>
-  			 <p><%= p.price %></p>
-  			 <p><%= link_to p.name, product_path(p.slug) %></p>
-  		  </div>
-      <% end %>
-				</div>
-		</div>
-	</div>
+  <div class="row-fluid">
+    <div class="span2">
+     <% @dc.each do |c| %>
+       <p><%= link_to c.category_name, category_path(c.slug)%> <%= c.products.count %></p>
+     <% end %>
+    </div>
+    <div class="span10">
+      <% if @products.empty? %>
+        <h2> Oh no products here! </h2>
+      <% else %>
+        <% @products.each do |p| %>
+          <ul class="thumbnails"> 
+            <li class="span9">
+              <%= image_tag p.image %>
+            </li>
+            <p> &#163 <%=  p.price %></p>
+            <p><%= link_to p.name, product_path(p.slug) %></p>
+          </ul>
+        <% end %>
+      <% end %>  
+    </div>
+  </div>
 </div>

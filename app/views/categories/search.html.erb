@@ -1,1 +1,5 @@
-<%= render partial: 'categories' %>
+<% if @cp.empty? %>
+  <h1 class="categories"> Uh ohh no resutlts </h1> 
+<% else %>
+  <%= render partial: 'categories' %>
+<% end %>

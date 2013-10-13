@@ -3,8 +3,8 @@ class BasketsController < ApplicationController
 
   def show
     begin
-      current_basket
-      if current_basket.status == "Inactive"
+      @basket = current_basket
+      if @basket.status == "Inactive"
         basket = Basket.create
         session[:basket_id] = basket.id
         basket

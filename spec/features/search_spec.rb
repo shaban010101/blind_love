@@ -4,6 +4,7 @@ feature Product do
   before do
     @product = FactoryGirl.create(:product)
     @category = FactoryGirl.create(:category)
+    @department = FactoryGirl.create(:department)
   end
 
   scenario "search for products" do

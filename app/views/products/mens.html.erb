@@ -1,15 +1,6 @@
 <button type="button" class="close" data-dismiss="alert">&times;</button>
   <p><%= flash[:notice] %></p>
 
-<div class ="search">
-  <form class="form-search">
-    <%= form_tag(search_path, method: "get") do %>
-      <%= text_field_tag(:query) %>
-      <%= submit_tag("Search") %>
-    <% end %>
-  </form> 
-</div>  
-
  <div class="container-fluid">
   <div class="row-fluid">
     <% @product.each do |p| %>

@@ -3,8 +3,6 @@ BlindLove::Application.routes.draw do
 	match "sessions/new" => "sessions#new", :as => "login"
   match "session" => "sessions#destroy", :as => "logout"
   get "search" => "categories#search"
-  get "mens" => "products#mens"
- 
 
   resources :admin, :only => [:index]
   resources :home_pages, :only => [:index]
@@ -31,12 +29,17 @@ BlindLove::Application.routes.draw do
       end
     end
     resources :categories
+    resources :categories_departments
   end
 
-  resources :categories, :only => [:index, :show], :shallow => true do
-    resources :products, :only => [:index, :show], :shallow => true
+  resources :departments, :only => [:show], :shallow => true do
+    resources :categories, :only => [:show] do
+      resources :products, :only => [:show] do
+      end
+    end
   end
-  
+
+  post "categories/:id/", :to => "categories#show"
+
   root :to => 'home_pages#index'
-  
 end

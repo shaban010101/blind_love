@@ -3,7 +3,9 @@ require 'spec_helper'
 feature "Product" do
   
   background do
-    @user = FactoryGirl.create(:user)     
+    @user = FactoryGirl.create(:user)
+    @product = FactoryGirl.create(:product)
+    @category = FactoryGirl.create(:category)
     visit '/sessions/new'
     fill_in "Username", :with => @user.username
     fill_in "Password", :with => @user.password
@@ -12,16 +14,7 @@ feature "Product" do
   end
 
   scenario "viewing the products a category has" do
-    @product = FactoryGirl.create(:product)
-    @category = FactoryGirl.create(:category)
     visit category_path(@category.slug)
-    page.should have_content("Foo")
+    page.has_xpath?("//p[2]/a")
   end
-
-  # scenario "clicking on populated categories for the department" do
-  #   @department = FactoryGirl.create(:department)
-  #   visit '/departments/mens/'
-  #   fill_in "Search", :with => @product.name
-  #   page.should have_content("Foo")
-  # end 
 end

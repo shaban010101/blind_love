@@ -1,6 +1,9 @@
 <%= form_for :product, :url => { :action => "sizing_update" }, :method => :put do |form| %>
-  <%= fields_for :sizings do |size|%>
-      
-      <%= size.select :quantity, options_for_select(1..20) %>
+  <%= form.fields_for :sizings do |s|%>
+    <% sizes = Size.all.map { |size| [size.size_name, size.id] } %>
+    <%= s.select(:size_id ,options_for_select(sizes)) %>
+    <%= s.text_field :quantity %>
   <% end %>
+     <%= form.submit %>
 <% end %>
+

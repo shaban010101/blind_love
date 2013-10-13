@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 feature "BasketItem" do
-
-  before :each do
-    @product = FactoryGirl.create(:product)
+  before(:each) do
+    @product =  FactoryGirl.create(:product)
     @basket = FactoryGirl.create(:basket)
+    @basket_item = FactoryGirl.create(:basket_item, :basket_id => @basket.id )
   end
 
   scenario "able to add items to the shopping basket" do
-    visit product_path(@product.slug)
+    visit product_path(@product)
     click_button "Add to Basket"
     visit basket_path(@basket.id)
     page.has_xpath?("//p")
