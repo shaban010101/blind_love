@@ -8,6 +8,8 @@ class OrdersController < ApplicationController
   def create
     @order = current_basket.create_order(params[:order])
     if @order.charge_customer
+      basket = @order.basket
+      basket.update_attributes(:status => "Inactive", :order_id => @order)
       redirect_to order_path(@order)
     else
       flash[:notice] = "Please try again"

@@ -29,7 +29,6 @@ BlindLove::Application.routes.draw do
       end
     end
     resources :categories
-    resources :categories_departments
   end
 
   resources :departments, :only => [:show], :shallow => true do

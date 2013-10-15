@@ -11,6 +11,5 @@ class CategoriesController < ApplicationController
   def search
     # @cat = Category.find(params[:category])
     @cp = Product.search(params)
-    # @department = Department.find(params[:department])
   end
 end
