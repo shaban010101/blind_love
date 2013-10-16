@@ -39,4 +39,8 @@ class Order < ActiveRecord::Base
     errors.add :base, "There was a problem with your credit/debit card."
     false
   end
+
+  def first_and_last_name
+    "#{first_name} #{last_name}"
+  end
 end

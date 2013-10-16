@@ -32,9 +32,8 @@ describe Order do
     @order.should_not be_valid
   end
 
-  it "should delete the basket when making an order" do
-    # @order.basket.should_recieve(:update_attributes).with(:status => "Inactive", :order_id => @order.id)
-    # @basket.status.should == "Inactive"
-    # @basket.order_id.should == @order.id
+  it "should merge first name and last name together" do
+    @order.first_and_last_name
+    .should == "Foo Bar"
   end
 end

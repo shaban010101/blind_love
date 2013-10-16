@@ -1,7 +1,7 @@
 class Category < ActiveRecord::Base
 	extend FriendlyId 
 	friendly_id :category_name, use: :slugged
-  attr_accessible :category_name, :product_attributes, :slug, :department_id, :category_departments_attributes
+  attr_accessible :category_name, :products_attributes, :slug, :department_id, :category_departments_attributes
 
   has_many :products
   has_many :category_departments

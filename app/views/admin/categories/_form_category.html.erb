@@ -11,10 +11,10 @@
 		<div class="control-group">
 			<%= f.fields_for :products do |product_form| %>
 			<label class="control-label">
-				<%= product_form.label :products, "Products" %>
+				<%= product_form.label :product, "Products" %>
 			</label>
 			<div class="controls">
-				<%= product_form.select :products, options_from_collection_for_select(Product.all, :id, :name) %>
+				<%= product_form.select :product, options_from_collection_for_select(Product.all, :id, :name) %>
 			<% end %>
 			</div>
 		</div>

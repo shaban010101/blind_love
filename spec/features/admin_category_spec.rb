@@ -30,7 +30,7 @@ feature 'Category', %q{
 			visit edit_admin_category_path(@category.slug)
 			fill_in "category_category_name", :with => "Baz"
 			find(:xpath, "//option[1]").click
-			find(:xpath, "").click
+			find(:xpath, "//option[2]").click
 			click_button("Save Category")
 			visit admin_category_path(@category)
 	  end

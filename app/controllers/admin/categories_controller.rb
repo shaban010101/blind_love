@@ -2,7 +2,7 @@ class Admin::CategoriesController < ApplicationController
 
 	def new
 		@category = Category.new
-		@products = @category.products.build(params[:product_attributes])
+		@products = @category.products.build(params[:products_attributes])
 		@departments = @category.category_departments.build(params[:category_departments_attributes])
 	end
 
