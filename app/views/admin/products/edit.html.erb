@@ -1,4 +1,4 @@
 <h1> Edit a product </h1>
-	<%= form_for :product, :url => { :action => "update" }, :method => :put do |f| %>
+	<%= form_for @product, :url => { :action => "update" }, :method => :put do |f| %>
 		<%= render :partial => "form", :locals => { :f => f } %>
 	<% end %>

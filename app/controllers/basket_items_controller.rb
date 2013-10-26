@@ -1,9 +1,8 @@
 class BasketItemsController < ApplicationController
-  skip_before_filter :authorize, :only => [:create, :destroy]
+  skip_before_filter :authenticate_user!, :only => [:create, :destroy]
   def create
     @basket = current_basket
-    @product = Product.find(params[:product_id])
-    @basket_item = @basket.basket_items.build(product_id: @product.id)
+    @basket_item = @basket.basket_items.build(params[:basket_items])
 
     if @basket_item.save
       flash[:notice] = "Product added to your shopping basket"
@@ -26,7 +25,7 @@ class BasketItemsController < ApplicationController
   end
 
   def update
-    @basket_item = BasketItem.find(params[:id])
+    @basket_item = BasketItem.find(params[:basket_item])
     if @basket_item.update_attributes(params[:basket_item])
       flash.now[:notice] = "Basket Updated"
     else

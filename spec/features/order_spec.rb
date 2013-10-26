@@ -6,7 +6,7 @@ feature "Order" do
     @order = FactoryGirl.create(:order)
   end
 
-  scenario "add basket items to the checkout" do
+  scenario "add basket items to the checkout", :skipping => true do
     visit new_order_path(@order)
     page.select('Mr', :from => "order_title")
     fill_in "First name", :with => @order.first_name

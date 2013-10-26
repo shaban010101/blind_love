@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  skip_before_filter :authorize, :only => [:new, :create, :shipping, :payment, :review, :show]
+  skip_before_filter :authenticate_user!, :only => [:new, :create, :shipping, :payment, :review, :show]
 
   def new 
     @order = current_basket.build_order(params[:basket_id])

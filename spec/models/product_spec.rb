@@ -28,8 +28,24 @@ describe Product do
 	context "scopes" do
 		it "should return products for the departments categories" do
 			category = FactoryGirl.create(:category)
-			product_one = FactoryGirl.create(:product, :category_id => category.id)
-			expect(Product.products_category(category)).to eq([product_one])
+			product.category_id = category.id
+			product.save
+			Product.products_category(category).map {|p| [p.name] }
+			.should == ["#{product.name}"]
+		end
+
+		it "should return product name entered" do
+			product = FactoryGirl.create(:product)
+			Product.search("#{product.name}").should == ["#{product.name}"]
+		end
+
+		it "should return lowest to highest range" do
+			["nuts", "moin"].each do |name| 
+				FactoryGirl.create(:product, :name => name)
+			end
+
+			Product.lowest_or_highest("DESC").map { |p| [p.name] }
+			.should == [["moin"], ["nuts"]]
 		end
 	end
 end

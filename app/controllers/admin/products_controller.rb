@@ -6,6 +6,10 @@ class Admin::ProductsController < ApplicationController
 
 	def new
 		@product = Product.new
+		Size.count.times do
+			@product.sizings.build
+			@product.sizes.build
+		end
  	end
 
 	def show
@@ -15,29 +19,17 @@ class Admin::ProductsController < ApplicationController
 	def create
 		@product = Product.new(params[:product])
 		if @product.save
-			redirect_to sizing_admin_product_path(@product)
+			redirect_to admin_product_path(@product)
 		else
 			flash.now[:error] = "Could not save the product"
 			render "new"
 		end
 	end
 
-  def sizing
-    @product = Product.find(params[:id])
-  end
-
-  def sizing_update
-    @product = Product.find(params[:id])
-    if @product.update_attributes(params[:product])
-      flash[:notice] = "Product succesfully updated"
-      redirect_to admin_products_path
-    else
-      redirect_to sizing_admin_product_path
-    end
-  end
-
 	def edit
 		@product = Product.find(params[:id])
+		@product.sizings.build
+		@product.sizes.build
 	end
 
 	def update

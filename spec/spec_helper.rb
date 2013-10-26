@@ -14,6 +14,7 @@ Capybara.javascript_driver = :selenium_billy
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
+  config.include Devise::TestHelpers, :type => :controller
   config.include Rack::Test::Methods
   config.infer_base_class_for_anonymous_controllers = true
   config.order = "random"
@@ -38,5 +39,5 @@ RSpec.configure do |config|
 end
 
 def login_post
-  page.driver.post sessions_path, :username => @user.username, :password => @user.password
+  page.driver.post user_session_path, :username => @user.username, :password => @user.password
 end 

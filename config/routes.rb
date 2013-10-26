@@ -1,14 +1,19 @@
 BlindLove::Application.routes.draw do
 
-	match "sessions/new" => "sessions#new", :as => "login"
-  match "session" => "sessions#destroy", :as => "logout"
-  get "search" => "categories#search"
+  devise_for :users
+
+  devise_scope :user do
+    match "/users/sign_in" => "devise/sessions#new", :as => "login"
+    match "/users/sign_out" => "devise/sessions#destroy", :as => "logout"
+  end
+  
+  resources :searches, :only => [:index]
 
   resources :admin, :only => [:index]
   resources :home_pages, :only => [:index]
-  resources :sessions, :only => [:new,:create,:destroy]
+  # resources :sessions, :only => [:new,:create,:destroy]
   resources :users, :only => [:edit,:create,:update,:new,:show,:destroy]
-  resources :basket_items, :only =>[ :create, :destroy ]
+  resources :basket_items, :only =>[ :create, :destroy, :update ]
   resources :baskets, :only => [ :show ]
 
   resources :orders ,:only => [ :new, :create, :show] do

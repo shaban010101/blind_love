@@ -2,8 +2,7 @@ class Admin::CategoriesController < ApplicationController
 
 	def new
 		@category = Category.new
-		@products = @category.products.build(params[:products_attributes])
-		@departments = @category.category_departments.build(params[:category_departments_attributes])
+		@category.category_departments.build
 	end
 
 	def index
@@ -26,8 +25,8 @@ class Admin::CategoriesController < ApplicationController
 
 	def edit 
 		@category = Category.find(params[:id])
-		@products = @category.products.build(params[:products_attributes])
-		@departments = @category.departments.build(params[:category_departments_attributes])
+    @category.products.build
+    @category.category_departments.build
 	end
 
 	def update

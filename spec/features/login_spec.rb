@@ -7,45 +7,33 @@ feature "Session" do
 	end 
 
 	scenario "can login in the website page" do
-		visit '/sessions/new'
-		fill_in "Username", :with => @user.username
+		visit '/users/sign_in'
+		fill_in "Email", :with => @user.username
 		fill_in "Password", :with => @user.password
-		click_button "Login"
-		page.driver.post '/sessions', :username => @user.username, :password => @user.password		
+		click_button "Sign in"
+		page.driver.post '/users/sign_in', :username => @user.username, :password => @user.password	
 		visit("/users/#{@user.id}")
 	end
 
 	scenario "invalid details entered" do
-		visit '/sessions/new/'
-		fill_in "Username", :with => ""
+		visit '/users/sign_in'
+		fill_in "Email", :with => ""
 		fill_in "Password", :with => ""
-		click_button "Login"
-		page.driver.post '/sessions', :username => "", :password => ""		
-		visit login_path
-		page.should have_content("Invalid email or Password supplied")
+		click_button "Sign in"
+		page.driver.post '/users/sign_in', :username => "", :password => ""	
+		visit '/users/sign_in'
 	end
 
 	context "Logged into site"
 		scenario "can logout of the website" do		
-			visit '/sessions/new'	
-			fill_in "Username", :with => @user.username
+			visit '/users/sign_in'
+			fill_in "Email", :with => @user.username
 			fill_in "Password", :with => @user.password
-			click_button "Login"
-			page.driver.post '/sessions', :username => @user.username, :password => @user.password		
+			click_button "Sign in"
+			page.driver.post '/users/sign_in', :username => @user.username, :password => @user.password		
 			visit("/users/#{@user.id}")
 			click_link("Log Out")
-			visit '/sessions/new'
+			visit '/users/sign_in'
 		end
-
-		scenario "gets a message when the user is already logged in" do 
-			visit '/sessions/new/'
-			fill_in "Username", :with => @user.username
-			fill_in "Password", :with => @user.password
-			click_button "Login"
-			login_post
-			visit("/users/#{@user.id}")		
-			visit '/sessions/new/'
-			page.should have_content("You silly lemon your already logged in!")
-		end	
 end
 

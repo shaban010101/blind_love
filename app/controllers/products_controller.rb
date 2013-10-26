@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-	skip_before_filter :authorize, :only => [:index, :show]
+	skip_before_filter :authenticate_user!, :only => [:index, :show]
 
   def index
     @products = Product.search(params)
@@ -7,5 +7,6 @@ class ProductsController < ApplicationController
 
 	def show
 	 @product = Product.find(params[:id])
+   @sizing = @product.sizings
 	end
 end

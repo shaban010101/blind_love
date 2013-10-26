@@ -14,8 +14,6 @@ guard 'rspec' do
   #watch('config/routes.rb')                           { "spec/routing" }
   watch('app/controllers/application_controller.rb')  { "spec/controllers" }
   watch('app/models/*.rb') { "spec/models" }
-  watch('app\/views\/(.+)\/*.erb$')
-  watch('app\/views\/(.+)\/(.+)\/*.erb$')
   
   # Capybara features specs
   watch(%r{^app/views/(.+)/.*\.(erb|haml)$})          { |m| "spec/features/#{m[1]}_spec.rb" }

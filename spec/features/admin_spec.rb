@@ -1,23 +1,26 @@
 require 'spec_helper'
 
 feature 'Admin' do
-	let(:user) {FactoryGirl.create(:user)}
+	before(:each) do
+		@user = FactoryGirl.create(:user)
+	end
 
 	scenario "should login into the dashboard" do
-		visit '/sessions/new'
-		fill_in "Username", :with => user.username 
-		fill_in "Password", :with => user.password
-		click_button "Login"
-		page.driver.post '/sessions', :username => user.username, :password => user.password
-		visit '/admin'
-		#  page.should have_content("Logged In")
+		visit new_user_session_path
+		fill_in "Email", :with => @user.email 
+		fill_in "Password", :with => @user.password
+		click_button "Sign in"
+	  page.should have_content("Signed in successfully.")
 	end
 
 	context "not logged in" do
-		scenario "no entry unless logged in" do
+		scenario "Invalid email or password." do
 			visit '/admin'
-			page.should have_content("Please log in")
-			visit '/sessions/new'
+			fill_in "Email", :with => "fhfhf" 
+			fill_in "Password", :with => @user.password
+			click_button "Sign in"
+			page.should have_content("Invalid email or password.")
+			visit '/users/sign_in'
 		end
 	end
 end

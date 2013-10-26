@@ -5,11 +5,13 @@ feature 'Product' do
 		before(:each) do
 			@product = FactoryGirl.create(:product)
 			@user = FactoryGirl.create(:user)
-			visit '/sessions/new'
-			fill_in "Username", :with => @user.username
+			@size = FactoryGirl.create(:size)
+			@sizing = FactoryGirl.create(:sizing)
+			visit new_user_session_path
+			fill_in "Email", :with => @user.email 
 			fill_in "Password", :with => @user.password
-			click_button "Login"
-			page.driver.post '/sessions', :username => @user.username, :password => @user.password	
+			click_button "Sign in"
+	  	page.should have_content("Signed in successfully.")
 		end
 
 		scenario "creation" do
@@ -18,8 +20,9 @@ feature 'Product' do
 			fill_in "Description", :with => "Baz" 
 			fill_in "Price", :with => 1000
 			attach_file "Image", Rails.root.join('spec', 'fixtures', 'images', 'boom.jpg')
-			# find(:xpath, "//div[5]/label[1]/label").click
-			click_button "Save Product"
+			find(:xpath, "//option[1]",  :match => :first ).click
+			fill_in "product_sizings_attributes_0_quantity", :with => 10
+			click_button "Create Product"
 			page.has_xpath?("/html/body/div[2]/p")
 	  end
 
@@ -30,6 +33,8 @@ feature 'Product' do
 			fill_in "Description", :with => "Bar1" 
 			fill_in "Price", :with => "1000"
 			attach_file "Image", Rails.root.join('spec', 'fixtures', 'images', 'boom.jpg')
+			find(:xpath, "//option[1]",  :match => :first ).click
+			fill_in "product_sizings_attributes_0_quantity", :with => 10
 			page.has_xpath?("//div[2]/p")
 	  end
 

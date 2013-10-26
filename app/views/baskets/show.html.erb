@@ -9,6 +9,7 @@
         <th>Picture</th>
         <th>Name</th>
         <th>Price</th>
+        <th>Quantity</th>
         <th></th>
       </tr>
       <tr>
@@ -16,8 +17,14 @@
           <td><p>Nothingness</p></td>
           <td><p><%= item.product.name %></p></td>
           <td><p><%= item.product.price %></p></td>
+          <td><p><%= item.quantity %></p></td>
           <td><%= button_to 'Remove', basket_item_path(item.id), :method => 'delete', :confirm => 'Are you sure?', :class => "btn" %></td>
-          <td><%= button_to "Update quantity", basket_items_path(item.id), :class => "btn" %></td>
+          <td><%= form_for item, :url => basket_item_path do |f| %>
+            <%= f.hidden_field(:basket_item, :value => item.id) %>
+            <%= f.label :quantity %>
+            <%= f.text_field :quantity %>
+          <%= f.submit "Update", :class => "btn" %>
+          <% end %></td>
         </tr>
         <% end %>
          <tr>

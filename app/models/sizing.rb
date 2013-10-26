@@ -3,4 +3,6 @@ class Sizing < ActiveRecord::Base
 
   belongs_to :product
   belongs_to :size
+
+  scope :in_stock, lambda { where("quantity > ?", 0 ) }
 end

@@ -1,0 +1,13 @@
+<% if target.empty? %>
+  <h2 align="left"> Oh no products here! </h2>
+<% else %>
+  <% target.each do |p| %>
+    <ul class="thumbnails"> 
+      <li class="span9">
+        <%= image_tag p.image %>
+      </li>
+      <p> &#163 <%=  p.price %></p>
+      <p><%= link_to p.name, product_path(p.slug) %></p>
+    </ul>
+  <% end %>
+<% end %>    

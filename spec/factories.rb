@@ -8,8 +8,9 @@ FactoryGirl.define do
   end
 
   factory :user do
-    username "Foo"
-    password "Bar"
+    email "foo@bar.com"
+    password "BarFarFaz"
+    password_confirmation "BarFarFaz"
   end
 
   factory :product do
@@ -33,8 +34,7 @@ FactoryGirl.define do
   end
 
   factory :size do
-    size "Small"
-    quantity 1
+    size_name "Small"
   end
 
   factory :sizing do

@@ -1,4 +1,6 @@
-<h1> Edit Category </h1>
-	<%= form_for :category, :url => { :action => "update" }, :method => :put do  |f| %>
-			<%= render :partial => 'form_category', :locals => {:f => f}  %>
-	<% end %>
+<div class="container">
+  <h1> Edit Category </h1>
+  	<%= form_for @category, :url => { :action => "update" }, :method => :put do  |f| %>
+      <%= render :partial => 'form_category', :locals => {:f => f}  %>
+  	<% end %>
+</div>

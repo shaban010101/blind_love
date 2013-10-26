@@ -1,5 +1,6 @@
 <div class="category-form-update">
 	<form class="form-horizontal">
+
 		<div class="control-group">
 			<label class="control-label">
 				<%= f.label :category_name %>
@@ -8,26 +9,18 @@
 				<%= f.text_field :category_name %>
 			</div>
 		</div>
-		<div class="control-group">
-			<%= f.fields_for :products do |product_form| %>
-			<label class="control-label">
-				<%= product_form.label :product, "Products" %>
-			</label>
-			<div class="controls">
-				<%= product_form.select :product, options_from_collection_for_select(Product.all, :id, :name) %>
-			<% end %>
-			</div>
-		</div>
   	<div class="control-group">
-			<%= f.fields_for :category_departments do |department_form| %>
+			<%= f.fields_for :category_departments do |builder| %>
 			<label class="control-label">
-				<%= department_form.label :department, "Department" %>
+				<%= builder.label :department, "Department" %>
 			</label>
 			<div class="controls">
-  			<%= department_form.select(:departments, options_from_collection_for_select(Department.all, :id, :department_name)) %>
+				<% department = Department.all.map { |dep| [dep.department_name.capitalize, dep.id] } %>
+  			<%= builder.select(:department_id ,options_for_select(department)) %>
 			<% end %>
 			</div>
 		</div>
+
 		<div class="control-group">
 			<div class="controls">
 				<button class="btn">

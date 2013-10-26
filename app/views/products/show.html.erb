@@ -14,5 +14,11 @@
 <div class="product-detail">
 	<p><%= @product.name %></p>
 	<p> &#163 <%= @product.price %></p>
-  <%= button_to "Add to Basket", basket_items_path(product_id: @product.id), :class =>"btn" %>
+
+  <%= form_for :basket_items, :url => basket_items_path do |f| %>
+    <%= f.hidden_field(:product_id, :value => @product.id) %>
+    <% sizes = @product.sizings.in_stock.map { |sizing| [sizing.size.size_name,sizing.size_id] } %>
+    <%= f.select(:size_id ,options_for_select(sizes))%>
+    <%= f.submit "Add to Basket", :class =>"btn" %>
+  <% end %>
 </div>
