@@ -3,7 +3,7 @@ require	'spec_helper'
 feature 'Product' do
 	context "when logged in" do
 		before(:each) do
-			@product = FactoryGirl.create(:product)
+		  @product = FactoryGirl.create(:product)
 			@user = FactoryGirl.create(:user)
 			@size = FactoryGirl.create(:size)
 			@sizing = FactoryGirl.create(:sizing)
@@ -28,7 +28,7 @@ feature 'Product' do
 
 	  scenario 'editing' do
 	  	visit '/admin/products'
-	  	find(:xpath, "//tr[2]/td[4]/a").click
+	  	find(:xpath, "//tr[2]/td[6]/a").click
 	  	fill_in "Name", :with => "Foo1" 
 			fill_in "Description", :with => "Bar1" 
 			fill_in "Price", :with => "1000"

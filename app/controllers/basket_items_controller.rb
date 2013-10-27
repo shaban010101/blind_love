@@ -1,5 +1,5 @@
 class BasketItemsController < ApplicationController
-  skip_before_filter :authenticate_user!, :only => [:create, :destroy]
+  skip_before_filter :authenticate_user!, :only => [:create, :destroy, :update]
   def create
     @basket = current_basket
     @basket_item = @basket.basket_items.build(params[:basket_items])

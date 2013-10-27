@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
 	def show
     @cat = Category.find(params[:id])
 	  # @category = Category.department_category(params[:department])
-		@cp = Product.products_category(@cat).pricing(params[:minimum],params[:maximum]).lowest_or_highest(params[:ordering])
+		@cp = Product.products_category(@cat).pricing(params[:minimum],params[:maximum]).lowest_or_highest(params[:ordering]).sizes(params[:size])
     @pr = Product.workout_min_and_max(@cat)
   end
 end

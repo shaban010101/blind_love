@@ -4,15 +4,7 @@
  <div class="container-fluid">
   <div class="row-fluid">
     <div class="span2">
-      <%= form_tag(category_path(@cat), :method => "post") do %>
-        <%= select_tag(:ordering, options_for_select([["Ascending","ASC"],["Descending", "DESC"]], params[:ordering] )) %>
-        <% ranges = @pr.map  %>
-          <%= select_tag(:minimum, options_for_select(ranges, :selected => ranges.min )) %>
-          <% params[:minimum] %>
-          <%= select_tag(:maximum, options_for_select(ranges,:selected => ranges.max)) %>
-          <% params[:maximum] %>
-        <%= submit_tag "Filter", :class => "btn" %>
-      <% end %>
+      <%= render 'category_filter' %>
     </div>
     <div class="span10">
       <%= render 'shared/products', :target => @cp %> 

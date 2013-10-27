@@ -9,6 +9,7 @@
 					<%= f.text_field :name %>
 				</div>
 			</div>
+
 			<div class="control-group">
 				<label class="control-label">
 					<%= f.label :description %>
@@ -17,6 +18,7 @@
 				  	<%= f.text_area :description, rows: 6 %>
 				 </div>
 			</div>
+
 			<div class="control-group">
 			 	<label class="control-label">
 			  	<%= f.label :image %>
@@ -25,6 +27,7 @@
 			  	<%= f.file_field :image %>
 			  </div>
 			</div>
+
 		  <div class="control-group">
 		  	<label class="control-label">
 		  		<%= f.label :price %>
@@ -33,13 +36,32 @@
 		  		<%= f.text_field :price %>
 		  	</div>
 			</div>
+
+			<div class="control-group">
+		  	<label class="control-label">
+		  		<%= f.label :category %>
+		  	</label>
+		  	<div class="controls">
+		  		<%= f.select(:category_id, options_from_collection_for_select(Category.all, "id", "category_name"), :prompt => "Select a category") %>
+		  	</div>
+			</div>
+
+			<div class="control-group">
+		  	<label class="control-label">
+		  		<%= f.label :department %>
+		  	</label>
+		  	<div class="controls">
+		  		<%= f.select(:department_id, options_from_collection_for_select(Department.all, "id", "department_name"), :prompt => "Select a department") %>
+		  	</div>
+			</div>
+
 			<div class="control-group">
 			  <%= f.fields_for :sizings do |s|%>
-			    <% sizes = Size.all.map { |size| [size.size_name, size.id] } %>
-			    <%= s.select(:size_id ,options_for_select(sizes)) %>
+			    <%= s.select(:size_id ,options_from_collection_for_select(Size.all, "id", "size_name"), :prompt => "Select a size") %>
 			    <%= s.text_field :quantity %>
 			  <% end %>
 			</div>
+
 		  <div class="control-group">
 		  	<div class="controls">
 			  	<button class="btn">

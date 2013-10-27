@@ -7,6 +7,6 @@ class BasketItem < ActiveRecord::Base
   belongs_to :size
 
   def self.product_totals(basket_id)
-    joins(:basket, :product).where(:basket_id => basket_id).sum(:price)
+    joins(:basket, :product).where(:basket_id => basket_id).sum("price")
   end
 end

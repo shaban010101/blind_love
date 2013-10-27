@@ -4,7 +4,6 @@ FactoryGirl.define do
   factory :category do
     category_name "Trousers"
     slug "trousers"
-    products_attributes { [ FactoryGirl.attributes_for(:product) ]}
   end
 
   factory :user do
@@ -13,19 +12,19 @@ FactoryGirl.define do
     password_confirmation "BarFarFaz"
   end
 
+  factory :department do
+    department_name "mens"
+    slug "mens"
+  end
+
   factory :product do
   	sequence(:name)  {|n| "Foo#{n}" }
   	price 9999
   	description "I am a foobar"
     slug "foo"
     image Rails.root.join("spec/fixtures/images/boom.jpg").open
-  	category
     department
-  end
-
-  factory :department do
-    department_name "mens"
-    slug "mens"
+    category
   end
 
   factory :category_department do
@@ -38,13 +37,11 @@ FactoryGirl.define do
   end
 
   factory :sizing do
-    size_id 1
-    product_id 1
+    quantity 10
     size
     product
   end
 
-  
   factory :basket do
     order
     status "Active"

@@ -27,7 +27,6 @@ feature 'Category', %q{
 		end
 
 		scenario "editing a category" do
-			@category = FactoryGirl.create(:category, :products_attributes => [ FactoryGirl.attributes_for(:product, :name => "Barz")])
 			visit edit_admin_category_path(@category.slug)
 			fill_in "category_category_name", :with => "Baz"
 			find(:xpath, "//option[1]").click

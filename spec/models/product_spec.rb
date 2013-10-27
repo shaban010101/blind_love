@@ -1,8 +1,9 @@
 require 'spec_helper'
 
 describe Product do
-	let(:category)  { FactoryGirl.build(:category) }
- 	let(:product) { FactoryGirl.build(:product) }
+	let(:category) { FactoryGirl.create(:category) }
+	let(:department) { FactoryGirl.create(:department) }
+ 	subject { FactoryGirl.create(:product) }
 
 	it { should validate_presence_of(:price) }
 	it { should validate_presence_of(:name) }
@@ -15,37 +16,43 @@ describe Product do
 	it { should validate_attachment_presence(:image) }
 
 	it "only numeric values should be valid" do
-		product.price = "4hfhf"
-		product.should_not be_valid
+		subject.price = "4hfhf"
+		subject.should_not be_valid
 	end
 
 	it "should downcase name" do
-		product.name = "HUGO"
-		product.save
-		product.name.should == "hugo"
+		subject.name = "HUGO"
+		subject.save
+		subject.name.should == "hugo"
 	end
 
 	context "scopes" do
 		it "should return products for the departments categories" do
-			category = FactoryGirl.create(:category)
-			product.category_id = category.id
-			product.save
-			Product.products_category(category).map {|p| [p.name] }
-			.should == ["#{product.name}"]
+			product = FactoryGirl.create(:product, :department_id => department.id, :category_id => category.id)
+			Product.products_category(category)
+			.should == [product]
 		end
 
 		it "should return product name entered" do
-			product = FactoryGirl.create(:product)
-			Product.search("#{product.name}").should == ["#{product.name}"]
+			Product.search(subject)
+			.should == [subject]
 		end
 
 		it "should return lowest to highest range" do
-			["nuts", "moin"].each do |name| 
-				FactoryGirl.create(:product, :name => name)
+			[9, 10].each do |price| 
+				FactoryGirl.create(:product, :price => price)
 			end
 
-			Product.lowest_or_highest("DESC").map { |p| [p.name] }
-			.should == [["moin"], ["nuts"]]
+			Product.lowest_or_highest("ASC").map { |p| [p.price] }
+			.should == [[9], [10]]
 		end
+
+		it "lists sizes available for category and also how many for each size" do
+			subject = FactoryGirl.create(:product, :category_id => category.id)
+			size = FactoryGirl.create(:size)
+			sizing = FactoryGirl.create(:sizing, :size_id => size.id, :product_id => subject.id )
+			Product.sizes(size.id)
+			.should == [subject]
+		end	
 	end
 end

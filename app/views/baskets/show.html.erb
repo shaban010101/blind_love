@@ -16,11 +16,11 @@
         <% @basket_items.each do |item| %>
           <td><p>Nothingness</p></td>
           <td><p><%= item.product.name %></p></td>
-          <td><p><%= item.product.price %></p></td>
+          <td><p><%= number_to_currency(item.product.price, :unit => "&pound") %></p></td>
           <td><p><%= item.quantity %></p></td>
           <td><%= button_to 'Remove', basket_item_path(item.id), :method => 'delete', :confirm => 'Are you sure?', :class => "btn" %></td>
-          <td><%= form_for item, :url => basket_item_path do |f| %>
-            <%= f.hidden_field(:basket_item, :value => item.id) %>
+          <td><%= form_for @basket_items, :url => basket_item_path do |f| %>
+            <%= f.hidden_field(:id, :value => item.id) %>
             <%= f.label :quantity %>
             <%= f.text_field :quantity %>
           <%= f.submit "Update", :class => "btn" %>
@@ -28,7 +28,7 @@
         </tr>
         <% end %>
          <tr>
-          <td><p class="text-info">Total  <%= @basket_items.product_totals(@basket.id) %><p></td>
+          <td><p class="text-info">Total  <%= number_to_currency(@basket_items.product_totals(@basket.id), :unit => "&pound") %><p></td>
           <td><%= link_to "Purchase products", new_order_path, :class => "btn" %></td>
         </tr>
     </table>
