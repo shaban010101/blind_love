@@ -8,6 +8,8 @@ describe Product do
 	it { should validate_presence_of(:price) }
 	it { should validate_presence_of(:name) }
 	it { should validate_presence_of(:description) }
+	it { should validate_presence_of(:category_id) }
+	it { should validate_presence_of(:department_id) }
 	it { should validate_uniqueness_of(:name) }
 	it { should belong_to(:category) }
 	it { should have_many(:sizes).through(:sizings)}
@@ -33,12 +35,12 @@ describe Product do
 			.should == [product]
 		end
 
-		it "should return product name entered" do
+		it "returns products which match product name entered" do
 			Product.search(subject)
 			.should == [subject]
 		end
 
-		it "should return lowest to highest range" do
+		it "returns products in ascending order" do
 			[9, 10].each do |price| 
 				FactoryGirl.create(:product, :price => price)
 			end
@@ -47,12 +49,39 @@ describe Product do
 			.should == [[9], [10]]
 		end
 
-		it "lists sizes available for category and also how many for each size" do
+		it "returns products in descending order" do
+			[9, 10].each do |price| 
+				FactoryGirl.create(:product, :price => price)
+			end
+
+			Product.lowest_or_highest("DESC").map { |p| [p.price] }
+			.should == [[10], [9]]
+		end
+
+		it "filter by size" do
 			subject = FactoryGirl.create(:product, :category_id => category.id)
 			size = FactoryGirl.create(:size)
+			other_size = FactoryGirl.create(:size)
+			other_sizing = FactoryGirl.create(:sizing, :size_id => other_size.id, :product_id => subject.id)
 			sizing = FactoryGirl.create(:sizing, :size_id => size.id, :product_id => subject.id )
 			Product.sizes(size.id)
 			.should == [subject]
+		end
+
+		it "produces a range of prices in 100s for product prices" do
+			other_product = FactoryGirl.create(:product,:price => 9500, :category_id => category.id)
+			product = FactoryGirl.create(:product, :category_id => category.id)
+
+			expect(Product.workout_min_and_max(category.id).map)
+			.to include(9500,9600,9700,9800,9900,10000)
+		end
+
+		it "filters products based on min and max values provided" do
+			other_product = FactoryGirl.create(:product,:price => 9500, :category_id => category.id)
+			product = FactoryGirl.create(:product, :category_id => category.id)
+
+			expect(Product.pricing(9500,9600).map)
+			.to include(other_product)
 		end	
 	end
 end
