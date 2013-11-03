@@ -28,4 +28,15 @@ class BasketsController < ApplicationController
       redirect_to basket_path
     end
   end
+
+  def update_basket_item
+    @basket_item = BasketItem.update_item(params[:basket_item])
+    if BasketItem.update_item(params[:basket_item])
+      flash[:succces] = "Basket updated"
+      redirect_to basket_path
+    else
+      flash[:error] = "Item could not be updated"
+      redirect_to basket_path
+    end
+  end
 end

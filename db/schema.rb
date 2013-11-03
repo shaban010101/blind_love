@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131020174341) do
+ActiveRecord::Schema.define(:version => 20131103173754) do
+
+  create_table "addresses", :force => true do |t|
+    t.string   "address_1"
+    t.string   "address_2"
+    t.string   "city"
+    t.string   "post_code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+  end
 
   create_table "basket_items", :force => true do |t|
     t.integer  "product_id"
@@ -21,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20131020174341) do
     t.integer  "order_id"
     t.integer  "quantity"
     t.integer  "size_id"
+    t.integer  "item_price"
   end
 
   create_table "baskets", :force => true do |t|
@@ -56,16 +67,24 @@ ActiveRecord::Schema.define(:version => 20131020174341) do
   add_index "departments", ["slug"], :name => "index_departments_on_slug", :unique => true
 
   create_table "orders", :force => true do |t|
-    t.string   "title"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "address_1"
-    t.string   "address_2"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "basket_id"
     t.integer  "total"
-    t.string   "stripe_token"
+    t.integer  "address_id"
+    t.integer  "payment_id"
+    t.integer  "user_id"
+  end
+
+  create_table "payments", :force => true do |t|
+    t.string   "stripe"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+    t.integer  "last4"
+    t.string   "type"
+    t.integer  "exp_month"
+    t.integer  "exp_year"
   end
 
   create_table "products", :force => true do |t|
@@ -116,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20131020174341) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "role"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true

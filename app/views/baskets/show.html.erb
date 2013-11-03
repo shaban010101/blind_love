@@ -1,6 +1,4 @@
-<p><%= notice %></p>
-
-<div class="container">
+<div class="container"> 
 <% if @basket_items.empty? %>
   <p> Add some products this is empty.... </p>
 <% else %> 
@@ -16,11 +14,12 @@
         <% @basket_items.each do |item| %>
           <td><p>Nothingness</p></td>
           <td><p><%= item.product.name %></p></td>
-          <td><p><%= number_to_currency(item.product.price, :unit => "&pound") %></p></td>
+          <td><p><%= number_to_currency(item.price_times_quantity, :unit => "&pound") %></p></td>
           <td><p><%= item.quantity %></p></td>
           <td><%= button_to 'Remove', basket_item_path(item.id), :method => 'delete', :confirm => 'Are you sure?', :class => "btn" %></td>
-          <td><%= form_for @basket_items, :url => basket_item_path do |f| %>
-            <%= f.hidden_field(:id, :value => item.id) %>
+          <td>
+          <%= form_for(@basket_items, :url => {:action => "update_basket_item", :method => "put"}) do |f|  %>
+            <%= f.hidden_field(:id, :key => item.id) %>
             <%= f.label :quantity %>
             <%= f.text_field :quantity %>
           <%= f.submit "Update", :class => "btn" %>

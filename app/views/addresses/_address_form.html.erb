@@ -1,0 +1,15 @@
+<%= f.label :address_1 %>
+<%= f.text_field :address_1 %>
+
+<%= f.label :address_2 %>
+<%= f.text_field :address_2 %>
+
+<%= f.label :city %>
+<%= f.text_field :city %>
+
+<%= f.label :post_code %>
+<%= f.text_field :post_code %>
+
+<%= f.hidden_field :user_id, :value => current_user.id %>
+
+<%= f.submit %>

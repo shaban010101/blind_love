@@ -30,6 +30,14 @@
 	  </div>
 	</div>
 
+  <% unless flash.empty? %>
+    <% flash.each do |name, msg| %>
+      <div class="alert alert-<%=name%>">
+        <strong><%= "#{msg}!" %></strong>
+      </div>
+    <% end %>
+  <% end %>
+
   <%= yield %>
 
 </body>

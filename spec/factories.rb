@@ -7,7 +7,7 @@ FactoryGirl.define do
   end
 
   factory :user do
-    email "foo@bar.com"
+    sequence(:email) { |n| "foo#{n}@bar.com" }
     password "BarFarFaz"
     password_confirmation "BarFarFaz"
   end
@@ -50,19 +50,30 @@ FactoryGirl.define do
   factory :basket_item do
     product
     basket
-    order
+    size
+    quantity 1
   end
 
   factory :order do
-    title "Mr"
-    first_name "Foo"
-    last_name "Bar"
-    address_1 "105 Arcadian Gardens"
-    address_2 "London"
+   address
+   user
+   basket
+  end
+
+  factory :address do
+    sequence(:address_1) {|n| "#{n} Arcadian Gardens" }
+    sequence(:address_2) {|n| "Wood Green #{n}"}
+    city "London"
+    post_code "N15 6PR"
+    user
+  end
+
+  factory :payment do
     number  4242424242424242
     cvc 234
     year 2020
     month 12
+    user
   end
 end
 

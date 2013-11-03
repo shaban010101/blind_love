@@ -20,6 +20,7 @@
     <%= f.hidden_field(:basket_id, :value => current_basket.id) %>
     <% sizes = @product.sizings.in_stock.map { |sizing| [sizing.size.size_name,sizing.size_id] } %>
     <%= f.select(:size_id ,options_for_select(sizes))%>
+    <%= f.hidden_field(:quantity, :value => 1) %>
     <%= f.submit "Add to Basket", :class =>"btn" %>
   <% end %>
 </div>

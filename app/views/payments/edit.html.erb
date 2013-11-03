@@ -1,0 +1,3 @@
+<%= form_for@payment,:url => { :action => :create, :method => "put"} do |f| %>
+  <%= render :partial => "payment_form", :locals => {:f => f} %>
+<% end %>

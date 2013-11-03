@@ -3,6 +3,8 @@ class OrdersController < ApplicationController
 
   def new 
     @order = current_basket.build_order(params[:basket_id])
+    @address = Address.this_user(current_user)
+    @payment = Payment.only_this_user(current_user)
   end
 
   def create

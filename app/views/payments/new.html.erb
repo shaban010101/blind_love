@@ -1,0 +1,5 @@
+<div class="container">
+  <%= form_for@payment,:url => { :action => :create, :method => "post"} do |f| %>
+    <%= render :partial => "payment_form", :locals => {:f => f} %>
+  <% end %>
+</div>

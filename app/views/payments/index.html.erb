@@ -1,0 +1,9 @@
+<h1> Credit/Debit Card </h1>
+
+ <%= link_to "Create a credit/debit card to pay with", new_user_payment_path %>
+ 
+ <%= @payment.each do |p| %>
+  <p><%= p.last4 %></p>
+  <p><%= p.type %></p>
+  <p><%= p.expiry_year_and_month %></p>
+ <% end %>

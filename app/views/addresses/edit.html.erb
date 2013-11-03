@@ -1,0 +1,5 @@
+<%= form_for @address, :url => {:action => :update, :method => "put " } do |f| %>
+  <div class="container">
+    <%= render :partial => "address_form", :locals => {:f => f} %>
+  </div>
+<% end %>

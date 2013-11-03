@@ -1,0 +1,22 @@
+<h1> Addresses </h1>
+  <div class="container">
+    <strong><%= link_to "New address", new_user_address_path %></strong>
+    <table class="table table-hover">
+      <tr>
+        <th>Address 1</th>
+        <th>Address 2</th>
+        <th>City</th>
+        <th>Post Code</th>
+      </tr>
+      <tr>
+        <% @addresses.each do |addr| %>
+          <td><p><%= addr.address_1 %><p></td>
+          <td><p><%= addr.address_2 %><p></td>
+          <td><p><%= addr.city %><p></td>
+          <td><p><%= addr.post_code %><p></td>
+          <td><%= link_to 'Edit', edit_user_address_path(addr) %></td>
+          <td><%= link_to 'Remove', [:delete, addr], :method => 'delete', :confirm => 'Are you sure?' %></td>
+        </tr>
+      <% end %>
+      </table>
+    </div>

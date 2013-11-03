@@ -14,6 +14,6 @@
 /log/*.log
 /tmp
 /system
-app/assets/images/
+/app/assets/images/
 /public/system/
 /config/initializers/stripe.rb

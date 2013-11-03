@@ -8,13 +8,21 @@ BlindLove::Application.routes.draw do
   end
   
   resources :searches, :only => [:index]
-
   resources :admin, :only => [:index]
   resources :home_pages, :only => [:index]
-  # resources :sessions, :only => [:new,:create,:destroy]
-  resources :users, :only => [:edit,:create,:update,:new,:show,:destroy]
-  resources :basket_items, :only =>[ :create, :destroy, :update ]
-  resources :baskets, :only => [ :show ]
+  resources :basket_items, :only =>[ :create, :destroy]
+  
+  resources :baskets, :only => [ :show ] do
+    member do
+      put "update_basket_item"
+    end
+  end
+
+  resources :users, :except => [:index] do
+    resources :addresses
+    resources :payments
+  end
+
 
   resources :orders ,:only => [ :new, :create, :show] do
     member do

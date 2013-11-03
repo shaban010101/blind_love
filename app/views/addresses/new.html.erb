@@ -1,0 +1,6 @@
+<%= form_for @address, :url => {:action => :create, :method => "post " } do |f| %>
+  <div class="container">
+    <%= render 'shared/error_messages', :target => @address %>
+    <%= render :partial => "address_form", :locals => {:f => f} %>
+  </div>
+<% end %>
