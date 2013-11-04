@@ -13,7 +13,7 @@ feature "Address"  do
   end
 
   scenario "can create a new Address" do
-    visit new_user_address_path(@user)
+    visit new_user_address_path(@user.id)
     fill_in "Address 1", :with => @address.address_1
     fill_in "Address 2", :with => @address.address_2
     fill_in "City", :with => @address.city
@@ -23,7 +23,7 @@ feature "Address"  do
   end
 
   scenario "cannot create a new Address due to an error" do
-    visit new_user_address_path(@user)
+    visit new_user_address_path(@user.id)
     fill_in "Address 1", :with => ""
     fill_in "Address 2", :with => @address.address_2
     fill_in "City", :with => @address.city
@@ -33,8 +33,9 @@ feature "Address"  do
   end
 
   scenario "can edit an existing Address " do
-    visit user_addresses_path(@user)
-    save_and_open_page
+    visit user_addresses_path(@user.id)
+    click_on("Edit")
+    visit edit_user_address_path(@user.id, @address.id)
     fill_in "Address 1", :with => @address.address_1
     fill_in "Address 2", :with => @address.address_2
     fill_in "City", :with => @address.city
@@ -44,7 +45,9 @@ feature "Address"  do
   end
 
   scenario "can edit an existing Address " do
-    visit user_addresses_path(@user)
+    visit user_addresses_path(@user.id)
+    click_on("Edit")
+    visit edit_user_address_path(@user.id, @address.id)
     fill_in "Address 1", :with => @address.address_1
     fill_in "Address 2", :with => @address.address_2
     fill_in "City", :with => @address.city

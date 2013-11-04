@@ -21,9 +21,8 @@ describe BasketItem do
     basket_item = FactoryGirl.create(:basket_item, :product_id => product.id, :basket_id => basket.id, :size_id => 1)
     basket_item_two = FactoryGirl.create(:basket_item, :product_id => product.id, :basket_id => basket.id, :size_id => 1)
 
-    [basket_item, basket_item_two].each do |b|
-      BasketItem.add_item(b)
-    end
+    BasketItem.add_item(basket_item)
+    BasketItem.add_item(basket_item_two)
 
     BasketItem.all.map {|b| b.quantity }.should == [2] 
   end

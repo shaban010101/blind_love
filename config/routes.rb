@@ -11,7 +11,8 @@ BlindLove::Application.routes.draw do
   resources :admin, :only => [:index]
   resources :home_pages, :only => [:index]
   resources :basket_items, :only =>[ :create, :destroy]
-  
+  resources :orders ,:only => [ :new, :create, :show]
+
   resources :baskets, :only => [ :show ] do
     member do
       put "update_basket_item"
@@ -23,24 +24,8 @@ BlindLove::Application.routes.draw do
     resources :payments
   end
 
-
-  resources :orders ,:only => [ :new, :create, :show] do
-    member do
-      get "shipping"
-      get "review"
-      get "payment"
-      put "payment"
-      put "review"
-    end
-  end
-
   namespace :admin do
-    resources :products do
-      member do
-        get "sizing"
-        put "sizing_update"
-      end
-    end
+    resources :products
     resources :categories
   end
 

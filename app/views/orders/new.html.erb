@@ -1,29 +1,24 @@
+<div class="container">
 <%= form_for :order, :url => { :action => "create" }, :class => "horizontal" do |f| %>
   
 <%= render 'shared/error_messages', :target => @order %>
-
- <div id="shipping-details">
-    <h2> Shipping Details </h2>
-      <% @address.each do |add| %>
-        <%= add.address_1 %>
-        <%= add.address_2 %>
-        <%= add.city %>
-        <%= add.post_code %>
-      <% end %>
-    <h2> Payment Details </h2>
-      <% @payment.each do |pay| %>
-        <%= pay.last4 %>
-        <%= pay.type %>
-        <%= pay.expiry_year_and_month %>
-      <% end %>
+  <h2> Shipping Details </h2>
+    <% @address.each do |add| %>
+      <p><%= add.address_1 %></p>
+      <p><%= add.address_2 %></p>
+      <p><%= add.city %></p>
+      <p><%= add.post_code %></p>
+      <%= f.radio_button(:address_id, :checked => add.id ) %>
+    <% end %>
+  <h2> Payment Details </h2>
+    <% @payment.each do |pay| %>
+      <p><%= pay.last4 %></p>
+      <p><%= pay.type %></p>
+      <p><%= pay.expiry_year_and_month %></p>
+    <% end %>
     
-      <%= f.submit("Order", :class => "btn") %>
-    </div>
-  </div>>
+  <p><strong> Total cost:- <%= @order.product_totals %></strong></p>
 
-  <div id="stripe_error">
-    <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
-  </div>
-<% end %>
-
-<p><%= @order.product_totals %><p>
+    <%= f.submit("Order", :class => "btn") %>
+  <% end %>
+</div>

@@ -14,8 +14,8 @@
           <td><p><%= addr.address_2 %><p></td>
           <td><p><%= addr.city %><p></td>
           <td><p><%= addr.post_code %><p></td>
-          <td><%= link_to 'Edit', edit_user_address_path(addr) %></td>
-          <td><%= link_to 'Remove', [:delete, addr], :method => 'delete', :confirm => 'Are you sure?' %></td>
+          <td><%= link_to 'Edit', edit_user_address_path(current_user,addr) %></td>
+          <td><%= link_to 'Remove', user_address_path(current_user,addr), :method => 'delete', :confirm => 'Are you sure?' %></td>
         </tr>
       <% end %>
       </table>

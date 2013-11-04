@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController 
   def index
-   @payment = Payment.only_this_user(current_user)
+   @payment = Payment.only_this_user(params[:user_id])
   end
 
   def new

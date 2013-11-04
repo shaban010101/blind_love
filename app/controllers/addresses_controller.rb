@@ -1,6 +1,6 @@
 class AddressesController < ApplicationController
   def index
-    @addresses = Address.this_user(current_user)
+    @addresses = Address.this_user(params[:user_id])
   end
 
   def new

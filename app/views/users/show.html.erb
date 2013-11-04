@@ -1,9 +1,13 @@
-<h1>Welcome <%= @user.username %></h1>
+<h1>Welcome <%= @user.email %></h1>
 
-<p> Orders </p>
+<div class="container">
+  <h2> Orders </h2>
 
-<p> Address </p>
+  <h2> Address </h2>
+    <p><%= link_to "Address setup", user_addresses_path(current_user) %></p>
 
-<p> Credit card details </p>
+  <h2> Credit/debit card details </h2>
+    <p><%= link_to "Credit/Debit setup", user_payments_path(current_user) %></p>
 
-<p> Settings </p>
+  <h2> Account Settings </h2>
+</div>

@@ -43,21 +43,23 @@ FactoryGirl.define do
   end
 
   factory :basket do
-    order
     status "Active"
   end
 
   factory :basket_item do
     product
     basket
+    order
     size
     quantity 1
   end
 
   factory :order do
    address
+   payment
    user
    basket
+   total 100
   end
 
   factory :address do

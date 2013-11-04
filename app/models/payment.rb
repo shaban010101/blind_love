@@ -12,7 +12,6 @@ class Payment < ActiveRecord::Base
   validates :year, :numericality => true
   validates :month, :numericality => true
   validates :month, :length => { :in => 1..2 }
-  validates :user_id, :presence => true 
 
   scope :only_this_user, lambda {|user| where(:user_id => user) }
 
