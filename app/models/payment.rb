@@ -1,7 +1,7 @@
 require 'stripe'
 
 class Payment < ActiveRecord::Base
-  attr_accessible :stripe, :cvc, :number, :year, :month, :basket, :user_id, :last4, :exp_month, :exp_year, :type
+  attr_accessible :stripe, :cvc, :number, :year, :month, :basket, :user_id, :last_four, :expiry_month, :expiry_year, :card_type
   attr_accessor :cvc, :number, :month, :year
 
   belongs_to :user
@@ -15,14 +15,16 @@ class Payment < ActiveRecord::Base
 
   scope :only_this_user, lambda {|user| where(:user_id => user) }
 
+  before_save :delete_cards
+
   def create_payment_method
     c = Stripe::Customer.create({ :card => { :number => number, :exp_month => month, 
       :cvc => cvc, :exp_year => year }})
-    self.stripe = c.id
-    self.last4 = c.last4
-    self.type = c.type
-    self.exp_year = c.exp_year
-    self.exp_month = c.exp_month
+    self.stripe = c.id 
+    self.last_four = c["cards"]["data"][0]["last4"]
+    self.card_type = c["cards"]["data"][0]["type"]
+    self.expiry_year = c["cards"]["data"][0]["exp_year"]
+    self.expiry_month = c["cards"]["data"][0]["exp_month"]
     save!
   rescue Stripe::CardError => e
     logger.error "Stripe error while trying to create the payment method: #{e.message}"
@@ -33,10 +35,10 @@ class Payment < ActiveRecord::Base
   def update_payment_method
     c = Stripe::Customer.retrieve({ :id => stripe, :card => { :number => number, :exp_month => month, :cvc => cvc, :exp_year => year } })
     self.stripe = c.id
-    self.last4 = c.last4
-    self.type = c.type
-    self.exp_year = c.exp_year
-    self.exp_month = c.exp_month
+    self.last_four = c["cards"]["data"][0]["last4"]
+    self.card_type = c["cards"]["data"][0]["type"]
+    self.expiry_year = c["cards"]["data"][0]["exp_year"]
+    self.expiry_month = c["cards"]["data"][0]["exp_month"]
     save!
   rescue Stripe::CardError => e
     logger.error "Stripe error while trying to create the payment method: #{e.message}"
@@ -45,6 +47,11 @@ class Payment < ActiveRecord::Base
   end
 
   def expiry_year_and_month
-    "#{exp_month} #{exp_year}"
+    "#{expiry_month} / #{expiry_year}"
+  end
+
+private
+  def delete_cards
+    self.class.where(:user_id => user_id).destroy_all
   end
 end

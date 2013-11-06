@@ -60,6 +60,7 @@ FactoryGirl.define do
    user
    basket
    total 100
+   stripe_id ""
   end
 
   factory :address do
@@ -75,6 +76,7 @@ FactoryGirl.define do
     cvc 234
     year 2020
     month 12
+    stripe "cchhcch"
     user
   end
 end

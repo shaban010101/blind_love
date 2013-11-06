@@ -24,6 +24,7 @@
           <li><%= link_to "Womens", department_path(:womens) %></li>
           <li><%= link_to "Basket", current_basket %></li>
           <% if :user_signed_in? %>
+            <li><%= link_to 'User Account', user_path(current_user) %></li>
             <li><%= link_to 'Log Out', logout_path(@user) %></li>
           <% end %> 
 	    </ul>

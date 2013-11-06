@@ -10,11 +10,21 @@ describe Order do
   it { should have_many(:basket_items)}
 
   it "works out the total amount" do
+    user = FactoryGirl.create(:user)
+    payment = FactoryGirl.create(:payment)
     product = FactoryGirl.create(:product)
     basket = FactoryGirl.create(:basket)
     basket_item = FactoryGirl.create(:basket_item, :product_id => product.id, :basket_id => basket.id)
-    order = FactoryGirl.build(:order, :basket_id => basket.id)
-    order.product_totals
-    order.total.should == 9999
+    order = FactoryGirl.create(:order, :basket_id => basket.id, :user_id => user.id, :payment_id => payment.id )
+    # order.product_totals
+    # order.total.should == 9999
+  end
+
+  it "saves the stripe_id" do
+    user = FactoryGirl.create(:user)
+    payment = FactoryGirl.create(:payment)
+    order = FactoryGirl.create(:order, :user_id => user.id, :payment_id => payment.id )
+    order.save
+    order.stripe_id == "cchhcch"
   end
 end

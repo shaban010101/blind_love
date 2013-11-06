@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController 
   def index
-   @payment = Payment.only_this_user(params[:user_id])
+   @payment = Payment.only_this_user(current_user)
   end
 
   def new
@@ -20,6 +20,12 @@ class PaymentsController < ApplicationController
 
   def edit
     @payment = Payment.find(params[:id])
+  end
+
+  def destroy
+    @payment = Payment.find
+    @payment.destroy
+    flash[:notice] = "Card deleted"
   end
 
 

@@ -1,6 +1,5 @@
 class BasketItem < ActiveRecord::Base
   attr_accessible :basket_id, :product_id, :order_id, :quantity, :size_id, :item_price
-  attr_accessible :item_price
   
   belongs_to :product
   belongs_to :basket
@@ -12,7 +11,7 @@ class BasketItem < ActiveRecord::Base
   before_save :price_times_quantity
 
   def self.product_totals(basket_id)
-    joins(:basket, :product).where(:basket_id => basket_id).sum("item_price")
+    joins(:basket).where(:basket_id => basket_id).sum("item_price")
   end
 
   def self.add_item(params)
