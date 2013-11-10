@@ -13,5 +13,4 @@ class Category < ActiveRecord::Base
   accepts_nested_attributes_for :category_departments
 
   scope :department_category, lambda { |department| joins(:department, :products).where("departments.department_name" => department ) }
-  # scope :category_department, joins(:category_departments).where(:category => :department)
 end

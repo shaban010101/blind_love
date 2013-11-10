@@ -1,5 +1,5 @@
 class BasketsController < ApplicationController
-  skip_before_filter :authenticate_user!, :only => [:show, :destroy]
+  skip_before_filter :authenticate_user!, :only => [:show, :destroy, :update_basket_item]
 
   def show
     begin

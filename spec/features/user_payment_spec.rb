@@ -4,6 +4,7 @@ require 'spec_helper'
 feature "Payment" do
   let(:user) { FactoryGirl.create(:user) }
   let(:payment) { FactoryGirl.create(:payment) }
+  
 
   before(:each) do
     visit new_user_session_path
@@ -14,13 +15,13 @@ feature "Payment" do
   end
 
   it "allow a user to create a payment method" do
-    visit user_payments_path
-    click_on("Create a credit/debit card to pay with")
-    vist new_user_payment_path
-    fill_in "Number" , :with => @payment.number
-    fill_in "CVC", :with => @payment.cvc
-    fill_in "Month", :with => @payment.month
-    fill_in "Year", :with => @payment.year
+    visit user_payments_path(user)
+    click_on("Create/Edit a credit/debit card to pay with")
+    visit new_user_payment_path(user)
+    fill_in "payment_number" , :with => payment.number
+    fill_in "payment_cvc", :with => payment.cvc
+    fill_in "payment_month", :with => payment.month
+    fill_in "payment_year", :with => payment.year
   end 
   
 end

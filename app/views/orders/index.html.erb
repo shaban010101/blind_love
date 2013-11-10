@@ -1,0 +1,13 @@
+<h1>Orders</h1>
+  <div class="container">
+    <table class="table table-hover">
+      <tr>
+      <% @order.each do |o| %>
+        <th><p><%= o.status %></p></th>
+        <th><p><%= o.total %></p></th>
+        <th><p><%= o.created_at.strftime("%Y-%m-%d") %></p></th>
+        <th><p><%= link_to "Cancel Order", cancel_user_order_path(current_user, o), :class => "btn" %></p></th>
+      </tr>
+      <% end %>
+    </table>
+</div>

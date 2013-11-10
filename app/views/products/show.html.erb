@@ -1,26 +1,27 @@
 <ul class="breadcrumb">
-  <li><%= link_to "Home", root_path %></li>
-  <li class="active">Department </li>
-  <li class="active">Category products </li>
+  <li class="active"><p><%= link_to @product.department.slug.capitalize, department_path(@product.department.slug) %></p></li>
+  <li class="active"><p><%= link_to @product.category.slug.capitalize, department_category_path(@product.department.slug, @product.category.slug) %></p></li>
 </ul>
 
-<ul class="thumbnails">
-	<li class="span4">
-		<div class="thumbnail">
-			<%= image_tag(@product.image) %>
-		</div>
-	</li>
-</ul>
-<div class="product-detail">
-	<p><%= @product.name %></p>
-	<p><%= number_to_currency(@product.price, :unit => "&pound") %></p>
+<div class="container">
+  <ul class="thumbnails">
+  	<li class="span4">
+  		<div class="thumbnail">
+  			<%= image_tag(@product.image) %>
+  		</div>
+  	</li>
+  </ul>
+  <div class="product-detail">
+  	<p><%= @product.name %></p>
+  	<p><%= number_to_currency(@product.price, :unit => "&pound") %></p>
 
-  <%= form_for :basket_items, :url => basket_items_path do |f| %>
-    <%= f.hidden_field(:product_id, :value => @product.id) %>
-    <%= f.hidden_field(:basket_id, :value => current_basket.id) %>
-    <% sizes = @product.sizings.in_stock.map { |sizing| [sizing.size.size_name,sizing.size_id] } %>
-    <%= f.select(:size_id ,options_for_select(sizes))%>
-    <%= f.hidden_field(:quantity, :value => 1) %>
-    <%= f.submit "Add to Basket", :class =>"btn" %>
-  <% end %>
+    <%= form_for :basket_items, :url => basket_items_path do |f| %>
+      <%= f.hidden_field(:product_id, :value => @product.id) %>
+      <%= f.hidden_field(:basket_id, :value => current_basket.id) %>
+      <% sizes = @product.sizings.in_stock.map { |sizing| [sizing.size.size_name,sizing.id] } %>
+      <%= f.select(:sizing_id ,options_for_select(sizes))%>
+      <%= f.hidden_field(:quantity, :value => 1) %>
+      <%= f.submit "Add to Basket", :class =>"btn" %>
+    <% end %>
+  </div>
 </div>

@@ -50,7 +50,7 @@ FactoryGirl.define do
     product
     basket
     order
-    size
+    sizing
     quantity 1
   end
 

@@ -2,12 +2,10 @@
 
 <div class="container">
   <h2> Orders </h2>
-
+    <p><%= link_to "Orders", user_orders_path(current_user) %></p>
   <h2> Address </h2>
     <p><%= link_to "Address setup", user_addresses_path(current_user) %></p>
-
   <h2> Credit/debit card details </h2>
     <p><%= link_to "Credit/Debit setup", user_payments_path(current_user) %></p>
-
   <h2> Account Settings </h2>
 </div>

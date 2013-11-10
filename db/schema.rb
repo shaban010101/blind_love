@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131106131650) do
+ActiveRecord::Schema.define(:version => 20131109203640) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address_1"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20131106131650) do
     t.datetime "updated_at", :null => false
     t.integer  "order_id"
     t.integer  "quantity"
-    t.integer  "size_id"
+    t.integer  "sizing_id"
     t.integer  "item_price"
   end
 
@@ -67,13 +67,15 @@ ActiveRecord::Schema.define(:version => 20131106131650) do
   add_index "departments", ["slug"], :name => "index_departments_on_slug", :unique => true
 
   create_table "orders", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.integer  "basket_id"
     t.integer  "total"
     t.integer  "address_id"
     t.integer  "payment_id"
     t.integer  "user_id"
+    t.string   "status",     :default => "Processing"
+    t.string   "stripe_id"
   end
 
   create_table "payments", :force => true do |t|

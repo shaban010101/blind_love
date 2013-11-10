@@ -1,4 +1,4 @@
-<%= form_tag(category_path(@cat), :method => "post") do %>
+<%= form_tag(department_category_path(@cat), :method => "post") do %>
   <%= select_tag(:ordering, options_for_select([["Ascending","ASC"],["Descending", "DESC"]], params[:ordering] ), :prompt => "Select an order") %>
   <% ranges = @pr.map %>
   <%= select_tag(:minimum, options_for_select(ranges, :selected => ranges.min )) %>

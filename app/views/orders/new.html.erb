@@ -21,7 +21,7 @@
 
     <%= link_to "Create/Edit credit/debit card", user_payments_path(current_user) %> 
     
-  <p><strong> Total cost:- <%= @order.product_totals %></strong></p>
+  <p><strong> Total cost:- <%= @order.totals %></strong></p>
 
     <%= f.submit("Order", :class => "btn") %>
 
