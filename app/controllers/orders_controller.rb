@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(params[:order])
+   @order = Order.new(params[:order])
     if @order.charge_customer(params[:order])
       basket = current_basket
       basket.update_attributes(:status => "Inactive", :order_id => @order)
@@ -32,7 +32,8 @@ class OrdersController < ApplicationController
   end
 
   def cancel
-    Order.cancel_order(params[:order])
+    Order.cancel_order(params[:id])
+    redirect_to user_orders_path(current_user)
     flash[:notice] = "Order Cancelled"
   end
 end

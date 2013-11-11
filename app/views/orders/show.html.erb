@@ -1,10 +1,11 @@
 <h1>Order</h1>
-
-<h2> Status </h2>
-  <p><%= @order.status %></p>
-<h2> Order Items </h2>
-
-<h2> Total </h2>
- <p><% @order.total %></p>
-<h2> Cancel Order </h2>
- <p><%= button_to 'Cancel', cancel_user_order_path(@order),:method => "put", :class => "btn"  %></p>
+<div class="container">
+  <h2> Status </h2>
+    <p><%= @order.status %></p>
+  <h2> Order Items </h2>
+  
+  <h2> Total </h2>
+   <p><%= @order.total %></p>
+  <h2> Cancel Order </h2>
+   <p><%= button_to 'Cancel', cancel_user_order_path(@order),:method => "put", :class => "btn"  %></p>
+ </div>

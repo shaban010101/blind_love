@@ -3,7 +3,7 @@ class DepartmentsController < ApplicationController
 
   def show
     @department = Department.find(params[:id])
-    @dc = @department.categories
+    @dc = Category.category_department(@department.id)
     @products = @department.products
   rescue ActiveRecord::RecordNotFound
     render :file => "#{Rails.root}/public/404"

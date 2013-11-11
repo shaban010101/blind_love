@@ -34,7 +34,7 @@ class BasketItem < ActiveRecord::Base
 
     if quantity == 0
       item.errors.add(:quantity, "Oh no there's no more in stock")
-    elsif desired_quantity == quantity ^ desired_quantity <= quantity
+    elsif desired_quantity == quantity || desired_quantity <= quantity
       item.update_attributes(:quantity => desired_quantity)
     else desired_quantity > quantity
       wanted = desired_quantity - quantity

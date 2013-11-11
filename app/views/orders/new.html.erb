@@ -8,7 +8,8 @@
 
   <%= link_to 'Create/Edit Addresses', user_addresses_path(current_user) %>
   
-  <% f.hidden_field(:user_id, :value => current_user.id) %>
+  <%= f.hidden_field(:user_id, :value => current_user.id) %>
+  <%= f.hidden_field(:basket_id, :value => current_basket.id) %>
 
   <h2> Payment method </h2>
 
