@@ -22,9 +22,8 @@ describe BasketItem do
     basket_item_two = FactoryGirl.create(:basket_item, :product_id => product.id, :basket_id => basket.id, :sizing_id => 1)
 
     BasketItem.add_item(basket_item)
-    BasketItem.add_item(basket_item_two)
-
-    BasketItem.all.map {|b| b.quantity }.should == [2] 
+    b = BasketItem.add_item(basket_item_two)
+    expect(b.quantity).to eq(2)
   end
 
   it "not merge non-duplicate products" do
@@ -54,14 +53,14 @@ describe BasketItem do
   it "adds the desired quantity" do
     sizing = FactoryGirl.create(:sizing, :quantity => 2, :product_id => product.id)
     basket_item = FactoryGirl.create(:basket_item, :quantity => 2, :sizing_id => sizing.id)
-    b = BasketItem.update_item(basket_item)
-    expect(b.quantity).to eq(2)
+    BasketItem.update_item(basket_item)
+    BasketItem.all.map {|b| b.quantity }.should == [2]
   end
 
   it "adds the quantity left over" do
-    sizing = FactoryGirl.create(:sizing, :quantity => 2, :product_id => product.id)
-    basket_item = FactoryGirl.create(:basket_item, :quantity => 3, :sizing_id => sizing.id)
-    raise BasketItem.update_item(basket_item).inspect
-    BasketItem.all.map {|b| b.quantity }.should == [2]
+    sizing = FactoryGirl.create(:sizing, :quantity => 1, :product_id => product.id)
+    basket_item = FactoryGirl.create(:basket_item, :quantity => 2, :sizing_id => sizing.id)
+    BasketItem.update_item(basket_item)
+    BasketItem.all.map {|b| b.quantity}.should == [1]
   end
 end

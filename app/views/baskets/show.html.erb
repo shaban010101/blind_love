@@ -11,19 +11,19 @@
         <th></th>
         <th></th>
       </tr>
+      <% @basket_items.each do |item| %>
       <tr>
-        <% @basket_items.each do |item| %>
           <td><p><%= link_to item.product.name, department_category_product_path(item.product.department.slug, item.product.category.slug, item.product.name.downcase) %></p></td>
           <td><p><%= number_to_currency(item.price_times_quantity, :unit => "&pound") %></p></td>
           <td><p><%= item.sizing.size.size_name %></p></td>
-          <td><p><%= form_for(@basket_items, :url => {:action => "update_basket_item", :method => "put"}) do |f|  %>
+          <%= form_for(item, :url => {:action => "update_basket_item", :method => "put"}) do |f|  %>
             <%= f.hidden_field(:id, :key => item.id) %>
             <%= f.hidden_field(:product_id,:key => item.product.id) %>
             <%= f.hidden_field(:sizing_id,:key => item.sizing_id ) %>
             <% quant = item.sizing.quantity %>
-            <%= f.number_field(:quantity, :in => 1..quant, :class => "input-mini") %></p></td>
-          <td><%= f.submit "Update", :class => "btn" %></td>
-          <% end %></td>
+            <td><%= f.number_field(:quantity, :in => 1..quant, :class => "input-mini") %></td>
+            <td><%= f.submit "Update", :class => "btn" %></td>
+          <% end %>
           <td><%= button_to 'Remove', basket_item_path(item.id), :method => 'delete', :confirm => 'Are you sure?', :class => "btn" %></td>
         </tr>
         <% end %>

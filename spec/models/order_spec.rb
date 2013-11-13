@@ -27,4 +27,12 @@ describe Order do
     order.save
     order.stripe_id == "cchhcch"
   end
+
+  it "checks a user has an address before proceding", :skipping => true do
+    payment = FactoryGirl.create(:payment, :user_id => "")
+    user = FactoryGirl.create(:user)
+    order = FactoryGirl.create(:order, :user_id => user.id)
+    o = Order.check_payment(user.id)
+    expect(o.payment_id).to eq(["Please add a payment method"])
+  end
 end

@@ -12,8 +12,16 @@ class Order < ActiveRecord::Base
   validates :address_id, :presence => true
 
   scope :this_user, lambda { |user| where(:user_id => user) }
+  scope :payment_method, lambda {|user| joins(:payment).where(:user_id => user) }
 
   before_validation :totals
+
+  def self.check_payment(user_id)
+    pay = self.payment_method(user_id)
+    unless pay
+      errors.add(:payment_id, "Please add a payment method")
+    end
+  end
 
   def totals
     self.total = basket_items.product_totals(basket_id)

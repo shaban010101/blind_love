@@ -44,7 +44,7 @@ feature "Address"  do
     page.has_css?("div.alert.alert-success", :text => "Address updated")
   end
 
-  scenario "can edit an existing Address " do
+  scenario "gets an error when trying to save an edit to an existing Address " do
     visit user_addresses_path(@user.id)
     click_on("Edit")
     visit edit_user_address_path(@user.id, @address.id)

@@ -40,8 +40,8 @@ feature "BasketItem" do
     click_button "Add to Basket"
     visit basket_path(@basket.id)
     fill_in "basket_item_quantity", :with => 4
-    find(:xapth, "//div[2]/table/tbody/tr[2]/td[5]/input").click
-    page.should have_content(4)
+    click_button "Update"
+    page.has_css?("input#basket_item_quantity.input-mini", :text => 4) 
   end
 
   scenario "attempting to go to a cart which does not belong to the user", :skipping => true do

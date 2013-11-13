@@ -17,8 +17,11 @@ feature "Session" do
 		visit '/users/sign_in'
 	end
 
-	scenario "can logout of the website" do
-		login_into_account
+	scenario '/users/sign_in' do
+		visit '/users/sign_in'
+		fill_in "Email", :with => user.email
+		fill_in "Password", :with => user.password
+		click_button "Sign in"
 		visit("/users/#{user.id}")
 		click_link("Log Out")
 		visit login_path
