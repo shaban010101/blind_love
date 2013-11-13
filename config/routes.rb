@@ -32,6 +32,7 @@ BlindLove::Application.routes.draw do
   namespace :admin do
     resources :products
     resources :categories
+    resources :orders
   end
 
   resources :departments, :only => [:show] do
