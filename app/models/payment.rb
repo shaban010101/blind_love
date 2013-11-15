@@ -17,29 +17,17 @@ class Payment < ActiveRecord::Base
 
   before_save :delete_cards
 
-  def create_payment_method
-    c = Stripe::Customer.create({ :card => { :number => number, :exp_month => month, 
-      :cvc => cvc, :exp_year => year }})
-    self.stripe = c.id 
-    self.last_four = c["cards"]["data"][0]["last4"]
-    self.card_type = c["cards"]["data"][0]["type"]
-    self.expiry_year = c["cards"]["data"][0]["exp_year"]
-    self.expiry_month = c["cards"]["data"][0]["exp_month"]
-    save!
-  rescue Stripe::CardError => e
-    logger.error "Stripe error while trying to create the payment method: #{e.message}"
-    errors.add :base, "There was a problem with your credit/debit card."
-    false
-  end
+  def self.create_payment_method(payment)
+    c = Stripe::Customer.create({ :card => { :number => payment[:number], :exp_month => payment[:month], 
+      :cvc => payment[:cvc], :exp_year => payment[:year] }})
 
-  def update_payment_method
-    c = Stripe::Customer.retrieve({ :id => stripe, :card => { :number => number, :exp_month => month, :cvc => cvc, :exp_year => year } })
-    self.stripe = c.id
-    self.last_four = c["cards"]["data"][0]["last4"]
-    self.card_type = c["cards"]["data"][0]["type"]
-    self.expiry_year = c["cards"]["data"][0]["exp_year"]
-    self.expiry_month = c["cards"]["data"][0]["exp_month"]
-    save!
+    stripe_response = c["cards"]["data"][0]
+
+    payment_attr = self.new
+    payment_attr.assign_attributes({:last_four => stripe_response["last4"], :card_type => stripe_response["type"], 
+    :expiry_year => stripe_response["exp_year"], :expiry_month => stripe_response["exp_month"], :stripe => c.id, 
+    :month => payment[:month], :year => payment[:year], :user_id => payment[:user_id] })
+    payment_attr.save!
   rescue Stripe::CardError => e
     logger.error "Stripe error while trying to create the payment method: #{e.message}"
     errors.add :base, "There was a problem with your credit/debit card."
