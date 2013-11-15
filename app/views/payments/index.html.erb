@@ -3,6 +3,6 @@
   <%= link_to"Create/Edit a credit/debit card to pay with", new_user_payment_path %>
   <% @payment.each do |p| %>
     <p><%= p.last_four %> <%= p.card_type %> <%= p.expiry_year_and_month %></p>
-    <p><%= link_to "Delete card", user_payment_path(p.id, current_user), :method => :delete %></p>
+    <p><%= link_to "Delete card", user_payment_path(current_user,p.id), :method => :delete %></p>
   <% end %>
 </div>

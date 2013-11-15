@@ -18,8 +18,9 @@ class PaymentsController < ApplicationController
   end
 
   def destroy
-    @payment = Payment.find
+    @payment = Payment.find(params[:id])
     @payment.destroy
+    redirect_to user_payments_path(current_user)
     flash[:notice] = "Card deleted"
   end
 end
