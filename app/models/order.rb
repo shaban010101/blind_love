@@ -12,14 +12,27 @@ class Order < ActiveRecord::Base
   validates :address_id, :presence => true
 
   scope :this_user, lambda { |user| where(:user_id => user) }
-  scope :payment_method, lambda {|user| joins(:payment).where(:user_id => user) }
 
   before_validation :totals
+  after_save :deduct_from_stock
+  # after_save :give_order_id
 
-  def self.check_payment(user_id)
-    pay = self.payment_method(user_id)
-    unless pay
-      errors.add(:payment_id, "Please add a payment method")
+  def get_basket_items(basket)
+    basket.basket_items.each do |basket_item|
+      basket_item
+    end
+  end
+
+  def deduct_from_stock
+    basket.basket_items.each do |basket_item|
+      quant = basket_item.sizing.quantity - basket_item.quantity
+      basket_item.sizing.decrement(:quantity, quant)
+    end
+  end
+
+  def give_order_id(basket)
+    basket.basket_items.each do |basket_item|
+     basket_item.update_attributes(:order_id => self.id)
     end
   end
 
@@ -44,7 +57,7 @@ class Order < ActiveRecord::Base
     order = self.find(id)
     c = Stripe::Charge.retrieve(:id => order.stripe_id)
     c.refund
-    order.update_attributes(:status => "Canceled")
+    order.update_attributes(:status => "Cancelled")
   rescue Stripe::InvalidRequestError => e
     logger.error "Stripe error please try again: #{e.message}"
     order.errors.add :base, "There was a problem with caneling your order please try again."

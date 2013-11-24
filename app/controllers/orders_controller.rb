@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
-
+  load_and_authorize_resource
+  
   def index
     @order = Order.this_user(current_user)
   end
@@ -17,6 +18,7 @@ class OrdersController < ApplicationController
 
   def create
    @order = Order.new(params[:order])
+   
     if @order.charge_customer(params[:order])
       basket = current_basket
       basket.update_attributes(:status => "Inactive", :order_id => @order)

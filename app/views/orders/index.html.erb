@@ -6,7 +6,9 @@
         <th><p><%= o.status %></p></th>
         <th><p><%= o.total %></p></th>
         <th><p><%= o.created_at.strftime("%Y-%m-%d") %></p></th>
-        <th><p><%= link_to "Cancel Order", cancel_user_order_path(current_user, o), :class => "btn" %></p></th>
+        <% unless o.status == "Canceled" %>
+          <th><p><%= button_to "Cancel Order", cancel_user_order_path(current_user, o), :method => 'put', :class => "btn" %></p></th>
+        <% end %>
       </tr>
       <% end %>
     </table>

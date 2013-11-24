@@ -1,7 +1,13 @@
 require 'spec_helper'
 
 describe Order do
-  let(:order) { FactoryGirl.create(:order) }
+  let(:basket) { FactoryGirl.create(:basket) }
+  let(:order) { FactoryGirl.create(:order, :basket_id => basket.id) }
+  let(:product) { FactoryGirl.create(:product) }
+  let(:sizing)  { FactoryGirl.create(:sizing, :quantity => 2, :product_id => product.id) }
+  let(:basket_item) { FactoryGirl.create(:basket_item, :basket_id => basket.id, :sizing_id => sizing.id, :product_id => product.id, :quantity => 1) }
+  let(:user) { FactoryGirl.create(:user) }
+  let(:order) { FactoryGirl.create(:order, :basket_id => basket.id) }
 
   it { should belong_to(:basket) }
   it { should belong_to(:address) }
@@ -10,29 +16,28 @@ describe Order do
   it { should have_many(:basket_items)}
 
   it "works out the total amount" do
-    user = FactoryGirl.create(:user)
-    payment = FactoryGirl.create(:payment)
-    product = FactoryGirl.create(:product)
-    basket = FactoryGirl.create(:basket)
-    basket_item = FactoryGirl.create(:basket_item, :product_id => product.id, :basket_id => basket.id)
-    order = FactoryGirl.create(:order, :basket_id => basket.id, :user_id => user.id, :payment_id => payment.id )
-    # order.product_totals
-    # order.total.should == 9999
+    order.send(:totals)
+    order.should_receive(:create)
+    order.total.should == 9999
   end
 
-  it "saves the stripe_id" do
-    user = FactoryGirl.create(:user)
-    payment = FactoryGirl.create(:payment)
-    order = FactoryGirl.create(:order, :user_id => user.id, :payment_id => payment.id )
+  it "retrieves the basket items" do
+    
+  end
+
+  it "deducts the order quantity from the sizings quantity" do
+    order = FactoryGirl.build(:order, :basket_id => basket.id)
+    order.deduct_from_stock
     order.save
-    order.stripe_id == "cchhcch"
+    sizing.quantity.should == 1
   end
 
-  it "checks a user has an address before proceding", :skipping => true do
-    payment = FactoryGirl.create(:payment, :user_id => "")
-    user = FactoryGirl.create(:user)
-    order = FactoryGirl.create(:order, :user_id => user.id)
-    o = Order.check_payment(user.id)
-    expect(o.payment_id).to eq(["Please add a payment method"])
+  it "recieves the order id of the order" do
+    basket = FactoryGirl.create(:basket)
+    order_1 = FactoryGirl.build(:order, :basket_id => basket.id)
+    basket_item = FactoryGirl.create(:basket_item, :basket_id => basket.id)
+    order_1.save
+    # order_1.give_order_id(basket)
+    order_1.basket.basket_item.order_id.should == order_1.id
   end
 end

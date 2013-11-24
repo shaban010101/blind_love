@@ -8,8 +8,7 @@ describe Product do
 	it { should validate_presence_of(:price) }
 	it { should validate_presence_of(:name) }
 	it { should validate_presence_of(:description) }
-	it { should validate_presence_of(:category_id) }
-	it { should validate_presence_of(:department_id) }
+	it { should validate_presence_of(:category_department_id) }
 	it { should validate_uniqueness_of(:name) }
 	it { should belong_to(:category) }
 	it { should have_many(:sizes).through(:sizings)}

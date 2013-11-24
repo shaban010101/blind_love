@@ -5,6 +5,7 @@ class Admin::ProductsController < ApplicationController
   end
 
   def new
+    @category_departments = CategoryDepartment.category_department_list
     @product = Product.new
     Size.count.times do
       @product.sizings.build
@@ -27,6 +28,7 @@ class Admin::ProductsController < ApplicationController
   end
 
   def edit
+    @category_departments = CategoryDepartment.category_department_list
     @product = Product.find(params[:id])
     @product.sizings.build
     @product.sizes.build

@@ -37,7 +37,7 @@ BlindLove::Application.routes.draw do
 
   resources :departments, :only => [:show] do
     resources :categories, :only => [:show] do
-      resources :products, :only => [:show] do
+      resources :products, :only => [:show], :shallow => true do
       end
     end
   end

@@ -10,6 +10,7 @@ FactoryGirl.define do
     sequence(:email) { |n| "foo#{n}@bar.com" }
     password "BarFarFaz"
     password_confirmation "BarFarFaz"
+    role "customer"
   end
 
   factory :department do
@@ -25,6 +26,7 @@ FactoryGirl.define do
     image Rails.root.join("spec/fixtures/images/boom.jpg").open
     department
     category
+    category_department
   end
 
   factory :category_department do

@@ -20,6 +20,7 @@ feature 'Product' do
 			fill_in "Description", :with => "Baz" 
 			fill_in "Price", :with => 1000
 			attach_file "Image", Rails.root.join('spec', 'fixtures', 'images', 'boom.jpg')
+			select("Mens-Trousers", :from => "product_category_department_id")
 			find(:xpath, "//option[1]",  :match => :first ).click
 			fill_in "product_sizings_attributes_0_quantity", :with => 10
 			click_button "Create Product"
@@ -33,6 +34,7 @@ feature 'Product' do
 			fill_in "Description", :with => "Bar1" 
 			fill_in "Price", :with => "1000"
 			attach_file "Image", Rails.root.join('spec', 'fixtures', 'images', 'boom.jpg')
+			select("Mens-Trousers", :from => "product_category_department_id")
 			find(:xpath, "//option[1]",  :match => :first ).click
 			fill_in "product_sizings_attributes_0_quantity", :with => 10
 			page.has_xpath?("//div[2]/p")

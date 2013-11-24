@@ -13,7 +13,7 @@
       </tr>
       <% @basket_items.each do |item| %>
       <tr>
-          <td><p><%= link_to item.product.name, department_category_product_path(item.product.department.slug, item.product.category.slug, item.product.name.downcase) %></p></td>
+          <td><p><%= link_to item.product.name, product_path(item.product.name.downcase) %></p></td>
           <td><p><%= number_to_currency(item.price_times_quantity, :unit => "&pound") %></p></td>
           <td><p><%= item.sizing.size.size_name %></p></td>
           <%= form_for(item, :url => {:action => "update_basket_item", :method => "put"}) do |f|  %>

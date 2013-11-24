@@ -4,11 +4,12 @@ class Product < ActiveRecord::Base
 	friendly_id :name, use: :slugged
 	has_attached_file :image
 
-	attr_accessible :ranges, :name, :price, :description, :category_id, :slug, :image, :image_file_name, :department_id, :sizings_attributes
+	attr_accessible :ranges, :name, :price, :description, :category_id, :slug, :image, :image_file_name, :department_id, :sizings_attributes, :category_department_id
   attr_accessor :ranges
 
 	belongs_to :category
   belongs_to :department
+  belongs_to :category_department
 	has_many :sizings, :dependent => :destroy
 	has_many :sizes, :through => :sizings
 	has_many :basket_items
@@ -20,8 +21,7 @@ class Product < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_presence_of :description
   validates_attachment_presence :image
-  validates :category_id, :presence => true
-  validates :department_id, :presence => true
+  validates :category_department_id, :presence => true
 
   accepts_nested_attributes_for :sizes
   accepts_nested_attributes_for :sizings, reject_if: :all_blank

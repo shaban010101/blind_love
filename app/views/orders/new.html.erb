@@ -20,7 +20,14 @@
       <% f.hidden_field(:payment_id, :value => p.id) %>
     <% end %>
 
-    <%= link_to "Create/Edit credit/debit card", user_payments_path(current_user) %> 
+    <%= link_to "Create/Edit credit/debit card", user_payments_path(current_user) %>
+
+    <% @order.get_basket_items(current_basket).each do |bi| %>
+      <%= bi.product.name %>
+      <%= bi.item_price %>
+      <%= bi.sizing.size.size_name %> 
+      <%= bi.quantity %>
+    <% end %>
     
   <p><strong> Total cost:- <%= @order.totals %></strong></p>
 

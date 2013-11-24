@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131109203640) do
+ActiveRecord::Schema.define(:version => 20131117102503) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address_1"
@@ -93,8 +93,8 @@ ActiveRecord::Schema.define(:version => 20131109203640) do
     t.string   "name"
     t.integer  "price"
     t.text     "description"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.integer  "category_id"
     t.string   "image_file_name"
     t.string   "image_content_type"
@@ -103,7 +103,9 @@ ActiveRecord::Schema.define(:version => 20131109203640) do
     t.string   "slug"
     t.string   "image"
     t.integer  "department_id"
-    t.string   "currency",           :default => "gbp"
+    t.string   "currency",               :default => "gbp"
+    t.string   "integer"
+    t.integer  "category_department_id"
   end
 
   add_index "products", ["slug"], :name => "index_products_on_slug", :unique => true
