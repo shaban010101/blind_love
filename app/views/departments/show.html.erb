@@ -4,7 +4,7 @@
   <div class="row-fluid">
     <div class="span2">
      <% @dc.each do |c| %>
-       <p><%= link_to c.category_name, department_category_path(@department.slug,c.slug)%></p>
+       <p><%= link_to c.category.category_name, department_category_path(@department.slug,c.category.slug)%></p>
      <% end %>
     </div>
     <div class="span10">
