@@ -29,6 +29,7 @@ class Product < ActiveRecord::Base
   scope :search, lambda { |params| where("name LIKE ?", "%#{params[:query]}%" ) }
   scope :products_category, lambda { |category| joins(:category).where(:category_id => category) }
   scope :products_department, lambda { |department| joins(:department).where(:department_id => department) }
+  scope :products_category_department, lambda { |category_department| joins(:category_department).where(:category_department_id => category_department) }
   scope :lowest_or_highest, lambda { |ordering| order("price #{ordering}") if ordering.present? }
   scope :pricing, lambda { |min,max| where(:price => (min)..(max)) if min.present? && max.present? }
   scope :sizes, lambda { |size| joins(:sizings).where("sizings.size_id" => size)  if size.present? }
@@ -38,9 +39,9 @@ class Product < ActiveRecord::Base
   end
 
 
-  def self.workout_min_and_max(category)
-    min = self.products_category(category).minimum(:price) 
-    max = self.products_category(category).maximum(:price)
+  def self.workout_min_and_max(category_department)
+    min = self.products_category_department(category_department).minimum(:price) 
+    max = self.products_category_department(category_department).maximum(:price)
 
     min = (min / 100) * 100
     max = max.round(-2)

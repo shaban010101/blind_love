@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Product do
 	let(:category) { FactoryGirl.create(:category) }
 	let(:department) { FactoryGirl.create(:department) }
+	let(:category_department) { FactoryGirl.create(:category_department) }
  	subject { FactoryGirl.create(:product) }
 
 	it { should validate_presence_of(:price) }
@@ -68,10 +69,10 @@ describe Product do
 		end
 
 		it "produces a range of prices in 100s for product prices" do
-			other_product = FactoryGirl.create(:product,:price => 9500, :category_id => category.id)
-			product = FactoryGirl.create(:product, :category_id => category.id)
+			other_product = FactoryGirl.create(:product,:price => 9500, :category_department_id => category_department.id)
+			product = FactoryGirl.create(:product, :category_department_id => category_department.id)
 
-			expect(Product.workout_min_and_max(category.id).map)
+			expect(Product.workout_min_and_max(category_department.id).map)
 			.to include(9500,9600,9700,9800,9900,10000)
 		end
 

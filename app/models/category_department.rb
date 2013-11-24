@@ -4,6 +4,8 @@ class CategoryDepartment < ActiveRecord::Base
   belongs_to :category
   has_many :products
 
+  scope :category_department, lambda { |category| joins(:category).where(:category_id => category) }
+
   def self.category_department_list
     cat_dep = self.all
     cat_dep_hash = Hash.new

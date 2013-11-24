@@ -4,7 +4,8 @@ feature "Product" do
   before(:each) do
    @category = FactoryGirl.create(:category)
    @department = FactoryGirl.create(:department)
-   @product = FactoryGirl.create(:product, :category_id => @category.id, :department_id => @department.id)
+   @category_department = FactoryGirl.create(:category_department, :category_id => @category.id, :department_id => @department.id)
+   @product = FactoryGirl.create(:product, :category_department_id => @category_department.id)
   end
 
   scenario "viewing the products a category has" do
@@ -13,7 +14,7 @@ feature "Product" do
   end
 
   scenario "switiching ordering of products" do
-    product_one = FactoryGirl.create(:product, :price => 800, :category_id => @category.id)
+    product_one = FactoryGirl.create(:product, :price => 800, :category_department_id => @category_department.id)
     visit department_category_path(@department.slug, @category.slug)
     select('Ascending', :from => "ordering")
     click_button "Filter"
