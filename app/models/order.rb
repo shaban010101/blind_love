@@ -14,7 +14,7 @@ class Order < ActiveRecord::Base
   scope :this_user, lambda { |user| where(:user_id => user) }
 
   before_validation :totals
-  after_save :deduct_from_stock
+  # after_save :deduct_from_stock
   # after_save :give_order_id
 
   def get_basket_items(basket)
@@ -23,14 +23,14 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def deduct_from_stock
+  def after_save(basket)
     basket.basket_items.each do |basket_item|
       quant = basket_item.sizing.quantity - basket_item.quantity
-      basket_item.sizing.decrement(:quantity, quant)
+      basket_item.sizing.decrement(:quantity, quant).inspect
     end
   end
 
-  def give_order_id(basket)
+  def after_save(basket)
     basket.basket_items.each do |basket_item|
      basket_item.update_attributes(:order_id => self.id)
     end

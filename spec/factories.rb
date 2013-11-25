@@ -24,8 +24,6 @@ FactoryGirl.define do
   	description "I am a foobar"
     slug "foo"
     image Rails.root.join("spec/fixtures/images/boom.jpg").open
-    department
-    category
     category_department
   end
 

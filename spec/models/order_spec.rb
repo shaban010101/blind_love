@@ -22,22 +22,26 @@ describe Order do
   end
 
   it "retrieves the basket items" do
-    
+    basket = FactoryGirl.create(:basket)
+    order = FactoryGirl.create(:order, :basket_id => basket.id)
+    basket_item = FactoryGirl.create(:basket_item, :basket_id => basket.id)
+    order.get_basket_items(basket).should == [basket_item]
   end
 
   it "deducts the order quantity from the sizings quantity" do
+    basket = FactoryGirl.create(:basket)
     order = FactoryGirl.build(:order, :basket_id => basket.id)
-    order.deduct_from_stock
+    product = FactoryGirl.create(:product)
+    sizing = FactoryGirl.create(:sizing, :quantity => 2, :product_id => product.id)
+    basket_item = FactoryGirl.create(:basket_item, :basket_id => basket.id, :sizing_id => sizing.id, :product_id => product.id, :quantity => 1)
     order.save
-    sizing.quantity.should == 1
+    basket_item.sizing.should_receive(:decrement)
   end
 
   it "recieves the order id of the order" do
-    basket = FactoryGirl.create(:basket)
     order_1 = FactoryGirl.build(:order, :basket_id => basket.id)
     basket_item = FactoryGirl.create(:basket_item, :basket_id => basket.id)
     order_1.save
-    # order_1.give_order_id(basket)
-    order_1.basket.basket_item.order_id.should == order_1.id
+    basket_item.should_receive(:update_attributes)
   end
 end

@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
-  <li class="active"><p><%= link_to @product.department.slug.capitalize, department_path(@product.department.slug) %></p></li>
-  <li class="active"><p><%= link_to @product.category.slug.capitalize, department_category_path(@product.department.slug, @product.category.slug) %></p></li>
+  <li class="active"><p><%= link_to @product.category_department.department.slug.capitalize, department_path(@product.category_department.department.slug) %></p></li>
+  <li class="active"><p><%= link_to @product.category_department.category.slug.capitalize, department_category_path(@product.category_department.department.slug, @product.category_department.category.slug) %></p></li>
 </ul>
 
 <div class="container">

@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe Product do
-	let(:category) { FactoryGirl.create(:category) }
-	let(:department) { FactoryGirl.create(:department) }
 	let(:category_department) { FactoryGirl.create(:category_department) }
  	subject { FactoryGirl.create(:product) }
 
@@ -11,7 +9,6 @@ describe Product do
 	it { should validate_presence_of(:description) }
 	it { should validate_presence_of(:category_department_id) }
 	it { should validate_uniqueness_of(:name) }
-	it { should belong_to(:category) }
 	it { should have_many(:sizes).through(:sizings)}
 	it { should have_many(:basket_items) }
 	it { should have_attached_file(:image) }
@@ -30,8 +27,8 @@ describe Product do
 
 	context "scopes" do
 		it "should return products for the departments categories" do
-			product = FactoryGirl.create(:product, :department_id => department.id, :category_id => category.id)
-			Product.products_category(category)
+			product = FactoryGirl.create(:product,  :category_department_id => category_department.id)
+			Product.products_category_department(category_department)
 			.should == [product]
 		end
 
@@ -59,7 +56,7 @@ describe Product do
 		end
 
 		it "filter by size" do
-			subject = FactoryGirl.create(:product, :category_id => category.id)
+			subject = FactoryGirl.create(:product, :category_department_id => category_department.id)
 			size = FactoryGirl.create(:size)
 			other_size = FactoryGirl.create(:size)
 			other_sizing = FactoryGirl.create(:sizing, :size_id => other_size.id, :product_id => subject.id)
@@ -77,8 +74,8 @@ describe Product do
 		end
 
 		it "filters products based on min and max values provided" do
-			other_product = FactoryGirl.create(:product,:price => 9500, :category_id => category.id)
-			product = FactoryGirl.create(:product, :category_id => category.id)
+			other_product = FactoryGirl.create(:product,:price => 9500, :category_department_id => category_department.id)
+			product = FactoryGirl.create(:product, :category_department_id => category_department.id)
 
 			expect(Product.pricing(9500,9600).map)
 			.to include(other_product)
