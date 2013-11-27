@@ -7,9 +7,9 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.customer?
-      can :create, :all
+      can :create, Order
       can :read, :edit, Order do |order|
-        order.try(:user) == user
+        order == user
       end
     end
   end

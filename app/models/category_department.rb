@@ -5,6 +5,7 @@ class CategoryDepartment < ActiveRecord::Base
   has_many :products
 
   scope :category_department, lambda { |category| joins(:category).where(:category_id => category) }
+  scope :department_category, lambda { |department| joins(:department).where(:department_id => department) }
 
   def self.category_department_list
     cat_dep = self.all

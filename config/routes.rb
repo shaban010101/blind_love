@@ -42,9 +42,8 @@ BlindLove::Application.routes.draw do
     end
   end
 
-  match "/departments/:id" => "departments#show", :as => "dep"
-  match "/categories/:id" => "categories#show", :as => "cat"
-
-  post "departments/:id/categories/:id/", :to => "categories#show"
+  # match "/departments/:id" => "departments#show", :as => "dep"
+  # match "/categories/:id" => "categories#show", :as => "cat"
+  post "departments/:department_id/categories/:id/", :to => "categories#show"
   root :to => 'home_pages#index'
 end

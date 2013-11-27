@@ -27,14 +27,16 @@ describe Order do
   end
 
   it "deducts the order quantity from the sizings quantity" do
-    @order = FactoryGirl.build(:order, :basket_id => @basket.id)
-    @order.save
-    @basket_item.sizing.should_receive(:decrement)
+    @order = FactoryGirl.create(:order, :basket_id => @basket.id)
+    @order.save 
+    b = @order.basket_items
+    @basket.basket_items.sizing.should == 2
   end
 
   it "recieves the order id of the order" do
-    @order = FactoryGirl.build(:order, :basket_id => @basket.id)
+    @order = FactoryGirl.create(:order, :basket_id => @basket.id)
     @order.save
-    @order.basket.basket_items.should == order.id
+    @order.basket_items.map {|b| b.order_id }
+    .should == [@order.id]
   end
 end

@@ -4,11 +4,9 @@ class Product < ActiveRecord::Base
 	friendly_id :name, use: :slugged
 	has_attached_file :image
 
-	attr_accessible :ranges, :name, :price, :description, :category_id, :slug, :image, :image_file_name, :department_id, :sizings_attributes, :category_department_id
+	attr_accessible :ranges, :name, :price, :description, :slug, :image, :image_file_name, :sizings_attributes, :category_department_id
   attr_accessor :ranges
 
-	belongs_to :category
-  belongs_to :department
   belongs_to :category_department
 	has_many :sizings, :dependent => :destroy
 	has_many :sizes, :through => :sizings
@@ -27,8 +25,8 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :sizings, reject_if: :all_blank
 
   scope :search, lambda { |params| where("name LIKE ?", "%#{params[:query]}%" ) }
-  scope :products_category, lambda { |category| joins(:category).where(:category_id => category) }
-  scope :products_department, lambda { |department| joins(:department).where(:department_id => department) }
+  scope :products_category, lambda { |category| joins(:category_department).where("category_departments.category_id" => category) }
+  scope :products_department, lambda { |department| joins(:category_department).where("category_departments.department_id" => department) }
   scope :products_category_department, lambda { |category_department| joins(:category_department).where(:category_department_id => category_department) }
   scope :lowest_or_highest, lambda { |ordering| order("price #{ordering}") if ordering.present? }
   scope :pricing, lambda { |min,max| where(:price => (min)..(max)) if min.present? && max.present? }
@@ -37,11 +35,10 @@ class Product < ActiveRecord::Base
   def downcase_name
     name.downcase!
   end
-
-
-  def self.workout_min_and_max(category_department)
-    min = self.products_category_department(category_department).minimum(:price) 
-    max = self.products_category_department(category_department).maximum(:price)
+  
+  def self.workout_min_and_max(category, department)
+    min = self.products_category(category).products_department(department).minimum(:price)
+    max = self.products_category(category).products_department(department).maximum(:price)
 
     min = (min / 100) * 100
     max = max.round(-2)
