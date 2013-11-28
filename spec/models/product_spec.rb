@@ -34,6 +34,18 @@ describe Product do
 			.should == [product]
 		end
 
+		it "returns products which belong to the department" do
+			product = FactoryGirl.create(:product,  :category_department_id => category_department.id)
+			product_two = FactoryGirl.create(:product,  :category_department_id => 1)
+			Product.products_department(department.id).should == [product]
+		end
+
+		it "returns products which belong to the category" do
+			product = FactoryGirl.create(:product,  :category_department_id => category_department.id)
+			product_two = FactoryGirl.create(:product,  :category_department_id => 1)
+			Product.products_category(category.id).should == [product]
+		end
+
 		it "returns products which match product name entered" do
 			Product.search(subject)
 			.should == [subject]
@@ -71,9 +83,13 @@ describe Product do
 			other_product = FactoryGirl.create(:product,:price => 9500, :category_department_id => category_department.id)
 			product = FactoryGirl.create(:product, :category_department_id => category_department.id)
 
-			expect(Product.workout_min_and_max(category_department, department.id).map)
+			expect(Product.workout_min_and_max(category.id, department.id).map)
 			.to include(9500,9600,9700,9800,9900,10000)
 		end
+
+		it "raises an exeption if no products are given for working out the range" do
+			expect { Product.workout_min_and_max(category_department, department.id) }.to raise_error(Product::NoProducts)
+		end	
 
 		it "filters products based on min and max values provided" do
 			other_product = FactoryGirl.create(:product,:price => 9500, :category_department_id => category_department.id)
@@ -81,6 +97,6 @@ describe Product do
 
 			expect(Product.pricing(9500,9600).map)
 			.to include(other_product)
-		end	
+		end
 	end
 end

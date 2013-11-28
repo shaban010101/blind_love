@@ -32,6 +32,8 @@ class Product < ActiveRecord::Base
   scope :pricing, lambda { |min,max| where(:price => (min)..(max)) if min.present? && max.present? }
   scope :sizes, lambda { |size| joins(:sizings).where("sizings.size_id" => size)  if size.present? }
 
+  class NoProducts < Exception ; end
+
   def downcase_name
     name.downcase!
   end
@@ -39,6 +41,8 @@ class Product < ActiveRecord::Base
   def self.workout_min_and_max(category, department)
     min = self.products_category(category).products_department(department).minimum(:price)
     max = self.products_category(category).products_department(department).maximum(:price)
+
+    raise NoProducts if !min & !max 
 
     min = (min / 100) * 100
     max = max.round(-2)

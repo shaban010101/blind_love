@@ -17,7 +17,7 @@ describe Order do
   it { should have_many(:basket_items)}
 
   it "works out the total amount" do
-    @order = FactoryGirl.build(:order, :basket_id => @basket.id )
+    @order = FactoryGirl.create(:order, :basket_id => @basket.id )
     @order.save
     @order.total.should == 9999
   end

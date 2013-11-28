@@ -11,9 +11,5 @@ class CategoriesController < ApplicationController
         lowest_or_highest(params[:ordering]).sizes(params[:size])
 
     @pr = Product.workout_min_and_max(@cat, @department)
-    
-    unless @cp
-      redirect_to department_path(@category_department.department.slug)
-    end
   end
 end
