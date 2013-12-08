@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :role
 
   has_many :addresses
+  has_one :payment
 
   def customer?
     self.role == "customer"

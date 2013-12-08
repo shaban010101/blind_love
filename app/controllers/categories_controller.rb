@@ -4,12 +4,16 @@ class CategoriesController < ApplicationController
 	def show
     @department = Department.find_by_slug(params[:department_id])
     @cat = Category.find(params[:id])
-    # @category_department = @cat.category_departments
 	 	
     @cp = Product.products_department(@department).products_category(@cat).
       pricing(params[:minimum],params[:maximum]).
         lowest_or_highest(params[:ordering]).sizes(params[:size])
 
-    @pr = Product.workout_min_and_max(@cat, @department)
+    begin
+      @pr = Product.workout_min_and_max(@cat, @department)
+    rescue Product::NoProducts
+      redirect_to department_path(@department)
+      flash[:notice] = "Sorry no products in the category"
+    end
   end
 end

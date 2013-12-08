@@ -1,6 +1,8 @@
 class AdminController < ApplicationController
-
-	def index
+  load_and_authorize_resource
+  layout "administration"
+	
+  def index
 
 	end
 end 

@@ -34,8 +34,19 @@ class OrdersController < ApplicationController
   end
 
   def cancel
-    Order.cancel_order(params[:id])
+    Order.update_order(params[:order])
     redirect_to user_orders_path(current_user)
     flash[:notice] = "Order Cancelled"
+  end
+
+  def update_basket_item
+    @basket_item = BasketItem.update_item(params[:basket_item])
+    if BasketItem.update_item(params[:basket_item])
+      flash[:succces] = "Basket updated"
+      redirect_to new_order_path
+    else
+      flash[:error] = "Item could not be updated"
+      redirect_to new_order_path
+    end
   end
 end

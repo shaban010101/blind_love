@@ -1,11 +1,19 @@
 BlindLove::Application.routes.draw do
-
+  root :to => 'home_pages#index'
+  
   devise_for :users
 
   devise_scope :user do
     match "/users/sign_in" => "devise/sessions#new", :as => "login"
     match "/users/sign_out" => "devise/sessions#destroy", :as => "logout"
   end
+
+  put "/orders/", :to => "orders#update_basket_item"
+  delete "/orders/", :to => "basketItems#destroy"
+  
+  post "departments/:department_id/categories/:id/", :to => "categories#show"
+  
+  put "admin/orders", :to => "admin/orders#update"
   
   resources :searches, :only => [:index]
   resources :admin, :only => [:index]
@@ -41,7 +49,4 @@ BlindLove::Application.routes.draw do
       end
     end
   end
-  
-  post "departments/:department_id/categories/:id/", :to => "categories#show"
-  root :to => 'home_pages#index'
 end

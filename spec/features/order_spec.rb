@@ -8,26 +8,6 @@ feature "Order" do
     login_as(@user, :scope => :user)
   end
 
-  context "ordering products" do
-    before(:each) do
-      @product = FactoryGirl.create(:product)
-      @basket = FactoryGirl.create(:basket)
-      @basket_item = FactoryGirl.create(:basket_item, :basket_id => @basket.id, :product_id => @product.id)
-      @size = FactoryGirl.create(:size)
-      @sizing = FactoryGirl.create(:sizing, :product_id => @product.id, :size_id => @size.id)
-      visit product_path(@product.slug)
-      select("Small", :from => "basket_items_sizing_id")
-      click_button "Add to Basket"
-      visit basket_path(@basket.id)
-      page.has_xpath?("//div[2]/strong")
-    end
-
-    scenario "order basket items" do
-      visit new_order_path
-      
-    end
-  end
-
   scenario "cancels order" do
     visit user_orders_path(@user)
     click_button("Cancel Order")

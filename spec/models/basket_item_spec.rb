@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe BasketItem do
   let(:product) { FactoryGirl.create(:product) }
+  let!(:sizing) { FactoryGirl.create(:sizing, :product_id => product.id )}
   let(:basket) { FactoryGirl.create(:basket)}
-  let(:basket_item) { FactoryGirl.create(:basket_item ) }
+  let(:basket_item) { FactoryGirl.create(:basket_item, :product_id => product.id, :sizing_id => sizing.id ) }
 
   it { should belong_to(:basket) }
   it { should belong_to(:product) }
@@ -11,6 +12,14 @@ describe BasketItem do
   it { should validate_presence_of(:product_id) }
   it { should validate_presence_of(:sizing_id) }
   it { should validate_presence_of(:basket_id) }
+
+  it "returns the quantity left for the sizing" do
+    product = FactoryGirl.create(:product)
+    sizing = FactoryGirl.create(:sizing, :product_id => product.id )
+    basket_item = FactoryGirl.create(:basket_item, :product_id => product.id, :sizing_id => sizing.id )
+    b = BasketItem.size_quantity(sizing.id, product.id)
+    b.map {|b| b.quantity}.should == [10]
+  end
 
   it "should sum the totals for products in the shopping basket" do
     basket_item = FactoryGirl.create(:basket_item, :product_id => product.id, :basket_id => basket.id )

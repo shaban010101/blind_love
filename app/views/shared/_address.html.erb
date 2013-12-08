@@ -1,0 +1,15 @@
+<%= address_form.label :address_1 %>
+<%= address_form.text_field :address_1 %>
+
+<%= address_form.label :address_2 %>
+<%= address_form.text_field :address_2 %>
+
+<%= address_form.label :city %>
+<%= address_form.text_field :city %>
+
+<%= address_form.label :post_code %>
+<%= address_form.text_field :post_code %>
+
+<%= address_form.hidden_field :user_id, :value => current_user.id %>
+
+<%= address_form.submit %>

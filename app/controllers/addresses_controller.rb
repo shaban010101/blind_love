@@ -1,4 +1,6 @@
 class AddressesController < ApplicationController
+  load_and_authorize_resource
+  
   def index
     @addresses = Address.this_user(params[:user_id])
   end

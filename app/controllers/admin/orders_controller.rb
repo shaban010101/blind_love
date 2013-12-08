@@ -1,12 +1,13 @@
 class Admin::OrdersController < ApplicationController
-
+  load_and_authorize_resource
+  
   def index
-    @orders = Order.all
+    @orders = Order.processing
   end
 
-  def status
-    @order = Order.find(params[:id])
-    @order.update_attributes(params[:order])
+  def update
+    Order.update_order(params[:order])
+    redirect_to admin_orders_path
     flash[:success] = "Order status updated"  
   end
 end

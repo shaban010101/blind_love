@@ -4,7 +4,7 @@ feature "Session" do
 	let(:user) { FactoryGirl.create(:user) }
 
 	scenario "can login in the website page" do
-		login_into_account
+		    login_as(user, :scope => :user)
 		visit("/users/#{user.id}")
 	end
 

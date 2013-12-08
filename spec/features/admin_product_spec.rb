@@ -4,14 +4,11 @@ feature 'Product' do
 	context "when logged in" do
 		before(:each) do
 		  @product = FactoryGirl.create(:product)
-			@user = FactoryGirl.create(:user)
+			@user = FactoryGirl.create(:user, :role => "admin")
 			@size = FactoryGirl.create(:size)
 			@sizing = FactoryGirl.create(:sizing)
 			visit new_user_session_path
-			fill_in "Email", :with => @user.email 
-			fill_in "Password", :with => @user.password
-			click_button "Sign in"
-	  	page.should have_content("Signed in successfully.")
+			login_as(@user, :scope => :user)
 		end
 
 		scenario "creation" do
@@ -19,7 +16,7 @@ feature 'Product' do
 			fill_in "Name", :with => "Foo" 
 			fill_in "Description", :with => "Baz" 
 			fill_in "Price", :with => 1000
-			attach_file "Image", Rails.root.join('spec', 'fixtures', 'images', 'boom.jpg')
+			attach_file("Image", Rails.root + 'spec/fixtures/images/ruby.png')
 			select("Mens-Trousers", :from => "product_category_department_id")
 			find(:xpath, "//option[1]",  :match => :first ).click
 			fill_in "product_sizings_attributes_0_quantity", :with => 10

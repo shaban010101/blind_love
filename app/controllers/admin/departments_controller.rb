@@ -1,5 +1,6 @@
 class Admin::DepartmentsController < ApplicationController
-
+  load_and_authorize_resource
+  
   def edit 
     @department = Department.find(params[:id])
     @products = @department.products.build(params[:products_attributes])

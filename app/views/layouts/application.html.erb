@@ -20,8 +20,11 @@
 	  	<a class="brand" href="#">Blind Love</a>
 	  	 <ul class="nav">
           <li><%= link_to 'Home', admin_index_path %></li>
+          <li class="divider-vertical"></li>
           <li><%= link_to 'Mens', department_path(:mens) %></li>
+          <li class="divider-vertical"></li>
           <li><%= link_to "Womens", department_path(:womens) %></li>
+          <li class="divider-vertical"></li>
           <li><%= link_to "Basket", current_basket %></li>
           <% if current_user %>
             <li><%= link_to 'User Account', user_path(current_user) %></li>

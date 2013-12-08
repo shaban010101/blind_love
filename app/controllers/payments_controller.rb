@@ -1,4 +1,6 @@
-class PaymentsController < ApplicationController 
+class PaymentsController < ApplicationController
+  load_and_authorize_resource
+   
   def index
    @payment = Payment.only_this_user(current_user)
   end

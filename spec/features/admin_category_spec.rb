@@ -10,13 +10,10 @@ feature 'Category', %q{
 
 		before(:each) do
 			@category = FactoryGirl.create(:category)
-			@user = FactoryGirl.create(:user)
+			@user = FactoryGirl.create(:user, :role => "admin")
 			@department = FactoryGirl.create(:department)
 			visit new_user_session_path
-			fill_in "Email", :with => @user.email 
-			fill_in "Password", :with => @user.password
-			click_button "Sign in"
-	  	page.should have_content("Signed in successfully.")
+			login_as(@user, :scope => :user)
 		end
 
 		scenario "creating a category" do

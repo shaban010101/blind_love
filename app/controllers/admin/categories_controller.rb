@@ -1,5 +1,7 @@
 class Admin::CategoriesController < ApplicationController
-
+	load_and_authorize_resource
+	layout "administration"
+	
 	def new
 		@category = Category.new
 		@category.category_departments.build

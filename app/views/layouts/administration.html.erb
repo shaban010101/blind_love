@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blind Love</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application", :media => "all" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="navigation-bar">
+    <ul class="navigation-tabs">
+      <% if current_user %>
+        <li><%= link_to_unless_current "Product management", admin_products_path %></li>
+
+        <li><%= link_to_unless_current "Category management", admin_categories_path %></li>
+
+        <li><%= link_to_unless_current "Order management", admin_orders_path %></li>
+
+        <li><%= link_to_unless_current 'User Account', user_path(current_user) %></li>
+ 
+        <li><%= link_to 'Log Out', logout_path(@user) %></li>
+      <% else %>
+        <li><%= link_to 'Log In', login_path %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <% unless flash.empty? %>
+    <% flash.each do |name, msg| %>
+      <div class="alert alert-<%=name%>">
+        <strong><%= "#{msg}!" %></strong>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= yield %>
+
+</body>
+</html>

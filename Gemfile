@@ -28,12 +28,14 @@ group :test do
   gem 'launchy', '~> 2.3'
   gem 'guard-rspec', '~> 3.0.1'
   gem 'shoulda-matchers', '~> 2.1'
-  gem 'puffing-billy'
+  gem  'webmock', '~>1.16'
+  gem 'vcr', '2.8'
 end
 
 group :development do
   gem 'annotate', ">=2.5.0"
   gem  "debugger"
+  gem "letter_opener"
 end
 
 group :test, :development do

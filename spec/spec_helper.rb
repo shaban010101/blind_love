@@ -7,9 +7,7 @@ require 'capybara/rspec'
 require 'database_cleaner'
 require 'rack/test'
 require "paperclip/matchers"
-require 'billy/rspec'
-
-Capybara.javascript_driver = :selenium_billy
+require 'webmock/rspec'
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
@@ -17,11 +15,12 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers
   config.include Devise::TestHelpers, :type => :controller
   config.include Rack::Test::Methods
-  config.infer_base_class_for_anonymous_controllers = true
+  config.include Paperclip::Shoulda::Matchers
+  config.include FactoryGirl::Syntax::Methods
   config.order = "random"
   config.use_transactional_fixtures = false
-  config.include Paperclip::Shoulda::Matchers
   config.filter_run_excluding :skipping => true
+  config.infer_base_class_for_anonymous_controllers = true
   Warden.test_mode!
 
   config.before(:each) do

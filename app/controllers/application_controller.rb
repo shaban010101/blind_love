@@ -2,8 +2,12 @@ class ApplicationController < ActionController::Base
 	before_filter :authenticate_user!
   protect_from_forgery
 
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to user_path(current_user), :notice => exception.message
+  rescue_from CanCan::AccessDenied do |_|
+    redirect_to user_path(current_user)
+  end
+
+  rescue_from ActionController::RoutingError do |_|
+    render :file => "#{Rails.root}/public/404"
   end
 
   def after_sign_in_path_for(user)
@@ -15,7 +19,8 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :current_basket 
-  
+private
+
   def current_basket
     Basket.find(session[:basket_id])
   rescue ActiveRecord::RecordNotFound 

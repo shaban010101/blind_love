@@ -17,3 +17,5 @@
 /app/assets/images/
 /public/system/
 /config/initializers/stripe.rb
+/config/initializers/gmail.rb
+/config/application.yml

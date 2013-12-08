@@ -5,12 +5,16 @@ class Ability
    
     user ||= User.new
     if user.admin?
-      can :manage, :all
+      can :read, Admin
+      can :manage, Product
+      can :manage, Category 
+      can :manage, Order
     elsif user.customer?
-      can :create, Order
-      
-      can :read, :edit, Order do |order|
-        order == user
+      can :create, [Order, Payment, Address]
+      can :read, [Order, Payment, Address]
+
+      can [:update, :destroy], [Order, Address, Payment] do |obj|
+        obj == user
       end
 
       can :cancel, Order do |order|

@@ -1,12 +1,5 @@
 <div class="container">
-  <div class="alert alert-success">
-    <p><%= flash[:notice] %></p>
-  </div>
-  <ul class="nav nav-pills">
-    <li><%= link_to "Product management", admin_products_path %></li>
-
-    <li><%= link_to "Category management", admin_categories_path %></li>
-  </ul>
+  <%= render 'shared/admin_links' %>
 
   <p> <%= link_to 'New Category', new_admin_category_path %> </p>
 

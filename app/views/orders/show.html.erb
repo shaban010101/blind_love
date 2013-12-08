@@ -7,5 +7,5 @@
   <h2> Total </h2>
    <p><%= @order.total %></p>
   <h2> Cancel Order </h2>
-   <p><%= button_to 'Cancel', cancel_user_order_path(@order),:method => "put", :class => "btn"  %></p>
+   <p><%= button_to 'Cancel', :id => order.id, :status => "Cancelled", cancel_user_order_path(@order),:method => "put", :class => "btn"  %></p>
  </div>

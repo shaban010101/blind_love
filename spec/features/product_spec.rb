@@ -37,4 +37,11 @@ feature "Product" do
     click_button "Filter"
     page.should have_content("Oh no products")
   end
+
+  scenario "redirects back to department page if there are no products for the category" do
+    @product = FactoryGirl.create(:product, :category_department_id => 3)
+    visit department_category_path(@department.slug, @category.slug)
+    visit department_path(@department.slug)
+    page.has_css?("div.alert.alert-notice", :text => "Sorry no products in the category!")
+  end
 end
