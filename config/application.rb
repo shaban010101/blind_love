@@ -38,8 +38,6 @@ module BlindLove
     # config.i18n.default_locale = :de
 
     # Configure the default encoding used in templates for Ruby 1.9.
-    
-    config.assets.precompile += %w(*.js  *.css  *.css.scss *.scss)
 
     config.encoding = "utf-8"
 
