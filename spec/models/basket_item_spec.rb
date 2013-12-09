@@ -72,4 +72,11 @@ describe BasketItem do
     BasketItem.update_item(basket_item)
     BasketItem.all.map {|b| b.quantity}.should == [1]
   end
+
+  it "deducts from the stock" do
+    sizing = create(:sizing, :quantity => 1, :product_id => product.id)
+    basket_item = create(:basket_item, :quantity => 1, :sizing_id => sizing.id)
+    basket_item.reduce_stock_avaliable
+    expect(basket_item.sizing.quantity).to eq(0)
+  end
 end

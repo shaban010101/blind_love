@@ -13,13 +13,13 @@ describe OrderMailer do
   it "renders the correct subject, to, from for new order emails" do
     expect(new_order.subject).to eq("New Order")
     expect(new_order.to).to eq([user.email])
-    expect(new_order.from).to eq([CONFIG[:username]])
+    expect(new_order.from).to eq(["at@exmple.com"])
   end
 
   it "renders the correct subject, to, from for dispatched emails" do
     expect(dispatch_email.subject).to eq("Order Dispatch")
     expect(dispatch_email.to).to eq([user.email])
-    expect(dispatch_email.from).to eq([CONFIG[:username]])
+    expect(dispatch_email.from).to eq(["at@exmple.com"])
   end
 
   it "sends the email when an order is created" do

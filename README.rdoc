@@ -1,8 +1,0 @@
-E-comerce clothing website for selling mens and womens clothing in diffrent sizes using stripe payments
-
-Built using:-
-
-Rails 3.2.1.4
-Ruby 2.0.0
-Postgres
-Heroku

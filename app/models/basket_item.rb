@@ -46,4 +46,8 @@ class BasketItem < ActiveRecord::Base
   def price_times_quantity
    self.item_price = quantity * product.price
   end
+
+  def reduce_stock_avaliable  
+   self.sizing.decrement(:quantity, self.quantity)
+  end
 end

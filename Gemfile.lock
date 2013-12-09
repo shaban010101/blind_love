@@ -85,6 +85,9 @@ GEM
       railties (>= 3.0.0)
     ffi (1.9.0)
     formatador (0.2.4)
+    foundation-rails (5.0.2.0)
+      railties (>= 3.1.0)
+      sass (>= 3.2.0)
     friendly_id (4.0.9)
     fuubar (1.1.1)
       rspec (~> 2.0)
@@ -247,6 +250,7 @@ DEPENDENCIES
   debugger
   devise
   factory_girl_rails (~> 4.2.1)
+  foundation-rails
   friendly_id (~> 4.0.9)
   fuubar (~> 1.1.1)
   guard-rspec (~> 3.0.1)

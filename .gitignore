@@ -18,4 +18,5 @@
 /public/system/
 /config/initializers/stripe.rb
 /config/initializers/gmail.rb
+/config/initializers/sendgrid.rb
 /config/application.yml

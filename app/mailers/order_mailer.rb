@@ -1,5 +1,5 @@
 class OrderMailer < ActionMailer::Base
-  default from: CONFIG[:username]
+  default from: "at@exmple.com"
 
   def new_order_email(order)
     @order = Order.find(order[:id])

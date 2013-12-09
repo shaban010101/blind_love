@@ -50,7 +50,15 @@ BlindLove::Application.configure do
   # config.assets.precompile += %w( search.js )
 
   # Disable delivery errors, bad email addresses will be ignored
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+  ActionMailer::Base.smtp_settings = {
+  :address              => 'smtp.sendgrid.net',
+  :port                 => 587,
+  :domain               => "example.com",
+  :user_name            => ENV["SENDGRID_USERNAME"],
+  :password             => ENV["SENDGRID_PASSWORD"],
+  :authentication       => 'plain',
+  :enable_starttls_auto => true  }
 
   # Enable threaded mode
   # config.threadsafe!

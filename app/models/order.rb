@@ -20,19 +20,11 @@ class Order < ActiveRecord::Base
 
   before_validation :totals
   after_save :give_order_id
-  after_save :deduct_from_stock
   after_save :new_order
 
   def get_basket_items(basket)
     basket.basket_items.each do |basket_item|
       basket_item
-    end
-  end
-
-  def deduct_from_stock
-    self.basket.basket_items.each do |basket_item|
-      quant = basket_item.sizing.quantity - basket_item.quantity
-      basket_item.sizing.decrement(:quantity, quant)
     end
   end
 
