@@ -13,9 +13,7 @@ class Ability
       can :create, [Order, Payment, Address]
       can :read, [Order, Payment, Address]
 
-      can [:update, :destroy], [Order, Address, Payment] do |obj|
-        obj == user
-      end
+      can [:update, :destroy], [Order, Address, Payment], :user_id => user.id
 
       can :cancel, Order do |order|
         order == user

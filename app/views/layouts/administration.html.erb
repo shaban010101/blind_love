@@ -1,39 +1,65 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Blind Love</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application", :media => "all" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <div class="navigation-bar">
-    <ul class="navigation-tabs">
-      <% if current_user %>
-        <li><%= link_to_unless_current "Product management", admin_products_path %></li>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <li><%= link_to_unless_current "Category management", admin_categories_path %></li>
+    <title><%= "Blind-Love" %></title>
 
-        <li><%= link_to_unless_current "Order management", admin_orders_path %></li>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <nav class="top-bar" data-topbar data-options="is_hover: false">
+      <ul class="title-area">       
+        <li class="name">
+          <h1><%= link_to "Blind Love", root_path %></h1>
+        </li>
+      </ul>
+      <section class="top-bar-section">
 
-        <li><%= link_to_unless_current 'User Account', user_path(current_user) %></li>
- 
-        <li><%= link_to 'Log Out', logout_path(@user) %></li>
-      <% else %>
-        <li><%= link_to 'Log In', login_path %></li>
+        <ul class="left">
+          <li class="has-dropdown">
+            <%= link_to "Manage", admin_index_path %>
+              <ul class="dropdown">
+                <% if current_user %>
+                  <li><%= link_to_unless_current "Product management", admin_products_path %></li>
+
+                  <li><%= link_to_unless_current "Category management", admin_categories_path %></li>
+
+                  <li><%= link_to_unless_current "Order management", admin_orders_path %></li>
+                <% end %>
+              </ul>
+          </li>
+        <ul>
+
+        <ul class="right">
+          <li class="has-dropdown">
+            <a><%= link_to current_user.email %></a>
+            <ul class="dropdown">
+              <% if current_user %>
+              <li><%= link_to "Settings", user_path(current_user) %></li>
+              <li><%= link_to 'Log Out', logout_path(@user) %></li>
+              <% else %>
+                <li><%= link_to 'Log In', login_path %></li>
+              <% end %>
+            </ul>
+          </li>
+        </ul>  
+      </secton>
+    </nav>
+
+    <% unless flash.empty? %>
+      <% flash.each do |name, msg| %>
+        <% name ? 'success' : 'warning' %>
+        <div data-alert class="alert-box <%= name %> radius">
+          <%= "#{msg}!" %>
+        </div>
       <% end %>
-    </ul>
-  </div>
-
-  <% unless flash.empty? %>
-    <% flash.each do |name, msg| %>
-      <div class="alert alert-<%=name%>">
-        <strong><%= "#{msg}!" %></strong>
-      </div>
-    <% end %>
   <% end %>
 
-  <%= yield %>
-
-</body>
+    <%= yield %>
+    <%= javascript_include_tag "application" %>
+  </body>
 </html>

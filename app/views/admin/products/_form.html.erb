@@ -1,56 +1,51 @@
 <%= render 'shared/error_messages', :target => @product %>
 	<div class="product-form">
 		<form class="form-horizontal">
-			<div class="control-group">
-				<label class="control-label">
+			<div class="row">
+				<div class="small-4 columns">
 					<%= f.label :name %>
-				</label>
-				<div class="controls">
 					<%= f.text_field :name %>
 				</div>
 			</div>
 
-			<div class="control-group">
-				<label class="control-label">
+			<div class="row">
+				<div class="large-12 columns">
 					<%= f.label :description %>
-				</label>
-				<div class="controls">
-				  	<%= f.text_area :description, rows: 6 %>
+					<%= f.text_area :description, rows: 6 %>
 				 </div>
 			</div>
 
-			<div class="control-group">
-			 	<label class="control-label">
+			<div class="row">
+				<div class="large-6 columns">
 			  	<%= f.label :image %>
-			  </label>
-			  <div class="controls">
 			  	<%= f.file_field :image %>
 			  </div>
 			</div>
 
-		  <div class="control-group">
-		  	<label class="control-label">
+			<div class="row">
+		  	<div class="large-4 columns">
 		  		<%= f.label :price %>
-		  	</label>
-		  	<div class="controls">
 		  		<%= f.text_field :price %>
 		  	</div>
 			</div>
 
-			<div class="control-group">
-		  	<label class="control-label">
+			<div class="row">
+				<div class="small-3 columns">
 		  		<%= f.label "Category Department" %>
-		  	</label>
-		  	<div class="controls">
-		  		<%= f.select(:category_department_id, options_for_select(@category_departments)) %>
+		  		<%= f.select(:category_department_id, options_for_select(@category_departments, nil)) %>
 		  	</div>
 			</div>
 
-			<div class="control-group">
-			  <%= f.fields_for :sizings do |s|%>
+			<div class="row">
+				<div class="small-2 columns">
+					<%= f.label :size %>
+			  	<%= f.fields_for :sizings do |s|%>
 			    <%= s.select(:size_id ,options_from_collection_for_select(Size.all, "id", "size_name"), :prompt => "Select a size") %>
+			  </div>
+			  <div class="small-2 columns">
 			    <%= s.text_field :quantity %>
-			  <% end %>
+			  </div>
+			   <% end %>
 			</div>
 
 		  <div class="control-group">
