@@ -37,6 +37,8 @@ group :development do
   gem 'annotate', ">=2.5.0"
   gem  "debugger"
   gem "letter_opener"
+  gem "spring"
+  gem "spring-commands-rspec"
 end
 
 group :test, :development do

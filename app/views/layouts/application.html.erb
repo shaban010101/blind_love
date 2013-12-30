@@ -4,14 +4,65 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+    <title><%= "Blind-Love" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
   </head>
-
   <body>
+    <nav class="top-bar" data-topbar data-options="is_hover: false">
+      <ul class="title-area">       
+        <li class="name">
+          <h1><%= link_to "Blind Love", root_path %></h1>
+        </li>
+      </ul>
+      <section class="top-bar-section">
+
+        <ul class="left">
+          <li class="has-dropdown">
+            <a href "#">Departments</a>
+              <ul class="dropdown">
+                <li><%= link_to 'Mens', department_path(:mens) %></li>
+                <li><%= link_to 'Womens', department_path(:womens) %></li>
+              </ul>
+          </li>
+          <li><%= link_to "Basket", current_basket %></li>
+        <ul>
+
+        <ul class="right">
+          <% if current_user %>
+            <li class="has-dropdown">
+              <%= link_to current_user.email, user_path(current_user) %>
+                <ul class="dropdown">
+                  <li><%= link_to "Log Out", logout_path(@user) %></li>
+                </ul>
+            </li>
+          <% else %>
+            <li><%= link_to "Log In", new_user_session_path %></li>
+          <% end %>
+          <li class="has-form">
+            <div class="row collapse">
+              <div class="large-8 small-9 columns">        
+                <%= form_tag(searches_path, method: "get") do %>
+                   <%= text_field_tag(:query, "Search for Products") %>
+                   <%= submit_tag("Search", :class => "alert button expand") %>
+                <% end %>
+              </div>
+            </div>
+          </li>
+        </ul>  
+      </secton>
+    </nav>
+
+    <% unless flash.empty? %>
+      <% flash.each do |name, msg| %>
+        <% name ? 'success' : 'warning' %>
+        <div data-alert class="alert-box <%= name %> radius">
+          <%= "#{msg}!" %>
+        </div>
+      <% end %>
+  <% end %>
 
     <%= yield %>
     <%= javascript_include_tag "application" %>
