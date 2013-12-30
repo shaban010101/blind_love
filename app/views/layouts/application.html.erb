@@ -7,40 +7,41 @@
     <title><%= "Blind-Love" %></title>
 
     <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "modernizr" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <nav class="top-bar" data-topbar data-options="is_hover: false">
+    <nav class="top-bar" data-topbar>
       <ul class="title-area">       
         <li class="name">
           <h1><%= link_to "Blind Love", root_path %></h1>
         </li>
       </ul>
+
       <section class="top-bar-section">
+        
         <ul class="right">
           <li class="has-form">
-            <div class="row collapse">
-              <div class="large-8 small-9 columns">
-                <input type="text" placeholder="Search for Products">
-              </div>
-              <div class="large-4 small-3 columns">
-                <%= form_tag(searches_path, method: "get", :class => "form-search") do %>
+         
+                <%= form_tag(searches_path, method: "get") do %>
                    <%= text_field_tag(:query, "Search for Products") %>
-                   <%= submit_tag("Search", :class => "alert button") %>
+          
+                  <%= submit_tag("Search", :class => "alert button expand") %>
                 <% end %>
-              </div>
-            </div>
+
           </li>
         </ul>
+
         <ul class="left">
           <li class="has-dropdown">
+              <a href="#">Departments</a> 
               <ul class="dropdown">
                 <li><%= link_to 'Mens', department_path(:mens) %></li>
-                <li><%= link_to 'Mens', department_path(:womens) %></li>
+                <li><%= link_to 'Womens', department_path(:womens) %></li>
               </ul>
           </li>
         <ul>  
+
       </secton>
     </nav>
 

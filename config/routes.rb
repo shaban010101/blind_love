@@ -10,9 +10,7 @@ BlindLove::Application.routes.draw do
 
   put "/orders/", :to => "orders#update_basket_item"
   delete "/orders/", :to => "basketItems#destroy"
-  
-  post "departments/:department_id/categories/:id/", :to => "categories#show"
-  
+  post "d/:department_id/cats/:id/", :to => "categories#show"
   put "admin/orders", :to => "admin/orders#update"
   
   resources :searches, :only => [:index]
@@ -43,8 +41,8 @@ BlindLove::Application.routes.draw do
     resources :orders
   end
 
-  resources :departments, :only => [:show] do
-    resources :categories, :only => [:show] do
+  resources :departments, :only => [:show], :path => "d" do
+    resources :categories, :only => [:show], :path => "cats" do
       resources :products, :only => [:show], :shallow => true do
       end
     end

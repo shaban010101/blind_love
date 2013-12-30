@@ -32,7 +32,7 @@ describe BasketItem do
 
     BasketItem.add_item(basket_item)
     b = BasketItem.add_item(basket_item_two)
-    expect(b.quantity).to eq(2)
+    b.quantity.should == 2
   end
 
   it "not merge non-duplicate products" do
@@ -49,14 +49,14 @@ describe BasketItem do
   it "sums the product price by the quantity" do
     basket_item = FactoryGirl.create(:basket_item, :quantity => 2)
     basket_item.price_times_quantity 
-    expect(basket_item.item_price).to eq(19998)
+    basket_item.item_price.should == 19998
   end
 
   it "gives an error when there no more products" do
     sizing = FactoryGirl.create(:sizing, :quantity => 0, :product_id => product.id)
     basket_item = FactoryGirl.create(:basket_item, :quantity => 2, :sizing_id => sizing.id)
     b = BasketItem.update_item(basket_item)
-    expect(b).to eq(["Oh no there's no more in stock"])
+    b.should == ["Oh no there's no more in stock"]
   end
 
   it "adds the desired quantity" do
@@ -77,6 +77,6 @@ describe BasketItem do
     sizing = create(:sizing, :quantity => 1, :product_id => product.id)
     basket_item = create(:basket_item, :quantity => 1, :sizing_id => sizing.id)
     basket_item.reduce_stock_avaliable
-    expect(basket_item.sizing.quantity).to eq(0)
+    basket_item.sizing.quantity.should == 0
   end
 end

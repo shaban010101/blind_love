@@ -13,4 +13,3 @@ Postgres 9.2.4
 1. Within terminal type in `bundle install` to install the dependencies
 2. Setup the Database by typing `rake db:setup`
 3. Run the tests using `bundle exec rspec`
- 

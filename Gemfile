@@ -29,7 +29,7 @@ group :test do
   gem 'launchy', '~> 2.3'
   gem 'guard-rspec', '~> 3.0.1'
   gem 'shoulda-matchers', '~> 2.1'
-  gem  'webmock', '~>1.16'
+  gem 'webmock', '~>1.8.0'
   gem 'vcr', '2.8'
 end
 

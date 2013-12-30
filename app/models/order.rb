@@ -20,7 +20,7 @@ class Order < ActiveRecord::Base
 
   before_validation :totals
   after_save :give_order_id
-  after_save :new_order
+  after_save :new_order, :only => :create
 
   def get_basket_items(basket)
     basket.basket_items.each do |basket_item|
@@ -38,10 +38,14 @@ class Order < ActiveRecord::Base
     self.total = basket_items.product_totals(basket_id)
   end
 
-  def charge_customer(order)
-    totes = self.totals
+  def retrieve_stripe_id(order)
     stripe_id = Payment.where(:user_id => order[:user_id]).select(:stripe).last
     stripe_id = stripe_id.attributes["stripe"]
+  end
+
+  def charge_customer(order)
+    totes = self.totals
+    stripe_id = retrieve_stripe_id(order)
     c = Stripe::Charge.create({ :customer => stripe_id, :amount => totes, :currency => "gbp" })
     self.stripe_id = c.id
     save!

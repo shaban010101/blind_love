@@ -58,19 +58,21 @@ describe Order do
 
   context "creation and updating" do
     before(:each) do
-      user = create(:user)
+      @user = create(:user)
       @payment = create(:payment)
-      payment_attributes = attributes_for(:payment, :user_id => user.id)
-      @order_attributes = attributes_for(:order, :payment_id => @payment.id, :user_id => user.id )
+      @payment_attributes = attributes_for(:payment, :user_id => @user.id)
+      @order_attributes = attributes_for(:order, :payment_id => @payment.id, :user_id => @user.id )
       VCR.use_cassette("create a payment method") do
-        Payment.create_payment_method(payment_attributes)
+        Payment.create_payment_method(@payment_attributes)
        end
       ActionMailer::Base.deliveries = []
     end
 
     it "charges the customers credit card" do
-      VCR.use_cassette("charges customers card") do
-        order.charge_customer(@order_attributes)
+      VCR.use_cassette("charges customers card", :record => :once ) do
+        payment = Payment.create_payment_method(@payment_attributes)
+        order_attr = FactoryGirl.attributes_for(:order, :payment_id => payment.id, :user_id => @user.id)
+        expect(order.charge_customer(order_attr)).to be_true
       end
     end
 
@@ -87,7 +89,7 @@ describe Order do
         order.charge_customer(@order_attributes)
         order_attributes = create(:order, :status => "Cancelled", :stripe_id => order.stripe_id)
         order = Order.update_order(order_attributes)
-        expect(order.status).to eq("Cancelled")
+        order.status.should == "Cancelled"
       end
     end
 
@@ -95,21 +97,22 @@ describe Order do
       VCR.use_cassette("an error occurs when an invalid request has been made") do
         order_attributes = create(:order, :status => "Cancelled", :stripe_id => "")
         o = Order.update_order(order_attributes)
-        expect(o).to be_false
+        o.should be_false
       end
     end
 
     it "updates the order status to dispatched" do
       order = create(:order, :status => "Dispatched")
       Order.update_order(order)
-      expect(order.status).to eq("Dispatched")
+      order.status.should == "Dispatched"
     end
 
     it "emails the customer their order has been dispatched" do
-      order = create(:order, :status => "Dispatched")
+      order = FactoryGirl.create(:order, :status => "Dispatched")
       dispatch_mail = OrderMailer.dispatch_email(order)
+      ActionMailer::Base.deliveries = []
       Order.update_order(order)
-      expect(ActionMailer::Base.deliveries).to include(dispatch_mail)
+      ActionMailer::Base.deliveries.should include(dispatch_mail)
     end
   end
 end
