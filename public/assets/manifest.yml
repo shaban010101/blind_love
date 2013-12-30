@@ -21,6 +21,8 @@ Web Developer.docx: Web Developer-9fce6d33b957abedbd9a4cbb35b5b9c6.docx
 Web Developer/index.docx: Web Developer-9fce6d33b957abedbd9a4cbb35b5b9c6.docx
 jquery.min.map: jquery.min-6336c5bca4c709e809647cdfcb484d0a.map
 jquery/index.min.map: jquery.min-6336c5bca4c709e809647cdfcb484d0a.map
+vendor/modernizr.js: vendor/modernizr-a7d5258f68c42509cd151b5d3ebb9aa9.js
+vendor/modernizr/index.js: vendor/modernizr-a7d5258f68c42509cd151b5d3ebb9aa9.js
 glyphicons-halflings-white.png: glyphicons-halflings-white-6cccd17a7aed91dbc0157d343c68c0d9.png
 glyphicons-halflings-white/index.png: glyphicons-halflings-white-6cccd17a7aed91dbc0157d343c68c0d9.png
 glyphicons-halflings.png: glyphicons-halflings-2851b489e8c39f8fad44fc10efb99c3e.png
