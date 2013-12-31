@@ -9,7 +9,7 @@ feature "Department" do
 
   it "displays products for this department" do
     visit department_path(@department)
-    find(:xpath, "//ul[1]/p[2]/a")
-    .should have_content(@product_one)
+    find(:xpath, "//li[1]/p[2]/a")
+    .should have_content(@product.name)
   end
 end

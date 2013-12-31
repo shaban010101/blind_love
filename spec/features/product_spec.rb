@@ -18,7 +18,7 @@ feature "Product" do
     visit department_category_path(@department.slug, @category.slug)
     select('Ascending', :from => "ordering")
     click_button "Filter"
-    find(:xpath, "//ul[1]/p[2]/a")
+    find(:xpath, "//li[1]/p[2]/a")
     .should have_content(product_one.name)
   end
 

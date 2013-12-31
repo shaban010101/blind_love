@@ -26,7 +26,7 @@ feature 'Product' do
 
 	  scenario 'editing' do
 	  	visit '/admin/products'
-	  	find(:xpath, "//tr[2]/td[6]/a").click
+	  	find(:xpath, "//tr/td[6]/a").click
 	  	fill_in "Name", :with => "Foo1" 
 			fill_in "Description", :with => "Bar1" 
 			fill_in "Price", :with => "1000"
@@ -39,7 +39,7 @@ feature 'Product' do
 
 	  scenario 'deleting' do
 	  	visit '/admin/products'
-	  	find(:xpath, "//tr[2]/td[5]/a").click
+	  	find(:xpath, "//tr/td[7]/a").click
 	  	visit '/admin/products'
 	  	page.has_xpath?("//div[2]/p")
 	  end

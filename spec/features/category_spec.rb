@@ -10,7 +10,7 @@ feature "Category" do
 
   scenario "displays products for this department" do
     visit department_category_path(@department,@category)
-    find(:xpath, "//ul[1]/p[2]/a")
+    find(:xpath, "//li[1]/p[2]/a")
     .should have_content(@product.name)
   end
 
