@@ -12,6 +12,7 @@ gem "thin"
 gem "rb-fsevent"
 gem 'devise'
 gem "cancan"
+gem "figaro"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
