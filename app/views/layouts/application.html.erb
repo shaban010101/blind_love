@@ -35,8 +35,9 @@
                 </li>
               </ul>
           </li>
+          <li class="divider"></li>
           <li><%= link_to "Basket", current_basket %></li>
-        <ul>
+        </ul>
 
         <ul class="right">
           <% if current_user %>
@@ -47,15 +48,17 @@
                 </ul>
             </li>
           <% else %>
-            <li><%= link_to "Log In", new_user_session_path %></li>
+              <li><%= link_to "Log In", new_user_session_path %></li>
           <% end %>
           <li class="has-form">
-            <div class="row collapse">
-              <div class="large-10 columns">        
+            <div class="row">
+              
+              <div class="small-9 columns">        
                 <%= form_tag(searches_path, method: "get") do %>
                    <%= text_field_tag(:query, "Search for Products") %>     
               </div>
-              <div class="large-2 small-3 columns">
+              
+              <div class="small-3 columns">
                   <%= submit_tag("Go", :class => "alert button expand") %>
                 <% end %>
               </div>
