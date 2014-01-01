@@ -7,38 +7,42 @@
   
 
 
-  <div class="shipping-method"> 
-    <h2 align="center"> Shipping Address </h2>
-    <div class="row">
-      <div class="small-4 columns"> 
+  
+    
+  <div class="row">
+    <div class="large-4 columns">
+      <div class="shipping-method"> 
+        <h2 align="left"> Shipping Address </h2>
         <%= f.select(:address_id, options_from_collection_for_select(@address, "id", "address_1"), :prompt => "Select an address") %>
-      </div>
-      <div class="small-2 columns">
-      </div>
-      <div class="small-6 column">
         <%= link_to 'Create/Edit Addresses', user_addresses_path(current_user) %>
-      </div> 
+      </div>
     </div>
-  </div>  
-  <div class="payment-method">
-    <h2 align="center"> Payment method </h2>
-    <div class="row">
-      <div class="large-8 columns">
+  
+    <div class="large-8 columns">
+      <div class="payment-method">
+        <h2 align="left"> Payment method </h2>
+        <p><%= link_to "Create/Edit credit/debit card", user_payments_path(current_user) %></p>
         <% @payment.each do |p| %>
-          <p><%= p.card_type %> <%= p.last_four %> <%= p.expiry_year_and_month%></p>
+          <p> Card type: <%= p.card_type %></p>
+          <p> Last Four digits: <%= p.last_four %></p>
+          <p> Card Expiry Month/Year: <%= p.expiry_year_and_month%></p>
           <% f.hidden_field(:payment_id, :value => p.id) %>
         <% end %>
       </div>
-      <div class="large-4 columns">
-        <%= link_to "Create/Edit credit/debit card", user_payments_path(current_user) %>
-      </div>
-      </div>
-  </div>
+    </div>
 
   <div class="shopping-basket">
-    <h2 align="center">Shopping Basket</h2>
-    <div class="shoping-basket-table">
+    <h2 align="left">Shopping Basket</h2>
+    <div class="shopping-basket-table">
       <table>
+      <thead>
+        <th width="200"></th>
+        <th width="100"></th>
+        <th width="120"></th>
+        <th></th>
+        <th width="100"></th>
+        <th width="100"></th>
+      </thead>
        <tbody>
           <% @order.get_basket_items(current_basket).each do |item| %>
           <tr>
