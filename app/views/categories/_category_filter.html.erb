@@ -1,12 +1,20 @@
 <%= form_tag(department_category_path(@department, @cat), :method => "post") do %>
-  <%= select_tag(:ordering, options_for_select([["Ascending","ASC"],["Descending", "DESC"]], params[:ordering] ), :prompt => "Select an order") %>
+    <%= label_tag :ordering %>
+    <%= select_tag(:ordering, options_for_select([["Ascending","ASC"],["Descending", "DESC"]], params[:ordering] ), :prompt => "Select an order") %>
+ 
   <% ranges = @pr.map %>
-  <%= select_tag(:minimum, options_for_select(ranges, :selected => ranges.min )) %>
-  <% params[:minimum] %>
-  <%=  select_tag(:maximum, options_for_select(ranges,:selected => ranges.max)) %>
-  <% params[:maximum] %>
-  <% sizes = Size.all.map { |s| [s.size_name, s.id] } %>
-  <%= select_tag(:size, options_for_select(sizes, :selected => nil ), :prompt => "Select a size") %>
-  <% params[:size] %>
-  <%= submit_tag "Filter", :class => "btn" %>
+    <%= label_tag :minimum_price %>
+    <%= select_tag(:minimum, options_for_select(ranges, :selected => ranges.min )) %>
+    <% params[:minimum] %>
+  
+    <%= label_tag :maximum_price %>
+    <%=  select_tag(:maximum, options_for_select(ranges,:selected => ranges.max)) %>
+    <% params[:maximum] %>
+    
+    <%= label_tag :size %>
+    <% sizes = Size.all.map { |s| [s.size_name, s.id] } %>
+    <%= select_tag(:size, options_for_select(sizes, :selected => nil ), :prompt => "Select a size") %>
+    <% params[:size] %>
+  
+    <%= submit_tag "Filter", :class => "button tiny" %>
 <% end %>

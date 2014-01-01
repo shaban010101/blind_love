@@ -1,13 +1,12 @@
-<button type="button" class="close" data-dismiss="alert">&times;</button>
-  <p><%= flash[:notice] %></p>
-
- <div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span2">
+<div class="row">
+  <div id="category-filter">
+    <div class="large-2 columns">
       <%= render 'category_filter' %>
     </div>
-    <div class="span10">
-      <%= render 'shared/products', :target => @cp %> 
+  </div>
+  <div id="products-grid">
+    <div class="large-10 column">
+        <%= render 'shared/products', :target => @cp %> 
     </div>
   </div>
 </div>

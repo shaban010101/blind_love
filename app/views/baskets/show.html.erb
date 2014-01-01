@@ -1,36 +1,40 @@
-<div class="container"> 
+<div class="basket-table"> 
 <% if @basket_items.empty? %>
   <p> Add some products this is empty.... </p>
 <% else %> 
-    <table class="table table-hover">
-      <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Size</th>
-        <th>Quantity</th>
-        <th></th>
-        <th></th>
-      </tr>
-      <% @basket_items.each do |item| %>
-      <tr>
-          <td><p><%= link_to item.product.name, product_path(item.product.name.downcase) %></p></td>
-          <td><p><%= number_to_currency(item.price_times_quantity, :unit => "&pound") %></p></td>
-          <td><p><%= item.sizing.size.size_name %></p></td>
-          <%= form_for(item, :url => {:action => "update_basket_item", :method => "put"}) do |f|  %>
-            <%= f.hidden_field(:id, :key => item.id) %>
-            <%= f.hidden_field(:product_id,:key => item.product.id) %>
-            <%= f.hidden_field(:sizing_id,:key => item.sizing_id ) %>
-            <% quant = item.sizing.quantity %>
-            <td><%= f.number_field(:quantity, :in => 1..quant, :class => "input-mini") %></td>
-            <td><%= f.submit "Update", :class => "btn" %></td>
+    <table>
+      <thead>
+        <tr>
+          <th width="200">Name</th>
+          <th width="20">Price</th>
+          <th width="150">Size</th>
+          <th width="50">Quantity</th>
+          <th width="200"></th>
+          <th width="200"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @basket_items.each do |item| %>
+        <tr>
+            <td><p><%= link_to item.product.name, product_path(item.product.name.downcase) %></p></td>
+            <td><p><%= number_to_currency(item.price_times_quantity, :unit => "&pound") %></p></td>
+            <td><p><%= item.sizing.size.size_name %></p></td>
+            <%= form_for(item, :url => {:action => "update_basket_item", :method => "put"}) do |f|  %>
+              <%= f.hidden_field(:id, :key => item.id) %>
+              <%= f.hidden_field(:product_id,:key => item.product.id) %>
+              <%= f.hidden_field(:sizing_id,:key => item.sizing_id ) %>
+              <% quant = item.sizing.quantity %>
+              <td><%= f.number_field(:quantity, :in => 1..quant, :class => "input-mini") %></td>
+              <td><%= f.submit "Update", :class => "button tiny" %></td>
+            <% end %>
+            <td><%= button_to 'Remove', basket_item_path(item.id), :method => 'delete', :confirm => 'Are you sure?', :class => "button tiny" %></td>
+          </tr>
           <% end %>
-          <td><%= button_to 'Remove', basket_item_path(item.id), :method => 'delete', :confirm => 'Are you sure?', :class => "btn" %></td>
-        </tr>
-        <% end %>
-         <tr>
-          <td><p class="text-info">Total  <%= number_to_currency(@basket_items.product_totals(@basket.id), :unit => "&pound") %><p></td>
-          <td><%= link_to "Purchase products", new_order_path, :class => "btn" %></td>
-        </tr>
+           <tr>
+            <td><p class="text-info">Total  <%= number_to_currency(@basket_items.product_totals(@basket.id), :unit => "&pound") %><p></td>
+            <td><%= link_to "Purchase products", new_order_path, :class => "button tiny" %></td>
+          </tr>
+        </tbody>
     </table>
   </div>
 <% end %>

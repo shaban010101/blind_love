@@ -1,13 +1,15 @@
 <h1><%= params[:id].capitalize %> </h1>
 
-<div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span2">
-     <% @dc.each do |c| %>
-       <p><%= link_to c.category.category_name, department_category_path(@department.slug,c.category.slug)%></p>
-     <% end %>
+<div class="row">
+  <div class="large-2 columns">
+    <div class="department-list">
+       <% @dc.each do |c| %>
+         <p><%= link_to c.category.category_name, department_category_path(@department.slug,c.category.slug)%></p>
+       <% end %>
     </div>
-    <div class="span10">
+  </div>
+  <div class="large-10 column">
+    <div class="products-grid-department">
       <%= render 'shared/products', :target => @products %>
     </div>
   </div>

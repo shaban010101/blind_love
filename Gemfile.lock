@@ -34,8 +34,6 @@ GEM
     arel (3.0.2)
     atomic (1.1.14)
     bcrypt-ruby (3.0.1)
-    bootstrap-sass (2.3.2.2)
-      sass (~> 3.2)
     builder (3.0.4)
     cancan (1.6.10)
     capybara (2.1.0)
@@ -248,7 +246,6 @@ PLATFORMS
 DEPENDENCIES
   annotate (>= 2.5.0)
   bcrypt-ruby (~> 3.0.1)
-  bootstrap-sass (~> 2.3.2)
   cancan
   capybara (~> 2.1)
   coffee-rails (~> 3.2.1)

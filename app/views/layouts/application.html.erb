@@ -23,8 +23,16 @@
           <li class="has-dropdown">
             <a href "#">Departments</a>
               <ul class="dropdown">
-                <li><%= link_to 'Mens', department_path(:mens) %></li>
-                <li><%= link_to 'Womens', department_path(:womens) %></li>
+                <li class="has-dropdown">
+                  <% department.each do |department| %>
+                    <%= link_to department.department_name.capitalize, department_path(department.department_name.to_sym) %>
+                    <ul class="dropdown">
+                      <% categories(department.department_name).each do |c| %>
+                        <li><%= link_to c.category.category_name, department_category_path(@department.slug,c.category.slug)%></li>
+                      <% end %>
+                    </ul>
+                  <% end %>
+                </li>
               </ul>
           </li>
           <li><%= link_to "Basket", current_basket %></li>
@@ -43,10 +51,12 @@
           <% end %>
           <li class="has-form">
             <div class="row collapse">
-              <div class="large-8 small-9 columns">        
+              <div class="large-10 columns">        
                 <%= form_tag(searches_path, method: "get") do %>
-                   <%= text_field_tag(:query, "Search for Products") %>
-                   <%= submit_tag("Search", :class => "alert button expand") %>
+                   <%= text_field_tag(:query, "Search for Products") %>     
+              </div>
+              <div class="large-2 small-3 columns">
+                  <%= submit_tag("Go", :class => "alert button expand") %>
                 <% end %>
               </div>
             </div>
@@ -64,7 +74,8 @@
       <% end %>
   <% end %>
 
-    <%= yield %>
     <%= javascript_include_tag "application" %>
+
+    <%= yield %>
   </body>
 </html>
