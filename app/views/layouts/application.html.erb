@@ -25,7 +25,7 @@
               <ul class="dropdown">
                 <li class="has-dropdown">
                   <% department.each do |department| %>
-                    <%= link_to department.department_name.capitalize, department_path(department.department_name.to_sym) %>
+                    <%= link_to department.department_name.capitalize, department_path(department.slug.to_sym) %>
                     <ul class="dropdown">
                       <% categories(department.department_name).each do |c| %>
                         <li><%= link_to c.category.category_name, department_category_path(@department.slug,c.category.slug)%></li>
