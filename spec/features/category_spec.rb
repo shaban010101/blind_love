@@ -11,7 +11,7 @@ feature "Category" do
   scenario "displays products for this department" do
     visit department_category_path(@department,@category)
     find(:xpath, "//li[1]/p[2]/a")
-    .should have_content(@product.name)
+    .should have_content(@product.name.capitalize)
   end
 
   scenario "when no products exisit for this category redirect back to the department of the product" do

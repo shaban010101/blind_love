@@ -10,6 +10,6 @@ feature "Department" do
   it "displays products for this department" do
     visit department_path(@department)
     find(:xpath, "//li[1]/p[2]/a")
-    .should have_content(@product.name)
+    .should have_content(@product.name.capitalize)
   end
 end

@@ -19,7 +19,7 @@ feature "Product" do
     select('Ascending', :from => "ordering")
     click_button "Filter"
     find(:xpath, "//li[1]/p[2]/a")
-    .should have_content(product_one.name)
+    .should have_content(product_one.name.capitalize)
   end
 
   scenario "filter products by cost" do
@@ -27,7 +27,7 @@ feature "Product" do
     select("9900", from: "minimum")
     select("10000", from: "maximum")
     click_button "Filter"
-    page.should have_content("foo")
+    page.should have_content("Foo")
   end
 
   scenario "filter products does not show any products when no products within the range" do
