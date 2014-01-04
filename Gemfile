@@ -13,6 +13,7 @@ gem "rb-fsevent"
 gem 'devise'
 gem "cancan"
 gem "figaro"
+gem "aws-sdk"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
