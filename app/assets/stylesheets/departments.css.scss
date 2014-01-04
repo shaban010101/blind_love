@@ -1,12 +1,13 @@
 .department-list{
- left: 10px;
- margin-top: 50px;
- margin-left: -200px;
+ position: absolute;
+ top: 50px;
+ left: 50px;
 }
 
 
 .products-grid-department {
- width: 1000px;	
- margin-left: -200px;
- margin-top: 50px;
+ position:  relative;
+ width: 100%;	
+ left: 50px;
+ top: 50px;
 }
