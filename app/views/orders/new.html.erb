@@ -2,13 +2,7 @@
 <%= form_for :order, :url => { :action => "create" }, :class => "horizontal" do |f| %>
   
   <%= render 'shared/error_messages', :target => @order %>
-  <%= f.hidden_field(:user_id, :value => current_user.id) %>
-  <%= f.hidden_field(:basket_id, :value => current_basket.id) %>
-  
-
-
-  
-    
+      
   <div class="row">
     <div class="large-4 columns">
       <div class="shipping-method"> 
@@ -18,7 +12,7 @@
       </div>
     </div>
   
-    <div class="large-8 columns">
+    <div class="large-6 columns">
       <div class="payment-method">
         <h2 align="left"> Payment method </h2>
         <p><%= link_to "Create/Edit credit/debit card", user_payments_path(current_user) %></p>
@@ -31,43 +25,43 @@
       </div>
     </div>
 
-  <div class="shopping-basket">
-    <h2 align="left">Shopping Basket</h2>
-    <div class="shopping-basket-table">
-      <table>
-      <thead>
-        <th width="200"></th>
-        <th width="100"></th>
-        <th width="120"></th>
-        <th></th>
-        <th width="100"></th>
-        <th width="100"></th>
-      </thead>
-       <tbody>
-          <% @order.get_basket_items(current_basket).each do |item| %>
-          <tr>
-              <td><p><%= link_to item.product.name, product_path(item.product.name.downcase) %></p></td>
-              <td><p><%= number_to_currency(item.price_times_quantity, :unit => "&pound") %></p></td>
-              <td><p><%= item.sizing.size.size_name %></p></td>
-              <%= form_for(item, :url => {:action => "update_basket_item", :method => "put"}) do |f|  %>
-                <%= f.hidden_field(:id, :key => item.id) %>
-                <%= f.hidden_field(:product_id,:key => item.product.id) %>
-                <%= f.hidden_field(:sizing_id,:key => item.sizing_id ) %>
-                <% quant = item.sizing.quantity %>
-                <td><%= f.number_field(:quantity, :in => 1..quant, :class => "input-mini") %></td>
-                <td><%= f.submit "Update", :class => "button tiny" %></td>
-              <% end %>
-              <td><%= button_to 'Remove', basket_item_path(item.id), :method => 'delete', :class => "button tiny" %></td>
+    <div class="shopping-basket">
+      <h2 align="left">Shopping Basket</h2>
+      <div class="shopping-basket-table">
+        <table>
+        <thead>
+          <th width="200"></th>
+          <th width="100"></th>
+          <th width="120"></th>
+          <th></th>
+          <th width="100"></th>
+          <th width="100"></th>
+        </thead>
+         <tbody>
+            <% @order.get_basket_items(current_basket).each do |item| %>
+            <tr>
+                <td><p><%= link_to item.product.name.capitalize, product_path(item.product.slug) %></p></td>
+                <td><p><%= number_to_currency(item.price_times_quantity, :unit => "&pound") %></p></td>
+                <td><p><%= item.sizing.size.size_name %></p></td>
+                <%= form_for(item, :url => {:action => "update_basket_item", :method => "put"}) do |f|  %>
+                  <%= f.hidden_field(:id, :key => item.id) %>
+                  <%= f.hidden_field(:product_id,:key => item.product.id) %>
+                  <%= f.hidden_field(:sizing_id,:key => item.sizing_id ) %>
+                  <% quant = item.sizing.quantity %>
+                  <td><%= f.number_field(:quantity, :in => 1..quant, :class => "input-mini") %></td>
+                  <td><%= f.submit "Update", :class => "button tiny" %></td>
+                <% end %>
+                <td><%= button_to 'Remove', basket_item_path(item.id), :method => 'delete', :class => "button tiny" %></td>
+              </tr>
+            <% end %>
+             <tr>
+              <td><p class="text-info">Total  <%= number_to_currency(@order.totals, :unit => "&pound") %><p></td>
+              <td><%= f.submit("Order", :class => "button tiny") %></td>
             </tr>
-          <% end %>
-           <tr>
-            <td><p class="text-info">Total  <%= number_to_currency(@order.totals, :unit => "&pound") %><p></td>
-            <td><%= f.submit("Order", :class => "button tiny") %></td>
-          </tr>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
     
 
   <% end %>

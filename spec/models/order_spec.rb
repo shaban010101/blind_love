@@ -56,6 +56,12 @@ describe Order do
     Order.processing.should == [order]
   end
 
+  it "adds attributes to the order object" do
+    basket = FactoryGirl.create(:basket)
+    order.add_attributes(attributes = {:basket_id => basket.id })
+    order.basket.id.should == basket.id
+  end
+
   context "creation and updating" do
     before(:each) do
       @user = create(:user)

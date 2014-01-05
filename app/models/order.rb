@@ -82,6 +82,12 @@ class Order < ActiveRecord::Base
   def new_order
     OrderMailer.new_order_email(self).deliver
   end
+
+  def add_attributes(attributes)
+    attributes.each do |k,v|
+     self.send("#{k}=", "#{v}")
+    end 
+  end
 end
 
 
