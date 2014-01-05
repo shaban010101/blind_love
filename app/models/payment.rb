@@ -20,18 +20,24 @@ class Payment < ActiveRecord::Base
   def self.create_payment_method(payment)
     c = Stripe::Customer.create({ :card => { :number => payment[:number], :exp_month => payment[:month], 
       :cvc => payment[:cvc], :exp_year => payment[:year] }})
-
-    stripe_response = c["cards"]["data"][0]
-
     payment_attr = self.new
-    payment_attr.assign_attributes({:last_four => stripe_response["last4"], :card_type => stripe_response["type"], 
-    :expiry_year => stripe_response["exp_year"], :expiry_month => stripe_response["exp_month"], :stripe => c.id, 
-    :month => payment[:month], :year => payment[:year], :user_id => payment[:user_id] })
+    stripe_response = c["cards"]["data"][0]
+    payment_attr.save_attributes(stripe_response, payment)
     payment_attr.save!
   rescue Stripe::CardError => e
     logger.error "Stripe error while trying to create the payment method: #{e.message}"
     errors.add :base, "There was a problem with your credit/debit card."
     false
+  end
+
+  def save_attributes(res,payment)
+    attributes = { :last_four => res["last4"], :card_type => res["type"], 
+    :expiry_year => res["exp_year"], :expiry_month => res["exp_month"], :stripe => res.id, 
+    :month => payment[:month], :year => payment[:year], :user_id => payment[:user_id] }
+
+    attributes.each do |k,v|
+      self.send("#{k}=","#{v}")
+    end
   end
 
   def expiry_year_and_month
