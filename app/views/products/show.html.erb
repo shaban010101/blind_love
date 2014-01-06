@@ -3,28 +3,30 @@
   <li><%= category_link %></li>
 </ul>
 
-<div class="row">
-  <div class="small-6 columns">
-    <a class="th">
-  		<div class="thumbnail">
-  			<%= image_tag(@product.image) %>
-  		</div>
-    </a>
-  </div>
-  <div class="small-5 columns">
-   <div class="product-detail">
-    	<p><%= @product.name %></p>
-      <p><%= @product.description %></p>
-    	<p><%= number_to_currency(@product.price, :unit => "&pound") %></p>
+<div class="product">
+  <div class="row">
+    <div class="small-6 columns">
+      <a class="th">
+    		<div class="thumbnail">
+    			<%= image_tag(@product.image) %>
+    		</div>
+      </a>
+    </div>
+    <div class="small-5 columns">
+     <div class="product-detail">
+      	<p><%= @product.name.capitalize %></p>
+        <p><%= @product.description %></p>
+      	<p><strong><%= number_to_currency(@product.price, :unit => "&pound") %></strong></p>
 
-      <%= form_for :basket_items, :url => basket_items_path do |f| %>
-        <%= f.hidden_field(:product_id, :value => @product.id) %>
-        <%= f.hidden_field(:basket_id, :value => current_basket.id) %>
-        <% sizes = @product.sizings.in_stock.map { |sizing| [sizing.size.size_name,sizing.id] } %>
-        <%= f.select(:sizing_id ,options_for_select(sizes))%>
-        <%= f.hidden_field(:quantity, :value => 1) %>
-        <%= f.submit "Add to Basket", :class =>"button small" %>
-      <% end %>
+        <%= form_for :basket_items, :url => basket_items_path do |f| %>
+          <%= f.hidden_field(:product_id, :value => @product.id) %>
+          <%= f.hidden_field(:basket_id, :value => current_basket.id) %>
+          <% sizes = @product.sizings.in_stock.map { |sizing| [sizing.size.size_name,sizing.id] } %>
+          <%= f.select(:sizing_id ,options_for_select(sizes))%>
+          <%= f.hidden_field(:quantity, :value => 1) %>
+          <%= f.submit "Add to Basket", :class =>"button small" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
