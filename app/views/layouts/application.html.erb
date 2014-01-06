@@ -71,9 +71,11 @@
     <% unless flash.empty? %>
       <% flash.each do |name, msg| %>
         <% name ? 'success' : 'warning' %>
-        <div data-alert class="alert-box <%= name %> radius">
-          <%= "#{msg}!" %>
-        </div>
+          <div class="alerts-box">
+            <div data-alert class="alert-box <%= name %> radius">
+              <%= "#{msg}!" %>
+            </div>
+          </div>
       <% end %>
   <% end %>
 
