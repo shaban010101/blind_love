@@ -1,19 +1,25 @@
 .department-list{
- position: absolute;
+ position: fixed;
  top: 50px;
  left: 0px;
 }
 
 
 .products-grid-department {
- position:  relative;
+ position:  fixed;
  width: 1100px;	
- left: 25px;
- top: 50px;
+ top: 150px;
+ left: 200px;
 }
 
 .category-list{
    position: absolute;
    top: 160px;
    left: 50px;
+}
+
+#department-title{
+  position: absolute;
+  top: 50px;
+  left: 600px;
 }
