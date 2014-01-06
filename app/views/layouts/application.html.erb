@@ -55,7 +55,7 @@
               
               <div class="small-9 columns">        
                 <%= form_tag(searches_path, method: "get") do %>
-                   <%= text_field_tag(:query, "Search for Products") %>     
+                   <%= text_field_tag(:query, nil, :placeholder => "Search for Products") %>     
               </div>
               
               <div class="small-3 columns">
