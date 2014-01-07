@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
   def create
    @order = Order.new(params[:order])
    
-    if @order.charge_customer(params[:order])
+    if @order.delay.charge_customer(params[:order])
       basket = current_basket
       basket.update_attributes(:status => "Inactive", :order_id => @order)
       redirect_to user_order_path(current_user,@order)
