@@ -1,29 +1,7 @@
 <div class="payment-form">
-<%= form_for :order, :url => { :action => "create" }, :class => "horizontal" do |f| %>
-  
-  <%= render 'shared/error_messages', :target => @order %>
-      
-  <div class="row">
-    <div class="large-4 columns">
-      <div class="shipping-method"> 
-        <h2 align="left"> Shipping Address </h2>
-        <%= f.select(:address_id, options_from_collection_for_select(@address, "id", "address_1"), :prompt => "Select an address") %>
-        <%= link_to 'Create/Edit Addresses', user_addresses_path(current_user) %>
-      </div>
-    </div>
-  
-    <div class="large-6 columns">
-      <div class="payment-method">
-        <h2 align="left"> Payment method </h2>
-        <p><%= link_to "Create/Edit credit/debit card", user_payments_path(current_user) %></p>
-        <% @payment.each do |p| %>
-          <p> Card type: <%= p.card_type %></p>
-          <p> Last Four digits: <%= p.last_four %></p>
-          <p> Card Expiry Month/Year: <%= p.expiry_year_and_month%></p>
-          <% f.hidden_field(:payment_id, :value => p.id) %>
-        <% end %>
-      </div>
-    </div>
+  <%= form_for :order, :url => { :action => "create" }, :class => "horizontal" do |f| %>
+    
+    <%= render 'shared/error_messages', :target => @order %>
 
     <div class="shopping-basket">
       <h2 align="left">Shopping Basket</h2>
@@ -43,7 +21,7 @@
                 <td><p><%= link_to item.product.name.capitalize, product_path(item.product.slug) %></p></td>
                 <td><p><%= number_to_currency(item.price_times_quantity, :unit => "&pound") %></p></td>
                 <td><p><%= item.sizing.size.size_name %></p></td>
-                <%= form_for(item, :url => {:action => "update_basket_item", :method => "put"}) do |f|  %>
+                <% form_for(item, :url => {:action => "update_basket_item", :method => "put"}) do |f|  %>
                   <%= f.hidden_field(:id, :key => item.id) %>
                   <%= f.hidden_field(:product_id,:key => item.product.id) %>
                   <%= f.hidden_field(:sizing_id,:key => item.sizing_id ) %>
@@ -56,13 +34,39 @@
             <% end %>
              <tr>
               <td><p class="text-info">Total  <%= number_to_currency(@order.totals, :unit => "&pound") %><p></td>
-              <td><%= f.submit("Order", :class => "button tiny") %></td>
+              
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-    
+        
+    <div class="row">
+      <div class="large-4 columns">
+        <div class="shipping-method"> 
+          <h2 align="left"> Shipping Address </h2>
+          <%= f.select(:address_id, options_from_collection_for_select(@address, "id", "address_1"), :prompt => "Select an address") %>
+          <%= link_to 'Create/Edit Addresses', user_addresses_path(current_user) %>
+        </div>
+      </div>    
+      <div class="large-6 columns">
+        <div class="payment-method">
+          <h2 align="left"> Payment method </h2>
+          <p><%= link_to "Create/Edit credit/debit card", user_payments_path(current_user) %></p>
+          <% @payment.each do |p| %>
+            <p> Card type: <%= p.card_type %></p>
+            <p> Last Four digits: <%= p.last_four %></p>
+            <p> Card Expiry Month/Year: <%= p.expiry_year_and_month%></p>
+            <% f.hidden_field(:payment_id, :value => p.id) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
 
+    <div class="order-button">
+      <%= f.submit("Order", :class => "button medium") %>
+    </div>
+      
+      
   <% end %>
 </div> 

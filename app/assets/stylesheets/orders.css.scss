@@ -1,19 +1,20 @@
 .payment-form{
 	position: fixed;
-	top: 20px;
-  left: 200px;
+	top: 75px;
+  left: 300px;
 }
 
 .payment-method{
   position: relative;
+  left: 100px;
 	bottom: 50px;
-  top: 25px;
+  top: 50px;
 }
 
 .shipping-method{
   position: relative;
 	bottom: 50px;
-  top: 25px;
+  top: 55px;
 }
 
 .shopping-basket{
@@ -23,6 +24,12 @@
 
 .shopping-basket-table{
   position: relative;
-	top: 0px; 
+	top: 20px; 
   left: 10px;
+}
+
+.order-button{
+  position: relative;
+  top: 50px;
+  left: 350px;
 }
