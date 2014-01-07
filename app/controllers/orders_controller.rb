@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
       redirect_to basket_path(current_basket)
     else
       @order = current_basket.build_order(params[:basket_id])
-      @order.add_attributes(attributes = {:user_id => current_user.id, :basket_id => current_basket.id })
       @address = Address.this_user(current_user)
       @payment = Payment.only_this_user(current_user)
     end

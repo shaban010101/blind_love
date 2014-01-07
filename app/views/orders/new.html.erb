@@ -1,7 +1,9 @@
 <div class="payment-form">
-  <%= form_for :order, :url => { :action => "create" }, :class => "horizontal" do |f| %>
+  <%= form_for @order, :url => { :action => "create" }, :class => "horizontal" do |f| %>
     
     <%= render 'shared/error_messages', :target => @order %>
+    <%= f.hidden_field(:basket_id => current_basket.id) %>
+    <%= f.hidden_field(:user_id => current_user.id) %>
 
     <div class="shopping-basket">
       <h2 align="left">Shopping Basket</h2>

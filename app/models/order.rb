@@ -1,4 +1,5 @@
 require "stripe"
+require "base64"
 
 class Order < ActiveRecord::Base
   attr_accessible :basket_id, :total, :payment_id, :address_id, :user_id, :stripe_id, :status
