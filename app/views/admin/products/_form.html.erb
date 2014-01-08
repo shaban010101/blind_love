@@ -36,23 +36,19 @@
 		  	</div>
 			</div>
 
-			<div class="row">
-				<div class="small-2 columns">
-					<%= f.label :size %>
+			<div class="sizings">
+					<%= f.label :sizes %>
 			  	<%= f.fields_for :sizings do |s|%>
-			    <%= s.select(:size_id ,options_from_collection_for_select(Size.all, "id", "size_name"), :prompt => "Select a size") %>
-			  </div>
-			  <div class="small-2 columns">
-			    <%= s.text_field :quantity %>
+				  	<div class="size-and-quant">
+				    	<%= s.select(:size_id ,options_from_collection_for_select(Size.all, "id", "size_name"), :prompt => "Select a size") %>
+				    	<%= s.text_field :quantity %>
+				    </div>
 			  </div>
 			   <% end %>
 			</div>
 
-		  <div class="control-group">
-		  	<div class="controls">
-			  	<button class="btn">
-			  		<%= f.submit %>
-			  	</button>
-			  </div>
+		  <div class="row">
+			  <%= f.submit %>
 			</div>
+
 		</div>
