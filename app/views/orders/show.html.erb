@@ -7,5 +7,9 @@
   <h2> Total </h2>
    <p><%= @order.total %></p>
   <h2> Cancel Order </h2>
-   <p><%= button_to 'Cancel', :id => order.id, :status => "Cancelled", cancel_user_order_path(@order),:method => "put", :class => "btn"  %></p>
+   <p><%= form_for(@order, :url => cancel_user_order_path, :method => :put) do |f|  %>
+            <%= f.hidden_field(:status, :value => "Cancelled") %>
+            <%= f.hidden_field(:id, :value => @order.id) %>
+            <%= f.submit "Cancel", :class => "button medium" %>
+          <% end %></p>
  </div>

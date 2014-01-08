@@ -2,8 +2,8 @@
   <%= form_for @order, :url => { :action => "create" }, :class => "horizontal" do |f| %>
     
     <%= render 'shared/error_messages', :target => @order %>
-    <%= f.hidden_field(:basket_id => current_basket.id) %>
-    <%= f.hidden_field(:user_id => current_user.id) %>
+    <%= f.hidden_field(:basket_id, :value => current_basket.id) %>
+    <%= f.hidden_field(:user_id, :value => current_user.id) %>
 
     <div class="shopping-basket">
       <h2 align="left">Shopping Basket</h2>
@@ -31,7 +31,7 @@
                   <td><%= f.number_field(:quantity, :in => 1..quant, :class => "input-mini") %></td>
                   <td><%= f.submit "Update", :class => "button tiny" %></td>
                 <% end %>
-                <td><%= button_to 'Remove', basket_item_path(item.id), :method => 'delete', :class => "button tiny" %></td>
+                <td><% button_to 'Remove', basket_item_path(item.id), :method => 'delete', :class => "button tiny" %></td>
               </tr>
             <% end %>
              <tr>
