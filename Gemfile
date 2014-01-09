@@ -16,6 +16,7 @@ gem "figaro"
 gem "aws-sdk"
 gem "delayed_job_active_record"
 gem "foreman", '~> 0.63.0'
+gem 'newrelic_rpm'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

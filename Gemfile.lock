@@ -139,6 +139,7 @@ GEM
     mime-types (1.25)
     mini_portile (0.5.1)
     multi_json (1.8.0)
+    newrelic_rpm (3.7.1.182)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     orm_adapter (0.4.0)
@@ -278,6 +279,7 @@ DEPENDENCIES
   jquery-rails (~> 3.0.1)
   launchy (~> 2.3)
   letter_opener
+  newrelic_rpm
   paperclip (~> 3.4.2)
   pg (~> 0.15.1)
   rails (= 3.2.14)
