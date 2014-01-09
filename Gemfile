@@ -27,11 +27,9 @@ group :assets do
 end
 
 group :test do
-  gem 'rspec-rails', '2.13.2'
   gem 'factory_girl_rails', '~> 4.2.1'
   gem 'capybara', '~> 2.1'
   gem 'launchy', '~> 2.3'
-  gem 'guard-rspec', '~> 3.0.1'
   gem 'shoulda-matchers', '~> 2.1'
   gem 'webmock', '~>1.8.0'
   gem 'vcr', '2.8'
@@ -51,7 +49,6 @@ group :test, :development do
   gem 'guard-rspec', '~> 3.0.1'
   gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'fuubar', '~> 1.1.1'
-  gem 'uglifier', '>= 1.0.3'
 end
 
 gem 'rails_12factor', group: :production
