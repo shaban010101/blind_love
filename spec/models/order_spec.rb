@@ -66,8 +66,9 @@ describe Order do
     before(:each) do
       @user = create(:user)
       @payment = create(:payment)
+      @order = create(:order)
       @payment_attributes = attributes_for(:payment, :user_id => @user.id)
-      @order_attributes = attributes_for(:order, :payment_id => @payment.id, :user_id => @user.id )
+      @order_attributes = attributes_for(:order, :payment_id => @payment.id, :user_id => @user.id, :total => 100)
       VCR.use_cassette("create a payment method") do
         Payment.create_payment_method(@payment_attributes)
        end
@@ -75,10 +76,12 @@ describe Order do
     end
 
     it "charges the customers credit card" do
-      VCR.use_cassette("charges customers card", :record => :once ) do
-        payment = Payment.create_payment_method(@payment_attributes)
-        order_attr = FactoryGirl.attributes_for(:order, :payment_id => payment.id, :user_id => @user.id)
-        expect(order.charge_customer(order_attr)).to be_true
+      VCR.use_cassette("charges customers card") do
+        basket = create(:basket)
+        basket_item = create(:basket_item, :basket_id => basket.id)
+        order = create(:order, :basket_id => basket.id)
+        @order = order.charge_customer(@order_attributes)
+        @order.should be_true
       end
     end
 
@@ -92,10 +95,13 @@ describe Order do
 
     it "cancels the order" do
       VCR.use_cassette("cancels the order") do
-        order.charge_customer(@order_attributes)
-        order_attributes = create(:order, :status => "Cancelled", :stripe_id => order.stripe_id)
-        order = Order.update_order(order_attributes)
-        order.status.should == "Cancelled"
+        basket = create(:basket)
+        basket_item = create(:basket_item, :basket_id => basket.id)
+        order = create(:order, :basket_id => basket.id)
+        @order = order.charge_customer(@order_attributes)
+        cancel_order_attributes = create(:order, :status => "Cancelled", :stripe_id => order.stripe_id)
+        order = Order.update_order(cancel_order_attributes)
+        Order.last.status.should == "Cancelled"
       end
     end
 

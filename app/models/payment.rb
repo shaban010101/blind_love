@@ -32,7 +32,7 @@ class Payment < ActiveRecord::Base
 
   def save_attributes(res,payment)
     attributes = { :last_four => res["last4"], :card_type => res["type"], 
-    :expiry_year => res["exp_year"], :expiry_month => res["exp_month"], :stripe => res.id, 
+    :expiry_year => res["exp_year"], :expiry_month => res["exp_month"], :stripe => res[:customer], 
     :month => payment[:month], :year => payment[:year], :user_id => payment[:user_id] }
 
     attributes.each do |k,v|
