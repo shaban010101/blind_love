@@ -47,4 +47,7 @@ BlindLove::Application.routes.draw do
       end
     end
   end
+
+  mount Split::Dashboard, :at => 'split'
+  
 end

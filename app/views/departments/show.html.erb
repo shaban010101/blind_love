@@ -1,9 +1,11 @@
 <div class="row">
   <div class="category-list">
     <div class="large-2 columns">
+      <ul class="department-list">
          <% @dc.each do |c| %>
-           <p><%= link_to c.category.category_name, department_category_path(@department.slug,c.category.slug)%></p>
+           <li id="category-item"><%= link_to c.category.category_name, department_category_path(@department.slug,c.category.slug), :id => "category-link", :remote => true %></li>
          <% end %>
+      </ul>
     </div>
   </div>
   <div class="large-10 column">

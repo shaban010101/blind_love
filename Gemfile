@@ -17,6 +17,7 @@ gem "aws-sdk"
 gem "delayed_job_active_record"
 gem "foreman", '~> 0.63.0'
 gem 'newrelic_rpm'
+gem 'split', :require => 'split/dashboard'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -53,6 +54,6 @@ end
 
 gem 'rails_12factor', group: :production
 
-gem 'jquery-rails', '~> 3.0.1'
+gem 'jquery-rails', '~> 3.0.4'
 
 ruby '2.0.0'
