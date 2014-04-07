@@ -4,8 +4,8 @@ class HomePagesController <  ApplicationController
   def index
     @products = Product.paginate(:page => params[:page], :per_page => 6)
 
-    page = ab_test("homepage_test", "index", "index_b")
-    render page
-    finished("homepage_test")
+    # page = ab_test("homepage_test", "index", "index_b")
+    # render page
+     # finished("homepage_test")
   end
 end

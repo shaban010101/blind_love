@@ -8,7 +8,9 @@ feature Product do
   scenario "search for products" do
     visit searches_path
     fill_in 'query', :with => @product.name
-    find(:xpath, "//li[2]/div/div[2]/input").click
-    page.should have_content(@product.name)
+    within("//ul[2]/li[2]/div/div[2]") do
+      find(:css, "input.alert.button.expand")
+    end
+    page.should have_content(@product.name.capitalize)
   end
 end
