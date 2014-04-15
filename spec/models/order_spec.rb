@@ -28,9 +28,10 @@ describe Order do
     basket = FactoryGirl.create(:basket)
     product = FactoryGirl.create(:product)
     sizing = FactoryGirl.create(:sizing, :product_id => product.id, :quantity => 2)
-    basket_item = FactoryGirl.create(:basket_item, :basket_id => basket.id, :sizing_id => 1, :quantity => 1)
+    basket_item = FactoryGirl.create(:basket_item, :basket_id => basket.id, :sizing_id => sizing.id, :quantity => 1)
     order = FactoryGirl.create(:order, :basket_id => basket.id)
-    order.save
+    order.update_stock_availabilty
+    Sizing.find(sizing.id).quantity.should == 1
   end
 
   it "recieves the order id of the order" do

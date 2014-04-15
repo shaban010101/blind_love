@@ -89,6 +89,15 @@ class Order < ActiveRecord::Base
      self.send("#{k}=", "#{v}")
     end 
   end
+
+  def update_stock_availabilty
+    basket.basket_items.each do |basket_item|
+      quantity = basket_item.quantity
+      item = Sizing.find(basket_item.sizing_id)
+      item.quantity = item.quantity - quantity
+      item.save
+    end 
+  end
 end
 
 
